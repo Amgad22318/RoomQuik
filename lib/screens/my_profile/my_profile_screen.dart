@@ -1,4 +1,6 @@
+import 'package:algoriza_team_6_realestate_app/business_logic/cubit/profile_cubit/profile_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../constants/screens.dart';
@@ -17,6 +19,7 @@ class MyProfileScreen extends StatelessWidget {
     var helpcontroller = TextEditingController();
     var paymentcontroller = TextEditingController();
     var settingscontroller = TextEditingController();
+    ProfileCubit cubit = ProfileCubit.get(context);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 15.0),
       child: SingleChildScrollView(
@@ -28,12 +31,14 @@ class MyProfileScreen extends StatelessWidget {
                 onTap: (){
                   Navigator.pushNamed(context, UpdateProfileRoute);
                 },
-                child: Row(
+                child: BlocBuilder<ProfileCubit, ProfileState>(
+  builder: (context, state) {
+    return Row(
                   children: [
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        DefaultText(text: 'Amanda',fontSize: 30.sp,color: Colors.black,fontWeight: FontWeight.bold,),
+                        DefaultText(text: cubit.updateProfileModel.data.name,fontSize: 30.sp,color: Colors.black,fontWeight: FontWeight.bold,),
                         SizedBox(height: 10,),
                         DefaultText(text: 'View and Edit Profile',fontSize: 18.sp,color: Colors.black,fontWeight: FontWeight.w500,),
                       ],
@@ -43,7 +48,9 @@ class MyProfileScreen extends StatelessWidget {
                       radius: 35,
                     )
                   ],
-                ),
+                );
+  },
+),
               ),
             ),
             Padding(

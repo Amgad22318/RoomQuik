@@ -15,10 +15,7 @@ class UpdateProfileRepository {
   ) async {
 
     return await sl<MyDio>().postData(endPoint: updateInfoEP, data: {
-
-
       'name': name,
-
       'email': email,
       'password': password,
       'password_confirmation': passwordConfirmation,
