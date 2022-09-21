@@ -36,9 +36,9 @@ class _OnBoardingState extends State<OnBoarding> {
   int activeIndex = 0;
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: Column(
+    return Scaffold(
+      body: SafeArea(
+        child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             Expanded(
@@ -85,10 +85,7 @@ class _OnBoardingState extends State<OnBoarding> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(
-                right: 22,
-                left: 22,
-              ),
+              padding: EdgeInsets.only(right: 22, left: 22, bottom: 5.h),
               child: DefaultMaterialButton(
                 onPressed: () {
                   Navigator.pushNamed(context, signupRoute);
