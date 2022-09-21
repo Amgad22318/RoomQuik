@@ -3,9 +3,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
-import '../../../constants/constants.dart';
-import '../../../data/source/local/my_shared_preferences.dart';
-import '../../../data/source/local/my_shared_preferences_keys.dart';
 import '../../constants/screens.dart';
 import '../../styles/colors.dart';
 import '../../widgets/default_rich_text.dart';
@@ -37,7 +34,7 @@ class _SplashScreenState extends State<SplashScreen>
 
     Timer(const Duration(milliseconds: 2500), () async {
       Navigator.of(context)
-          .pushNamedAndRemoveUntil(onboardingRoute, (route) => false);
+          .pushNamedAndRemoveUntil(appLayoutRoute, (route) => false);
     });
   }
 
