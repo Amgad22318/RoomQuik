@@ -5,11 +5,13 @@ import 'package:algoriza_team_6_realestate_app/screens/filter/filter_sceen.dart'
 import 'package:algoriza_team_6_realestate_app/screens/setting/setting_screen.dart';
 import 'package:flutter/material.dart';
 
+import '../screens/hotel_details/hotel_details.dart';
 import '../screens/my_profile/change_password.dart';
 import '../screens/my_profile/edit_profile.dart';
 
 
 
+import '../screens/onbording/onbording.dart';
 import '../screens/splash/splash_screen.dart';
 
 class AppRouter {
@@ -31,10 +33,14 @@ class AppRouter {
                 ));
       case screens.filterScreenRoute:
         return MaterialPageRoute(builder: (_) => FilterScreen());
+      case screens.onboardingRoute:
+        return MaterialPageRoute(builder: (_) => Onboarding());
       case screens.UpdateProfileRoute:
         return MaterialPageRoute(builder: (_) => EditProfile());
       case screens.ChangePasswordRoute:
         return MaterialPageRoute(builder: (_) => ChangePassword());
+      case screens.HotelDetailsRoute:
+        return MaterialPageRoute(builder: (_) => HotelDetails());
 
       default:
         return null;

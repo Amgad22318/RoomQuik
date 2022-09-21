@@ -8,3 +8,4 @@ const String signupRoute = 'signupRoute';
 const String filterScreenRoute = 'filterScreenRoute';
 const String UpdateProfileRoute = 'UpdateProfileRoute';
 const String ChangePasswordRoute = 'ChangePasswordRoute';
+const String HotelDetailsRoute = 'HotelDetailsRoute';
