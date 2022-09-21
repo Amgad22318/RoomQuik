@@ -6,6 +6,7 @@ import 'package:algoriza_team_6_realestate_app/screens/home/home_screen.dart';
 import 'package:algoriza_team_6_realestate_app/screens/setting/setting_screen.dart';
 import 'package:flutter/material.dart';
 
+import '../screens/onbording/onbording.dart';
 import '../screens/splash/splash_screen.dart';
 
 class AppRouter {
@@ -19,6 +20,8 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => startScreen);
       case screens.settingScreenRoute:
         return MaterialPageRoute(builder: (_) => SettingScreen());
+        case screens.onboardingRoute:
+        return MaterialPageRoute(builder: (_) => Onboarding());
       case screens.appLayoutRoute:
         int? route = settings.arguments as int?;
         return MaterialPageRoute(
