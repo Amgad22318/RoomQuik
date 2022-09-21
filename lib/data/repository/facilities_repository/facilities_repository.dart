@@ -6,6 +6,6 @@ import '../../source/network/my_dio.dart';
 
 class FacilitiesRepository {
   Future<ApiResults> getFacilitiesData() async {
-    return await sl<MyDio>().getData(endPoint: facilities);
+    return await sl<MyDio>().getData(endPoint: facilitiesEP);
   }
 }

@@ -4,12 +4,12 @@ import 'package:algoriza_team_6_realestate_app/data/source/network/api_result_ha
 import '../../source/network/endpoints.dart';
 import '../../source/network/my_dio.dart';
 
-class Hotels_Repository {
+class HotelsRepository {
   Future<ApiResults> getHotelsData(
-      int count,
-      int page,
-      ) async {
-    return await sl<MyDio>().getData(endPoint: hotels, queryParameters: {
+    int count,
+    int page,
+  ) async {
+    return await sl<MyDio>().getData(endPoint: hotelsEP, queryParameters: {
       'count': count,
       'page': page,
     });
