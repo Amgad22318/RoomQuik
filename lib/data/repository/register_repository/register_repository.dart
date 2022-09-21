@@ -5,17 +5,17 @@ import '../../source/network/endpoints.dart';
 import '../../source/network/my_dio.dart';
 
 class RegisterRepository {
-  Future<ApiResults> CreateRegisterData(
+  Future<ApiResults> createRegisterData(
     String name,
     String email,
     String password,
-    String password_confirmation,
+    String passwordConfirmation,
   ) async {
-    return await sl<MyDio>().postData(endPoint: register, data: {
-      'name':name ,
+    return await sl<MyDio>().postData(endPoint: registerEP, data: {
+      'name': name,
       'email': email,
       'password': password,
-      'password_confirmation': password_confirmation,
+      'password_confirmation': passwordConfirmation,
     });
   }
 }

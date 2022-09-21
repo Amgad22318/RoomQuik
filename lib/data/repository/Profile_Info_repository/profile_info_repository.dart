@@ -6,6 +6,9 @@ import '../../source/network/my_dio.dart';
 
 class ProfileInfoRepository {
   Future<ApiResults> getProfileInfoData() async {
-    return await sl<MyDio>().getData(endPoint: profileInfo,);
-}
+    return await sl<MyDio>().getData(
+      endPoint: profileInfoEP,
+    );
+  }
+
 }

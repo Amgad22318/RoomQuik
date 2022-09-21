@@ -9,13 +9,9 @@ class SearchRepository {
     int count,
     int page,
   ) async {
-    return await sl<MyDio>().getData(endPoint: search, queryParameters: {
+    return await sl<MyDio>().getData(endPoint: searchEP, queryParameters: {
       'count': count,
       'page': page,
     });
   }
 }
-
-
-
-

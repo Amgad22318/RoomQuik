@@ -5,13 +5,15 @@ import '../../source/network/endpoints.dart';
 import '../../source/network/my_dio.dart';
 
 class UpdateBookingRepository {
-  Future<ApiResults> UpdateBookingData(
-    int booking_id,
-      String type,
+  Future<ApiResults> updateBookingData(
+    int bookingId,
+    String type,
   ) async {
-    return await sl<MyDio>().postData(endPoint: updateBookingStatus, data: {
-      'booking_id':booking_id,
-      'type':type,
+
+    return await sl<MyDio>().postData(endPoint: updateBookingStatusEP, data: {
+      'booking_id': bookingId,
+      'type': type,
+
     });
   }
 }

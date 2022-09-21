@@ -6,10 +6,10 @@ import '../../source/network/my_dio.dart';
 
 class HotelsRepository {
   Future<ApiResults> getHotelsData(
-      int count,
-      int page,
-      ) async {
-    return await sl<MyDio>().getData(endPoint: hotels, queryParameters: {
+    int count,
+    int page,
+  ) async {
+    return await sl<MyDio>().getData(endPoint: hotelsEP, queryParameters: {
       'count': count,
       'page': page,
     });
