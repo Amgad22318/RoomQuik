@@ -1,7 +1,10 @@
 import 'package:algoriza_team_6_realestate_app/constants/screens.dart'
     as screens;
 import 'package:algoriza_team_6_realestate_app/screens/app_layout/app_layout.dart';
+import 'package:algoriza_team_6_realestate_app/screens/auth_pages/login_screen.dart';
+import 'package:algoriza_team_6_realestate_app/screens/auth_pages/sign_up_screen.dart';
 import 'package:algoriza_team_6_realestate_app/screens/filter/filter_sceen.dart';
+import 'package:algoriza_team_6_realestate_app/screens/onbording/onbording.dart';
 import 'package:algoriza_team_6_realestate_app/screens/setting/setting_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -11,7 +14,10 @@ import '../screens/my_profile/edit_profile.dart';
 
 
 
+
+
 import '../screens/onbording/onbording.dart';
+
 import '../screens/splash/splash_screen.dart';
 
 class AppRouter {
@@ -27,7 +33,7 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => SettingScreen());
 
       case screens.onboardingRoute:
-        return MaterialPageRoute(builder: (_) => const OnBoarding());
+        return MaterialPageRoute(builder: (_) => OnBoarding());
       case screens.loginRoute:
         return MaterialPageRoute(builder: (_) => Login());
       case screens.signupRoute:
