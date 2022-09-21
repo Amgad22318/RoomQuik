@@ -6,10 +6,12 @@ import '../../source/network/my_dio.dart';
 
 class BookingRepository {
   Future<ApiResults> getBookingData(
+
     int count,
     String type,
   ) async {
     return await sl<MyDio>().getData(endPoint: getBookingsEP, queryParameters: {
+
       'count': count,
       'type': type,
     });

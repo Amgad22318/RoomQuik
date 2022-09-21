@@ -5,12 +5,16 @@ import '../../source/network/endpoints.dart';
 import '../../source/network/my_dio.dart';
 
 class PassChangeRepository {
+
   Future<ApiResults> passChangeData(
+
     String email,
     String password,
     String passwordConfirmation,
   ) async {
+
     return await sl<MyDio>().postData(endPoint: passChangeEP, data: {
+
       'email': email,
       'password': password,
       'password_confirmation': passwordConfirmation,

@@ -9,9 +9,11 @@ class UpdateBookingRepository {
     int bookingId,
     String type,
   ) async {
+
     return await sl<MyDio>().postData(endPoint: updateBookingStatusEP, data: {
       'booking_id': bookingId,
       'type': type,
+
     });
   }
 }

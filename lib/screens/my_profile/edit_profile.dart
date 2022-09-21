@@ -8,6 +8,7 @@ class EditProfile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var namecontroller = TextEditingController();
+    var emailcontroller = TextEditingController();
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -52,82 +53,75 @@ class EditProfile extends StatelessWidget {
                 height: 10,
               ),
               ListTile(
-                leading: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Icon(
-                      Icons.person,
-                      size: 40,
-                    ),
-                    SizedBox(
-                      height: 3,
-                    ),
-                  ],
+                leading: Padding(
+                  padding: const EdgeInsets.only(top: 20.0),
+                  child: Icon(
+                    Icons.person,
+                    size: 40,
+                  ),
                 ),
-                title: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('Name'),
-                    DefaultTextFormField(
-                      label: '',
-                      controllerr: namecontroller,
-                      type: TextInputType.text,
-                      radius: 0,
-                      fontweight: FontWeight.bold,
-                      fonts: 30,
-                      readonly: false,
-                      max: 0,
-                      ispassword: false,
+                title:
+                    Column(
+                      children: [
+                        DefaultTextFormField(
+                          label: 'Name',
+
+                          controllerr: emailcontroller,
+                          type: TextInputType.text,
+                          radius: 0,
+                          floatingLabelBehavior: FloatingLabelBehavior.always,
+                          fontweight: FontWeight.bold,
+                          fonts: 30,
+                          focusedborder: InputBorder.none,
+                          enabledbprder: InputBorder.none,
+                          erroborder: InputBorder.none,
+                          disabledborder: InputBorder.none,
+                          readonly: false,
+                          max: 0,
+                          vertical: 0,
+                          ispassword: false,
+                        ),
+                        Container(height: 1,
+                        color: Colors.black,),
+                      ],
                     ),
-
-                    Container(
-                      color: Colors.black,
-                      height: 1,
-                    )
-                  ],
-                ),
-
               ),
               SizedBox(
                 height: 10,
               ),
               ListTile(
-                leading: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Icon(
-                      Icons.email,
-                      size: 40,
-                    ),
-                    SizedBox(
-                      height: 3,
-                    ),
-                  ],
+                leading: Padding(
+                  padding: const EdgeInsets.only(top: 21.0),
+                  child: Icon(
+                    Icons.email,
+                    size: 40,
+                  ),
                 ),
-                title: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('E-mail'),
-                    DefaultTextFormField(
-                      label: '',
-                      controllerr: namecontroller,
-                      type: TextInputType.text,
-                      radius: 0,
-                      fontweight: FontWeight.bold,
-                      fonts: 50,
-                      readonly: false,
-                      max: 0,
-                      ispassword: false,
+                title:
+                    Column(
+                      children: [
+                        DefaultTextFormField(
+                          label: 'E-mail',
+                          floatingLabelBehavior: FloatingLabelBehavior.always,
+                          vertical: 0,
+                          controllerr: namecontroller,
+                          type: TextInputType.text,
+                          radius: 0,
+                          fontweight: FontWeight.bold,
+                          fonts: 30,
+                          readonly: false,
+                          focusedborder: InputBorder.none,
+                          enabledbprder: InputBorder.none,
+                          erroborder: InputBorder.none,
+                          disabledborder: InputBorder.none,
+                          max: 0,
+                          ispassword: false,
+                        ),
+                        Container(height: 1,
+                          color: Colors.black,),
+                      ],
                     ),
-                    SizedBox(
-                      height: 5,
-                    ),
-                    Container(
-                      color: Colors.black,
-                      height: 1,
-                    )
-                  ],
-                ),
+
               ),
               SizedBox(
                 height: 50,
