@@ -80,7 +80,9 @@ class MyProfileScreen extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 8.0),
-              child: InkWell(onTap: (){},
+              child: InkWell(onTap: (){
+                Navigator.pushNamed(context, HotelDetailsRoute);
+              },
                 child: DefaultTextFormField(
                   controllerr: invitefriendscontroller,
                   type: TextInputType.text,
