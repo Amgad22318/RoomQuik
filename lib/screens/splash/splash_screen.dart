@@ -37,7 +37,7 @@ class _SplashScreenState extends State<SplashScreen>
 
     Timer(const Duration(milliseconds: 2500), () async {
       Navigator.of(context)
-          .pushNamedAndRemoveUntil(appLayoutRoute, (route) => false);
+          .pushNamedAndRemoveUntil(onboardingRoute, (route) => false);
     });
   }
 
