@@ -66,6 +66,7 @@ class SignUp extends StatelessWidget {
                   hintText: 'enter first name ',
                   uphintText: 'First name',
                 ),
+                //
                 AuthFormField(
                   controller: TextEditingController(),
                   keyboardType: TextInputType.text,
