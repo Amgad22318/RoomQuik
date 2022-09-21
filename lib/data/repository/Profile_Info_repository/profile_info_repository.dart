@@ -10,4 +10,5 @@ class ProfileInfoRepository {
       endPoint: profileInfoEP,
     );
   }
+
 }

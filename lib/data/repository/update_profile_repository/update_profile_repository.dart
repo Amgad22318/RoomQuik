@@ -5,14 +5,18 @@ import '../../source/network/endpoints.dart';
 import '../../source/network/my_dio.dart';
 
 class UpdateProfileRepository {
+
   Future<ApiResults> updateProfileData(
+
     String name,
     String email,
     String password,
     String passwordConfirmation,
   ) async {
+
     return await sl<MyDio>().postData(endPoint: updateinfoEP, data: {
       'name': name,
+
       'email': email,
       'password': password,
       'password_confirmation': passwordConfirmation,

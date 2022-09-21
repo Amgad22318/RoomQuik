@@ -8,8 +8,11 @@ class CreateBookingRepository {
   Future<ApiResults> createBookingData(
     int hotelID,
   ) async {
+
+
     return await sl<MyDio>().postData(endPoint: createBookingEP, data: {
       'hotel_id': hotelID,
+
     });
   }
 }
