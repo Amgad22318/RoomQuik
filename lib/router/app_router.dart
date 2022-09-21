@@ -31,7 +31,7 @@ class AppRouter {
       case screens.UpdateProfileRoute:
         return MaterialPageRoute(builder: (_) => EditProfile());
       case screens.ChangePasswordRoute:
-        return MaterialPageRoute(builder: (_) => Change_password());
+        return MaterialPageRoute(builder: (_) => ChangePassword());
 
       default:
         return null;

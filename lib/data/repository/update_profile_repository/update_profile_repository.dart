@@ -4,14 +4,14 @@ import 'package:algoriza_team_6_realestate_app/data/source/network/api_result_ha
 import '../../source/network/endpoints.dart';
 import '../../source/network/my_dio.dart';
 
-class Update_Profile_Repository {
+class UpdateProfileRepository {
   Future<ApiResults> UpdateProfileData(
     String name,
     String email,
     String password,
     String password_confirmation,
   ) async {
-    return await sl<MyDio>().postData(endPoint: update_info, data: {
+    return await sl<MyDio>().postData(endPoint: updateInfo, data: {
       'name':name ,
       'email': email,
       'password': password,

@@ -4,8 +4,8 @@ import 'package:algoriza_team_6_realestate_app/data/source/network/api_result_ha
 import '../../source/network/endpoints.dart';
 import '../../source/network/my_dio.dart';
 
-class Profile_Info_Repository {
+class ProfileInfoRepository {
   Future<ApiResults> getProfileInfoData() async {
-    return await sl<MyDio>().getData(endPoint: profile_info,);
+    return await sl<MyDio>().getData(endPoint: profileInfo,);
 }
 }
