@@ -13,17 +13,16 @@ class SignUp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-      ),
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(20),
-          child: SingleChildScrollView(
+        child: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
+          child: Padding(
+            padding: EdgeInsetsDirectional.only(
+                start: 3.w, bottom: 3.h, end: 3.w, top: 1.h),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                 DefaultText(
+                DefaultText(
                   text: 'Sign up',
                   fontSize: 25.sp,
                 ),
@@ -67,6 +66,7 @@ class SignUp extends StatelessWidget {
                   hintText: 'enter first name ',
                   uphintText: 'First name',
                 ),
+                //
                 AuthFormField(
                   controller: TextEditingController(),
                   keyboardType: TextInputType.text,
@@ -97,27 +97,26 @@ class SignUp extends StatelessWidget {
                     fontSize: 15.sp,
                   ),
                 ),
-                   Center(
-                   child: Padding(
-                     padding: const EdgeInsets.symmetric(
-                       vertical: 10
-                     ),
-                     child: DefaultText(
-                        text: 'By Signing up you agreed with our terms of \n Services and privacy policy',
+                Center(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    child: DefaultText(
+                      text:
+                          'By Signing up you agreed with our terms of \n Services and privacy policy',
                       maxLines: 3,
-                       textAlign: TextAlign.center,
-                       color: defaultGray,
-                       fontSize: 11.5.sp,
-                     ),
-                   ),
-                 ),
+                      textAlign: TextAlign.center,
+                      color: defaultGray,
+                      fontSize: 11.5.sp,
+                    ),
+                  ),
+                ),
                 Center(
                   child: InkWell(
-                    onTap: (){
+                    onTap: () {
                       Navigator.pushNamed(context, appLayoutRoute);
                     },
                     child: RichText(
-                      text:    TextSpan(
+                      text: TextSpan(
                         text: "Already have an account ? ",
                         style: TextStyle(color: defaultGray, fontSize: 12.sp),
                         children: <TextSpan>[
@@ -125,9 +124,8 @@ class SignUp extends StatelessWidget {
                               text: 'Login',
                               style: TextStyle(
                                   color: defaultLightTealColor,
-                                fontWeight: FontWeight.w500,
-                                fontSize: 15.sp
-                              )),
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 15.sp)),
                         ],
                       ),
                     ),

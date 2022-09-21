@@ -9,36 +9,31 @@ import 'package:sizer/sizer.dart';
 import '../../widgets/default_material_button.dart';
 
 class Login extends StatelessWidget {
-   Login({Key? key}) : super(key: key);
-  final _formKeya = GlobalKey<FormState>();
+  Login({Key? key}) : super(key: key);
+  final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-      ),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(20),
           child: SingleChildScrollView(
             child: Form(
-              key: _formKeya,
+              key: _formKey,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children:  [
-                   DefaultText(
-                      text: 'Login',
+                children: [
+                  DefaultText(
+                    text: 'Login',
                     fontSize: 25.sp,
                   ),
                   Padding(
-                    padding: const EdgeInsets.symmetric(
-                      vertical: 20
-                    ),
+                    padding: const EdgeInsets.symmetric(vertical: 20),
                     child: Row(
                       children: [
                         Expanded(
                           child: DefaultMaterialButton(
-                            onPressed: (){},
+                            onPressed: () {},
                             padding: const EdgeInsets.all(15),
                             text: 'facebook',
                             fontSize: 15.sp,
@@ -50,7 +45,7 @@ class Login extends StatelessWidget {
                         ),
                         Expanded(
                           child: DefaultMaterialButton(
-                            onPressed: (){},
+                            onPressed: () {},
                             padding: const EdgeInsets.all(15),
                             text: 'twitter',
                             fontSize: 15.sp,
@@ -60,54 +55,47 @@ class Login extends StatelessWidget {
                       ],
                     ),
                   ),
-                   const Center(
-                     child: DefaultText(
+                  const Center(
+                    child: DefaultText(
                       text: 'or log in with email',
-                       color: defaultGray,
+                      color: defaultGray,
+                    ),
                   ),
-                   ),
                   AuthFormField(
-                    validator: (value) =>
-                    value!.length <= 6 ?
-                    'Your password must be larger than 6 characters'
+                    validator: (value) => value!.length <= 6
+                        ? 'Your password must be larger than 6 characters'
                         : null,
-                      controller: TextEditingController(),
-                      keyboardType: TextInputType.text,
+                    controller: TextEditingController(),
+                    keyboardType: TextInputType.text,
                     hintText: 'enter your email',
                     uphintText: 'Your email',
                   ),
                   AuthFormField(
-                      controller: TextEditingController(),
-                      keyboardType: TextInputType.text,
+                    controller: TextEditingController(),
+                    keyboardType: TextInputType.text,
                     hintText: 'enter your password',
                     uphintText: 'password',
                   ),
                   Align(
                     alignment: Alignment.centerRight,
                     child: DefaultTextButton(
-                        onPressed: (){},
-                        child: const DefaultText(
-                            text: 'Forget your password ?',
-                          color: defaultGray,
-                        ),
+                      onPressed: () {},
+                      child: const DefaultText(
+                        text: 'Forget your password ?',
+                        color: defaultGray,
+                      ),
                     ),
                   ),
                   DefaultMaterialButton(
-                    padding: const EdgeInsets.symmetric(
-                      vertical: 15
-                    ),
-                    onPressed: (){
-                      if (_formKeya.currentState!.validate()) {
-
+                    padding: const EdgeInsets.symmetric(vertical: 15),
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
                         Navigator.pushNamed(context, appLayoutRoute);
-
                       }
-
                     },
                     background: defaultLightTealColor,
                     text: 'Login',
                     fontSize: 15.sp,
-
                   ),
                 ],
               ),

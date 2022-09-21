@@ -23,6 +23,14 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => startScreen);
       case screens.settingScreenRoute:
         return MaterialPageRoute(builder: (_) => SettingScreen());
+
+      case screens.onboardingRoute:
+        return MaterialPageRoute(builder: (_) => const OnBoarding());
+      case screens.loginRoute:
+        return MaterialPageRoute(builder: (_) => Login());
+      case screens.signupRoute:
+        return MaterialPageRoute(builder: (_) => SignUp());
+
       case screens.appLayoutRoute:
         int? route = settings.arguments as int?;
         return MaterialPageRoute(

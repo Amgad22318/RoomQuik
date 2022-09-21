@@ -26,7 +26,7 @@ class HomeCubit extends Cubit<HomeState> {
       emit(GetFacilitiesFailureState(apiResults.message));
     }
   }
-  //aaaaaaaaaaaaaa
+
   void handleFacilitiesResponse(json) {
     facilities = Facilities.fromJson(json);
     if (facilities.status.success) {
