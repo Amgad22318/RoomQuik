@@ -20,8 +20,9 @@ class _AppLayoutState extends State<AppLayout> {
   late int _selectedIndex;
   static const List<Widget> _navigationBarScreenList = <Widget>[
     HomeScreen(),
-    MyProfileScreen(),
     MyBookingScreen(),
+    MyProfileScreen(),
+
   ];
 
   @override
