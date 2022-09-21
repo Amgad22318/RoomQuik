@@ -9,6 +9,6 @@ const String createBookingEP = 'create-booking';
 const String updateBookingStatusEP = 'update-booking-status';
 const String getBookingsEP = 'get-bookings';
 const String profileInfoEP = 'profile-info';
-const String updateinfoEP = 'update-info';
+const String updateInfoEP = 'update-info';
 const String passChangeEP = 'pass-change';
 //

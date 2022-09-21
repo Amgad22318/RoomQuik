@@ -6,7 +6,6 @@ import 'package:algoriza_team_6_realestate_app/screens/filter/filter_sceen.dart'
 import 'package:algoriza_team_6_realestate_app/screens/setting/setting_screen.dart';
 import 'package:flutter/material.dart';
 
-
 import '../screens/my_profile/change_password.dart';
 import '../screens/my_profile/edit_profile.dart';
 
@@ -26,11 +25,11 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => startScreen);
       case screens.settingScreenRoute:
         return MaterialPageRoute(builder: (_) => SettingScreen());
-        case screens.onboardingRoute:
-        return MaterialPageRoute(builder: (_) => const Onboarding());
-        case screens.loginRoute:
+      case screens.onboardingRoute:
+        return MaterialPageRoute(builder: (_) => const OnBoarding());
+      case screens.loginRoute:
         return MaterialPageRoute(builder: (_) => Login());
-        case screens.signupRoute:
+      case screens.signupRoute:
         return MaterialPageRoute(builder: (_) => SignUp());
       case screens.appLayoutRoute:
         int? route = settings.arguments as int?;

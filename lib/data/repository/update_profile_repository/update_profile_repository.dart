@@ -11,7 +11,7 @@ class UpdateProfileRepository {
     String password,
     String passwordConfirmation,
   ) async {
-    return await sl<MyDio>().postData(endPoint: updateinfoEP, data: {
+    return await sl<MyDio>().postData(endPoint: updateInfoEP, data: {
       'name': name,
       'email': email,
       'password': password,
