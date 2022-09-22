@@ -1,134 +1,108 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sizer/sizer.dart';
 
+import '../../business_logic/cubit/profile_cubit/profile_cubit.dart';
+import '../../data/di/di.dart';
+import '../../widgets/default_cached_network_image.dart';
 import '../../widgets/default_text_form_field.dart';
 
-class EditProfile extends StatelessWidget {
+class EditProfile extends StatefulWidget {
   const EditProfile({Key? key}) : super(key: key);
 
   @override
+  State<EditProfile> createState() => _EditProfileState();
+}
+
+class _EditProfileState extends State<EditProfile> {
+
+  late ProfileCubit cubit;
+
+  @override
+  void initState() {
+    super.initState();
+     cubit = sl<ProfileCubit>();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    var namecontroller = TextEditingController();
-    var emailcontroller = TextEditingController();
+    var nameController = TextEditingController();
+    var emailController = TextEditingController();
+
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
             onPressed: () {
               Navigator.pop(context);
             },
-            icon: Icon(Icons.arrow_back_ios)),
+            icon: const Icon(Icons.arrow_back_ios)),
         elevation: 0,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(10.0),
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              Text('Edit Profile'),
-              SizedBox(
-                height: 10,
-              ),
-              Center(
-                child: CircleAvatar(
-                  radius: 90,
+      body: BlocBuilder<ProfileCubit, ProfileState>(
+        builder: (context, state) {
+          return SafeArea(
+            child: Column(
+              children: [
+                Center(
                   child: Stack(
+                    alignment: AlignmentDirectional.bottomEnd,
                     children: [
-                      CircleAvatar(
-                          radius: 60,
-                          backgroundColor: Colors.transparent,
-                          child: Padding(
-                            padding:
-                                const EdgeInsets.only(left: 105.0, top: 90),
-                            child: IconButton(
-                                onPressed: () {},
-                                icon: Icon(
-                                  Icons.camera_alt,
-                                  size: 30,
-                                )),
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(70.sp),
+                        child: DefaultCachedNetworkImage(
+                          imageUrl: cubit.auth.data.image,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      IconButton(
+                          onPressed: () {},
+                          icon: Icon(
+                            Icons.camera_alt,
+                            size: 30.sp,
                           ))
                     ],
                   ),
                 ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              ListTile(
-                leading: Padding(
-                  padding: const EdgeInsets.only(top: 20.0),
-                  child: Icon(
-                    Icons.person,
-                    size: 40,
-                  ),
+                DefaultTextFormField(
+                  label: 'Name',
+                  prefix: Icons.person,
+                  controllerr: emailController,
+                  type: TextInputType.text,
+                  radius: 0,
+                  floatingLabelBehavior: FloatingLabelBehavior.always,
+                  fontweight: FontWeight.bold,
+                  fonts: 28.sp,
+                  focusedborder: InputBorder.none,
+                  enabledbprder: InputBorder.none,
+                  erroborder: InputBorder.none,
+                  disabledborder: InputBorder.none,
+                  readonly: false,
+                  max: 0,
+                  vertical: 0,
+                  ispassword: false,
                 ),
-                title:
-                    Column(
-                      children: [
-                        DefaultTextFormField(
-                          label: 'Name',
-
-                          controllerr: emailcontroller,
-                          type: TextInputType.text,
-                          radius: 0,
-                          floatingLabelBehavior: FloatingLabelBehavior.always,
-                          fontweight: FontWeight.bold,
-                          fonts: 30,
-                          focusedborder: InputBorder.none,
-                          enabledbprder: InputBorder.none,
-                          erroborder: InputBorder.none,
-                          disabledborder: InputBorder.none,
-                          readonly: false,
-                          max: 0,
-                          vertical: 0,
-                          ispassword: false,
-                        ),
-                        Container(height: 1,
-                        color: Colors.black,),
-                      ],
-                    ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              ListTile(
-                leading: Padding(
-                  padding: const EdgeInsets.only(top: 21.0),
-                  child: Icon(
-                    Icons.email,
-                    size: 40,
-                  ),
+                DefaultTextFormField(
+                  label: 'E-mail',
+                  prefix: Icons.email,
+                  floatingLabelBehavior: FloatingLabelBehavior.always,
+                  vertical: 0,
+                  controllerr: nameController,
+                  type: TextInputType.text,
+                  radius: 0,
+                  fontweight: FontWeight.bold,
+                  fonts: 28.sp,
+                  readonly: false,
+                  focusedborder: InputBorder.none,
+                  enabledbprder: InputBorder.none,
+                  erroborder: InputBorder.none,
+                  disabledborder: InputBorder.none,
+                  max: 0,
+                  ispassword: false,
                 ),
-                title:
-                    Column(
-                      children: [
-                        DefaultTextFormField(
-                          label: 'E-mail',
-                          floatingLabelBehavior: FloatingLabelBehavior.always,
-                          vertical: 0,
-                          controllerr: namecontroller,
-                          type: TextInputType.text,
-                          radius: 0,
-                          fontweight: FontWeight.bold,
-                          fonts: 30,
-                          readonly: false,
-                          focusedborder: InputBorder.none,
-                          enabledbprder: InputBorder.none,
-                          erroborder: InputBorder.none,
-                          disabledborder: InputBorder.none,
-                          max: 0,
-                          ispassword: false,
-                        ),
-                        Container(height: 1,
-                          color: Colors.black,),
-                      ],
-                    ),
-
-              ),
-              SizedBox(
-                height: 50,
-              ),
-            ],
-          ),
-        ),
+              ],
+            ),
+          );
+        },
       ),
     );
   }

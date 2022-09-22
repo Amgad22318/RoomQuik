@@ -5,6 +5,7 @@ import 'package:algoriza_team_6_realestate_app/screens/my_booking/my_booking_scr
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../data/di/di.dart';
 import '../../styles/colors.dart';
 import '../../views/app_layout/app_layout_drawer.dart';
 import '../my_profile/my_profile_screen.dart';
@@ -41,7 +42,7 @@ class _AppLayoutState extends State<AppLayout> {
           lazy: false,
         ),
         BlocProvider(
-          create: (context) => ProfileCubit()..getProfileInfo(),
+          create: (context) => sl<ProfileCubit>()..getProfileInfo(),
           lazy: false,
         ),
       ],

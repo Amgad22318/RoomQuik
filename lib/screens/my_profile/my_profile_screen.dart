@@ -1,236 +1,121 @@
 import 'package:algoriza_team_6_realestate_app/business_logic/cubit/profile_cubit/profile_cubit.dart';
+import 'package:algoriza_team_6_realestate_app/widgets/default_cached_network_image.dart';
+import 'package:algoriza_team_6_realestate_app/widgets/default_list_tile.dart';
+import 'package:algoriza_team_6_realestate_app/widgets/horizontal_divider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
-
 import '../../constants/screens.dart';
+import '../../styles/colors.dart';
 import '../../widgets/default_text.dart';
-import '../../widgets/default_text_form_field.dart';
 
 class MyProfileScreen extends StatelessWidget {
   const MyProfileScreen({Key? key}) : super(key: key);
 
-
   @override
   Widget build(BuildContext context) {
-    var changepasswordontroller = TextEditingController();
-    var invitefriendscontroller = TextEditingController();
-    var creditcontroller = TextEditingController();
-    var helpcontroller = TextEditingController();
-    var paymentcontroller = TextEditingController();
-    var settingscontroller = TextEditingController();
     ProfileCubit cubit = ProfileCubit.get(context);
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 15.0),
+
+    return SafeArea(
       child: SingleChildScrollView(
         child: Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 30.0,bottom: 5,left: 7),
-              child: InkWell(
-                onTap: (){
-                  Navigator.pushNamed(context, UpdateProfileRoute);
-                },
-                child: BlocBuilder<ProfileCubit, ProfileState>(
-  builder: (context, state) {
-    return Row(
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+            InkWell(
+              onTap: () {
+                Navigator.pushNamed(context, UpdateProfileRoute);
+              },
+              child: BlocBuilder<ProfileCubit, ProfileState>(
+                builder: (context, state) {
+                  return Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 2.h),
+                    child: Row(
                       children: [
-                        DefaultText(text: cubit.updateProfileModel.data.name,fontSize: 30.sp,color: Colors.black,fontWeight: FontWeight.bold,),
-                        SizedBox(height: 10,),
-                        DefaultText(text: 'View and Edit Profile',fontSize: 18.sp,color: Colors.black,fontWeight: FontWeight.w500,),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            DefaultText(
+                              text: cubit.auth.data.name == ''
+                                  ? 'User Name'
+                                  : cubit.auth.data.name,
+                              fontSize: 15.sp,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            SizedBox(
+                              height: 1.h,
+                            ),
+                            DefaultText(
+                              text: 'View and Edit Profile',
+                              fontSize: 13.sp,
+                              fontWeight: FontWeight.w500,
+                              color: defaultGray,
+                            ),
+                          ],
+                        ),
+                        const Spacer(),
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(35.sp),
+                          child: DefaultCachedNetworkImage(
+                            imageUrl: cubit.auth.data.image,
+                            fit: BoxFit.cover,
+                          ),
+                        )
                       ],
                     ),
-                    Spacer(),
-                    CircleAvatar(
-                      radius: 35,
-                    )
-                  ],
-                );
-  },
-),
+                  );
+                },
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8.0),
-              child: InkWell(onTap: (){
+            InkWell(
+              onTap: () {
                 Navigator.pushNamed(context, ChangePasswordRoute);
               },
-                child: DefaultTextFormField(
-                  controllerr: changepasswordontroller,
-                  type: TextInputType.text,
-                  label: 'Change Password',
-                  fontweight: FontWeight.bold,
-                  focusedborder: InputBorder.none,
-                  enabledbprder: InputBorder.none,
-                  erroborder: InputBorder.none,
-                  disabledborder: InputBorder.none,
-
-                  radius: 1,
-                  fonts: 25,
-                  bradius: 15,
-                  enabled: false,
-                  max: 8,
-                  readonly: true,
-                  suffix: Icons.lock,
-                  border: OutlineInputBorder(),
-                  ispassword: false,
-
-                ),
+              child: const DefaultListTile(
+                  title: 'Change Password',
+                  trailingIcon: Icons.lock,
               ),
             ),
-            Container(
-              color: Colors.grey,
-              height: 1,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8.0),
-              child: InkWell(onTap: (){},
-                child: DefaultTextFormField(
-                  controllerr: invitefriendscontroller,
-                  type: TextInputType.text,
-                  label: 'Invite Friends',
-                  fontweight: FontWeight.bold,
-                  radius: 1,
-                  focusedborder: InputBorder.none,
-                  enabledbprder: InputBorder.none,
-                  erroborder: InputBorder.none,
-                  disabledborder: InputBorder.none,
-                  enabled: false,
-
-                  fonts: 25,
-                  bradius: 15,
-                  max: 8,
-                  readonly: false,
-                  suffix: Icons.person_add,
-                  border: OutlineInputBorder(),
-                  ispassword: false,
-
-                ),
+            const HorizontalDivider(),
+            InkWell(
+              onTap: (){},
+              child: const DefaultListTile(
+                title: 'Invite Friends',
+                trailingIcon: Icons.person_add,
               ),
             ),
-            Container(
-              color: Colors.grey,
-              height: 1,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8.0),
-              child: InkWell(onTap: (){},
-                child: DefaultTextFormField(
-                  controllerr: creditcontroller,
-                  type: TextInputType.text,
-                  label: 'Credit & Coupons',
-                  enabled: false,
-                  focusedborder: InputBorder.none,
-                  enabledbprder: InputBorder.none,
-                  erroborder: InputBorder.none,
-                  disabledborder: InputBorder.none,
-                  fontweight: FontWeight.bold,
-                  radius: 1,
-                  fonts: 25,
-                  bradius: 15,
-                  max: 8,
-                  readonly: false,
-                  suffix: Icons.card_giftcard,
-                  border: OutlineInputBorder(),
-                  ispassword: false,
-
-                ),
+            const HorizontalDivider(),
+            InkWell(
+              onTap: () {},
+              child: const DefaultListTile(
+                title: 'Credit & Coupons',
+                trailingIcon: Icons.card_giftcard,
               ),
             ),
-            Container(
-              color: Colors.grey,
-              height: 1,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8.0),
-              child: InkWell(onTap: (){},
-                child: DefaultTextFormField(
-                  controllerr: helpcontroller,
-                  type: TextInputType.text,
-                  label: 'Help Center',
-                  enabled: false,
-
-                  fontweight: FontWeight.bold,
-                  radius: 1,
-                  fonts: 25,
-                  bradius: 15,
-                  max: 8,
-                  focusedborder: InputBorder.none,
-                  enabledbprder: InputBorder.none,
-                  erroborder: InputBorder.none,
-                  disabledborder: InputBorder.none,
-                  readonly: false,
-                  suffix: Icons.info,
-                  border: OutlineInputBorder(),
-                  ispassword: false,
-
-                ),
+            const HorizontalDivider(),
+            InkWell(
+              onTap: () {},
+              child: const DefaultListTile(
+                title: 'Help Center',
+                trailingIcon: Icons.info,
               ),
             ),
-            Container(
-              color: Colors.grey,
-              height: 1,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8.0),
-              child: InkWell(onTap: (){},
-                child: DefaultTextFormField(
-                  controllerr: paymentcontroller,
-                  type: TextInputType.text,
-                  label: 'Payment',
-                  enabled: false,
-                  fontweight: FontWeight.bold,
-                  radius: 1,
-                  fonts: 25,
-                  bradius: 15,
-                  focusedborder: InputBorder.none,
-                  enabledbprder: InputBorder.none,
-                  erroborder: InputBorder.none,
-                  disabledborder: InputBorder.none,
-                  max: 8,
-                  readonly: false,
-                  suffix: Icons.payment,
-                  border: OutlineInputBorder(),
-                  ispassword: false,
-
-                ),
+            const HorizontalDivider(),
+            InkWell(
+              onTap: () {},
+              child: const DefaultListTile(
+                title: 'Payment',
+                trailingIcon: Icons.payment,
               ),
             ),
-            Container(
-              color: Colors.grey,
-              height: 1,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8.0),
-              child: InkWell(onTap: (){
+            const HorizontalDivider(),
+            InkWell(
+              onTap: () {
                 Navigator.pushNamed(context, settingScreenRoute);
               },
-                child: DefaultTextFormField(
-                  controllerr: settingscontroller,
-                  type: TextInputType.text,
-                  label: 'Settings',
-                  enabled: false,
-                  fontweight: FontWeight.bold,
-                  radius: 1,
-                  fonts: 25,
-                  bradius: 15,
-                  max: 8,
-                  focusedborder: InputBorder.none,
-                  enabledbprder: InputBorder.none,
-                  erroborder: InputBorder.none,
-                  disabledborder: InputBorder.none,
-                  readonly: false,
-                  suffix: Icons.settings,
-                  border: OutlineInputBorder(),
-                  ispassword: false,
-
-                ),
+              child: const DefaultListTile(
+                title: 'Settings',
+                trailingIcon: Icons.settings,
               ),
             ),
-
           ],
         ),
       ),
