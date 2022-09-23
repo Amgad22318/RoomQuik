@@ -5,6 +5,8 @@ import 'package:algoriza_team_6_realestate_app/data/source/network/my_dio.dart';
 import 'package:algoriza_team_6_realestate_app/router/app_router.dart';
 import 'package:get_it/get_it.dart';
 
+import '../../business_logic/cubit/profile_cubit/profile_cubit.dart';
+
 final sl = GetIt.instance;
 
 Future<void> init() async {
@@ -22,5 +24,8 @@ Future<void> init() async {
   );
   sl.registerLazySingleton<HomeCubit>(
     () => HomeCubit(),
+  );
+  sl.registerLazySingleton<ProfileCubit>(
+    () => ProfileCubit(),
   );
 }
