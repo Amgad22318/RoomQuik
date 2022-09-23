@@ -20,6 +20,7 @@ class MyProfileScreen extends StatelessWidget {
       child: SingleChildScrollView(
         child: Column(
           children: [
+
             InkWell(
               onTap: () {
                 Navigator.pushNamed(context, UpdateProfileRoute);
@@ -59,12 +60,14 @@ class MyProfileScreen extends StatelessWidget {
                             fit: BoxFit.cover,
                           ),
                         )
+
                       ],
                     ),
                   );
                 },
               ),
             ),
+
             InkWell(
               onTap: () {
                 Navigator.pushNamed(context, ChangePasswordRoute);
@@ -114,6 +117,7 @@ class MyProfileScreen extends StatelessWidget {
               child: const DefaultListTile(
                 title: 'Settings',
                 trailingIcon: Icons.settings,
+
               ),
             ),
           ],

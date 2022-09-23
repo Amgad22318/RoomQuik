@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
-import '../../styles/colors.dart';
 import '../../widgets/default_material_button.dart';
 import '../../widgets/default_text.dart';
 import '../../widgets/default_text_form_field.dart';
@@ -24,116 +23,118 @@ class ChangePassword extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.all(15.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            DefaultText(
-              text: 'Change Password',
-              fontSize: 20.sp,
-              fontWeight: FontWeight.bold,
-              color: Colors.black,
-            ),
-            SizedBox(
-              height: 15,
-            ),
-            DefaultText(
-              text: 'Please Enter Your New Password',
-              fontSize: 15.sp,
-              color: Colors.black,
-            ),
-            SizedBox(
-              height: 15,
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 17.0),
-                  child: DefaultText(
-                    text: 'New Password',
-                    fontSize: 20.sp,
-                    color: Colors.black,
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              DefaultText(
+                text: 'Change Password',
+                fontSize: 20.sp,
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+              ),
+              SizedBox(
+                height: 15,
+              ),
+              DefaultText(
+                text: 'Please Enter Your New Password',
+                fontSize: 15.sp,
+                color: Colors.black,
+              ),
+              SizedBox(
+                height: 15,
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 17.0),
+                    child: DefaultText(
+                      text: 'New Password',
+                      fontSize: 20.sp,
+                      color: Colors.black,
+                    ),
                   ),
-                ),
-                DefaultTextFormField(
-                  fontweight: FontWeight.w500,
-                  controllerr: password,
-                  type: TextInputType.text,
-                  label: ' ',
-                  radius: 0,
-                  fonts: 20.sp,
-                  readonly: false,
-                  ispassword: false,
-                  bradius: 25,
-                  enabledbprder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(25),
-                    borderSide: BorderSide(color: Colors.transparent),
+                  DefaultTextFormField(
+                    fontweight: FontWeight.w500,
+                    controllerr: password,
+                    type: TextInputType.text,
+                    label: ' ',
+                    radius: 0,
+                    fonts: 20.sp,
+                    readonly: false,
+                    ispassword: false,
+                    bradius: 25,
+                    enabledbprder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(25),
+                      borderSide: BorderSide(color: Colors.transparent),
+                    ),
+                    focusedborder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(25),
+                      borderSide: BorderSide(color: Colors.transparent),
+                    ),
+                    filled: true,
+                    fillcolor: Colors.blueGrey.withOpacity(0.5),
+                    vertical: 15,
+                    hint: 'Enter New Password',
                   ),
-                  focusedborder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(25),
-                    borderSide: BorderSide(color: Colors.transparent),
+                ],
+              ),
+              SizedBox(
+                height: 15,
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 17.0),
+                    child: DefaultText(
+                      text: 'Confirm Password',
+                      fontSize: 20.sp,
+                      color: Colors.black,
+                    ),
                   ),
-                  filled: true,
-                  fillcolor: Colors.blueGrey.withOpacity(0.5),
-                  vertical: 15,
-                  hint: 'Enter New Password',
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 15,
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 17.0),
-                  child: DefaultText(
-                    text: 'Confirm Password',
-                    fontSize: 20.sp,
-                    color: Colors.black,
+                  DefaultTextFormField(
+                    fontweight: FontWeight.w500,
+                    controllerr: confirm_password,
+                    type: TextInputType.text,
+                    label: ' ',
+                    radius: 0,
+                    fonts: 20.sp,
+                    readonly: false,
+                    ispassword: false,
+                    bradius: 25,
+                    enabledbprder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(25),
+                      borderSide: BorderSide(color: Colors.transparent),
+                    ),
+                    focusedborder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(25),
+                      borderSide: BorderSide(color: Colors.transparent),
+                    ),
+                    filled: true,
+                    fillcolor: Colors.blueGrey.withOpacity(0.5),
+                    vertical: 15,
+                    hint: 'Enter confirm Password',
                   ),
-                ),
-                DefaultTextFormField(
-                  fontweight: FontWeight.w500,
-                  controllerr: password,
-                  type: TextInputType.text,
-                  label: ' ',
-                  radius: 0,
-                  fonts: 20.sp,
-                  readonly: false,
-                  ispassword: false,
-                  bradius: 25,
-                  enabledbprder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(25),
-                    borderSide: BorderSide(color: Colors.transparent),
+                  SizedBox(
+                    height: 25,
                   ),
-                  focusedborder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(25),
-                    borderSide: BorderSide(color: Colors.transparent),
-                  ),
-                  filled: true,
-                  fillcolor: Colors.blueGrey.withOpacity(0.5),
-                  vertical: 15,
-                  hint: 'Enter confirm Password',
-                ),
-                SizedBox(
-                  height: 25,
-                ),
-                DefaultMaterialButton(
-                  height: 62,
-                  radius: 25,
-                  onPressed: () {},
-                  child: DefaultText(
-                    text: 'Apply',
-                    fontSize: 20.sp,
-                    fontWeight: FontWeight.w800,
+                  DefaultMaterialButton(
+                    height: 62,
+                    radius: 25,
+                    onPressed: () {},
+                    child: DefaultText(
+                      text: 'Apply',
+                      fontSize: 20.sp,
+                      fontWeight: FontWeight.w800,
 
+                    ),
                   ),
-                ),
-              ],
-            ),
-          ],
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

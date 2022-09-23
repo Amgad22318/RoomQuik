@@ -2,9 +2,11 @@
 
 const String settingScreenRoute = 'settingScreenRoute';
 const String appLayoutRoute = 'appLayoutRoute';
-const String onboardingRoute = 'onboardingRoute';
+const String onBoardingRoute = 'onBoardingRoute';
 const String loginRoute = 'loginRoute';
 const String signupRoute = 'signupRoute';
 const String filterScreenRoute = 'filterScreenRoute';
-const String UpdateProfileRoute = 'UpdateProfileRoute';
-const String ChangePasswordRoute = 'ChangePasswordRoute';
+const String updateProfileRoute = 'UpdateProfileRoute';
+const String changePasswordRoute = 'ChangePasswordRoute';
+const String hotelDetailsRoute = 'HotelDetailsRoute';
+const String hotelLocationRoute = 'hotelLocationRoute';

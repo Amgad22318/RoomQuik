@@ -24,7 +24,6 @@ class _AppLayoutState extends State<AppLayout> {
     HomeScreen(),
     MyBookingScreen(),
     MyProfileScreen(),
-
   ];
 
   @override
@@ -38,7 +37,7 @@ class _AppLayoutState extends State<AppLayout> {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => HomeCubit()..getFacilities(),
+          create: (context) => sl<HomeCubit>()..getHotels(),
           lazy: false,
         ),
         BlocProvider(
@@ -47,7 +46,7 @@ class _AppLayoutState extends State<AppLayout> {
         ),
       ],
       child: Scaffold(
-        drawer: const AppLayoutDrawer(),
+
         body: _navigationBarScreenList.elementAt(_selectedIndex),
         bottomNavigationBar: BottomNavigationBar(
           type: BottomNavigationBarType.shifting,
