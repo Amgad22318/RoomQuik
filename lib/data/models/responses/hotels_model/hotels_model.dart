@@ -333,8 +333,8 @@ class HotelData {
   String get rate => _rate ?? "";
   String get createdAt => _createdAt ?? "";
   String get updatedAt => _updatedAt ?? "";
-  List<HotelImages>? get hotelImages => _hotelImages;
-  List<HotelFacilities>? get hotelFacilities => _hotelFacilities;
+  List<HotelImages> get hotelImages => _hotelImages ?? [];
+  List<HotelFacilities> get hotelFacilities => _hotelFacilities ?? [];
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};

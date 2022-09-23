@@ -2,6 +2,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
+import '../styles/colors.dart';
+import 'default_loading_indicator.dart';
 import 'default_svg.dart';
 
 class DefaultCachedNetworkImage extends StatelessWidget {
@@ -28,18 +30,25 @@ class DefaultCachedNetworkImage extends StatelessWidget {
             imageUrl: imageUrl,
             progressIndicatorBuilder: (context, url, downloadProgress) {
               return Center(
-                  child: CircularProgressIndicator(
+                  child: DefaultLoadingIndicator(
+                color: defaultAppWhiteColor,
                 value: downloadProgress.downloaded.toDouble(),
               ));
             },
             errorWidget: (context, url, error) => Padding(
-              padding: EdgeInsets.all(14.sp),
-              child: const DefaultSvg(imagePath: 'assets/default_photo.svg'),
-            ),
+                padding: EdgeInsets.all(35.sp),
+                child: Icon(
+                  Icons.home_work_rounded,
+                  size: 75.sp,
+                  color: defaultAppColor,
+                )),
           )
         : Padding(
-            padding: EdgeInsets.all(14.sp),
-            child: const DefaultSvg(imagePath: 'assets/default_photo.svg'),
-          );
+            padding: EdgeInsets.all(35.sp),
+            child: Icon(
+              Icons.home_work_rounded,
+              size: 75.sp,
+              color: defaultAppColor,
+            ));
   }
 }

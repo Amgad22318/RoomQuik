@@ -1,9 +1,11 @@
 import 'package:algoriza_team_6_realestate_app/data/models/responses/facilities/facilities.dart';
+import 'package:algoriza_team_6_realestate_app/data/models/responses/hotels_model/hotels_model.dart';
 import 'package:algoriza_team_6_realestate_app/data/repository/facilities_repository/facilities_repository.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
 
+import '../../../data/repository/hotlels_repository/hotels_repository.dart';
 import '../../../data/source/network/api_result_handler.dart';
 
 part 'home_state.dart';
@@ -14,25 +16,25 @@ class HomeCubit extends Cubit<HomeState> {
 //
   static HomeCubit get(context) => BlocProvider.of<HomeCubit>(context);
 
-  Facilities facilities = Facilities();
+  Hotels homeHotels = Hotels();
 
-  void getFacilities() async {
-    emit(GetFacilitiesLoadingState());
-    ApiResults apiResults = await FacilitiesRepository().getFacilitiesData();
+  void getHotels() async {
+    emit(GetHotelsLoadingState());
+    ApiResults apiResults = await HotelsRepository().getHotelsData(20, 1);
 
     if (apiResults is ApiSuccess) {
-      handleFacilitiesResponse(apiResults.data);
+      handleHotelsResponse(apiResults.data);
     } else if (apiResults is ApiFailure) {
-      emit(GetFacilitiesFailureState(apiResults.message));
+      emit(GetHotelsFailureState(apiResults.message));
     }
   }
 
-  void handleFacilitiesResponse(json) {
-    facilities = Facilities.fromJson(json);
-    if (facilities.status.success) {
-      emit(GetFacilitiesSuccessState());
+  void handleHotelsResponse(json) {
+    homeHotels = Hotels.fromJson(json);
+    if (homeHotels.status.success) {
+      emit(GetHotelsSuccessState());
     } else {
-      emit(GetFacilitiesFailureState());
+      emit(GetHotelsFailureState());
     }
   }
 }
