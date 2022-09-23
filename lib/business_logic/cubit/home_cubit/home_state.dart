@@ -5,12 +5,12 @@ abstract class HomeState {}
 
 class HomeInitial extends HomeState {}
 
-class GetFacilitiesSuccessState extends HomeState {}
+class GetHotelsSuccessState extends HomeState {}
 
-class GetFacilitiesLoadingState extends HomeState {}
+class GetHotelsLoadingState extends HomeState {}
 
-class GetFacilitiesFailureState extends HomeState {
+class GetHotelsFailureState extends HomeState {
   final String? errorMessage;
 
-  GetFacilitiesFailureState([this.errorMessage]);
+  GetHotelsFailureState([this.errorMessage]);
 }

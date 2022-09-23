@@ -8,7 +8,6 @@ import '../../widgets/default_text_form_field.dart';
 class MyProfileScreen extends StatelessWidget {
   const MyProfileScreen({Key? key}) : super(key: key);
 
-
   @override
   Widget build(BuildContext context) {
     var changepasswordontroller = TextEditingController();
@@ -23,19 +22,31 @@ class MyProfileScreen extends StatelessWidget {
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.only(top: 30.0,bottom: 5,left: 7),
+              padding: const EdgeInsets.only(top: 30.0, bottom: 5, left: 7),
               child: InkWell(
-                onTap: (){
-                  Navigator.pushNamed(context, UpdateProfileRoute);
+                onTap: () {
+                  Navigator.pushNamed(context, updateProfileRoute);
                 },
                 child: Row(
                   children: [
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        DefaultText(text: 'Amanda',fontSize: 30.sp,color: Colors.black,fontWeight: FontWeight.bold,),
-                        SizedBox(height: 10,),
-                        DefaultText(text: 'View and Edit Profile',fontSize: 18.sp,color: Colors.black,fontWeight: FontWeight.w500,),
+                        DefaultText(
+                          text: 'Amanda',
+                          fontSize: 30.sp,
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        DefaultText(
+                          text: 'View and Edit Profile',
+                          fontSize: 18.sp,
+                          color: Colors.black,
+                          fontWeight: FontWeight.w500,
+                        ),
                       ],
                     ),
                     Spacer(),
@@ -48,9 +59,10 @@ class MyProfileScreen extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 8.0),
-              child: InkWell(onTap: (){
-                Navigator.pushNamed(context, ChangePasswordRoute);
-              },
+              child: InkWell(
+                onTap: () {
+                  Navigator.pushNamed(context, changePasswordRoute);
+                },
                 child: DefaultTextFormField(
                   controllerr: changepasswordontroller,
                   type: TextInputType.text,
@@ -60,7 +72,6 @@ class MyProfileScreen extends StatelessWidget {
                   enabledbprder: InputBorder.none,
                   erroborder: InputBorder.none,
                   disabledborder: InputBorder.none,
-
                   radius: 1,
                   fonts: 25,
                   bradius: 15,
@@ -70,7 +81,6 @@ class MyProfileScreen extends StatelessWidget {
                   suffix: Icons.lock,
                   border: OutlineInputBorder(),
                   ispassword: false,
-
                 ),
               ),
             ),
@@ -80,9 +90,10 @@ class MyProfileScreen extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 8.0),
-              child: InkWell(onTap: (){
-                Navigator.pushNamed(context, HotelDetailsRoute);
-              },
+              child: InkWell(
+                onTap: () {
+                  Navigator.pushNamed(context, hotelDetailsRoute);
+                },
                 child: DefaultTextFormField(
                   controllerr: invitefriendscontroller,
                   type: TextInputType.text,
@@ -94,7 +105,6 @@ class MyProfileScreen extends StatelessWidget {
                   erroborder: InputBorder.none,
                   disabledborder: InputBorder.none,
                   enabled: false,
-
                   fonts: 25,
                   bradius: 15,
                   max: 8,
@@ -102,7 +112,6 @@ class MyProfileScreen extends StatelessWidget {
                   suffix: Icons.person_add,
                   border: OutlineInputBorder(),
                   ispassword: false,
-
                 ),
               ),
             ),
@@ -112,7 +121,8 @@ class MyProfileScreen extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 8.0),
-              child: InkWell(onTap: (){},
+              child: InkWell(
+                onTap: () {},
                 child: DefaultTextFormField(
                   controllerr: creditcontroller,
                   type: TextInputType.text,
@@ -131,7 +141,6 @@ class MyProfileScreen extends StatelessWidget {
                   suffix: Icons.card_giftcard,
                   border: OutlineInputBorder(),
                   ispassword: false,
-
                 ),
               ),
             ),
@@ -141,13 +150,13 @@ class MyProfileScreen extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 8.0),
-              child: InkWell(onTap: (){},
+              child: InkWell(
+                onTap: () {},
                 child: DefaultTextFormField(
                   controllerr: helpcontroller,
                   type: TextInputType.text,
                   label: 'Help Center',
                   enabled: false,
-
                   fontweight: FontWeight.bold,
                   radius: 1,
                   fonts: 25,
@@ -161,7 +170,6 @@ class MyProfileScreen extends StatelessWidget {
                   suffix: Icons.info,
                   border: OutlineInputBorder(),
                   ispassword: false,
-
                 ),
               ),
             ),
@@ -171,7 +179,8 @@ class MyProfileScreen extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 8.0),
-              child: InkWell(onTap: (){},
+              child: InkWell(
+                onTap: () {},
                 child: DefaultTextFormField(
                   controllerr: paymentcontroller,
                   type: TextInputType.text,
@@ -190,7 +199,6 @@ class MyProfileScreen extends StatelessWidget {
                   suffix: Icons.payment,
                   border: OutlineInputBorder(),
                   ispassword: false,
-
                 ),
               ),
             ),
@@ -200,9 +208,10 @@ class MyProfileScreen extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 8.0),
-              child: InkWell(onTap: (){
-                Navigator.pushNamed(context, settingScreenRoute);
-              },
+              child: InkWell(
+                onTap: () {
+                  Navigator.pushNamed(context, settingScreenRoute);
+                },
                 child: DefaultTextFormField(
                   controllerr: settingscontroller,
                   type: TextInputType.text,
@@ -221,11 +230,9 @@ class MyProfileScreen extends StatelessWidget {
                   suffix: Icons.settings,
                   border: OutlineInputBorder(),
                   ispassword: false,
-
                 ),
               ),
             ),
-
           ],
         ),
       ),

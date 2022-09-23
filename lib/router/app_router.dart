@@ -4,19 +4,15 @@ import 'package:algoriza_team_6_realestate_app/screens/app_layout/app_layout.dar
 import 'package:algoriza_team_6_realestate_app/screens/auth_pages/login_screen.dart';
 import 'package:algoriza_team_6_realestate_app/screens/auth_pages/sign_up_screen.dart';
 import 'package:algoriza_team_6_realestate_app/screens/filter/filter_sceen.dart';
+import 'package:algoriza_team_6_realestate_app/screens/hotel_location/hotel_location.dart';
 import 'package:algoriza_team_6_realestate_app/screens/onbording/onbording.dart';
 import 'package:algoriza_team_6_realestate_app/screens/setting/setting_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import '../screens/hotel_details/hotel_details.dart';
 import '../screens/my_profile/change_password.dart';
 import '../screens/my_profile/edit_profile.dart';
-
-
-
-
-
-import '../screens/onbording/onbording.dart';
 
 import '../screens/splash/splash_screen.dart';
 
@@ -32,7 +28,7 @@ class AppRouter {
       case screens.settingScreenRoute:
         return MaterialPageRoute(builder: (_) => SettingScreen());
 
-      case screens.onboardingRoute:
+      case screens.onBoardingRoute:
         return MaterialPageRoute(builder: (_) => OnBoarding());
       case screens.loginRoute:
         return MaterialPageRoute(builder: (_) => Login());
@@ -47,14 +43,17 @@ class AppRouter {
                 ));
       case screens.filterScreenRoute:
         return MaterialPageRoute(builder: (_) => FilterScreen());
-      case screens.onboardingRoute:
-        return MaterialPageRoute(builder: (_) => Onboarding());
-      case screens.UpdateProfileRoute:
+      case screens.onBoardingRoute:
+        return MaterialPageRoute(builder: (_) => OnBoarding());
+      case screens.updateProfileRoute:
         return MaterialPageRoute(builder: (_) => EditProfile());
-      case screens.ChangePasswordRoute:
+      case screens.changePasswordRoute:
         return MaterialPageRoute(builder: (_) => ChangePassword());
-      case screens.HotelDetailsRoute:
+      case screens.hotelDetailsRoute:
         return MaterialPageRoute(builder: (_) => HotelDetails());
+      case screens.hotelLocationRoute:
+        LatLng latLng = settings.arguments as LatLng;
+        return MaterialPageRoute(builder: (_) => HotelLocation(latLng: latLng));
 
       default:
         return null;

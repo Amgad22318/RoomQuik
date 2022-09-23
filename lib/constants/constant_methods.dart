@@ -1,7 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:geolocator/geolocator.dart';
+import 'dart:ui' as ui;
 
 import 'constants.dart';
 
@@ -111,4 +113,14 @@ extension DateOnlyCompare on DateTime {
   bool isSameDate(DateTime other) {
     return year == other.year && month == other.month && day == other.day;
   }
+}
+
+Future<Uint8List> getBytesFromAsset(String path, double width) async {
+  ByteData data = await rootBundle.load(path);
+  ui.Codec codec = await ui.instantiateImageCodec(data.buffer.asUint8List(),
+      targetWidth: width.toInt());
+  ui.FrameInfo fi = await codec.getNextFrame();
+  return (await fi.image.toByteData(format: ui.ImageByteFormat.png))!
+      .buffer
+      .asUint8List();
 }
