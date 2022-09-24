@@ -111,7 +111,7 @@ class DefaultTextFormField extends StatelessWidget {
         prefix: prefixwidget,
         suffixIcon: Icon(
           suffix,
-          size: 35,
+          size: 30,
         ),
         label: Text(
           label,

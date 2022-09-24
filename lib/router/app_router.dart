@@ -6,6 +6,7 @@ import 'package:algoriza_team_6_realestate_app/screens/setting/setting_screen.da
 import 'package:flutter/material.dart';
 
 import '../screens/hotel_details/hotel_details.dart';
+import '../screens/hotel_location/hotel_location.dart';
 import '../screens/my_profile/change_password.dart';
 import '../screens/my_profile/edit_profile.dart';
 
@@ -41,6 +42,8 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => ChangePassword());
       case screens.HotelDetailsRoute:
         return MaterialPageRoute(builder: (_) => HotelDetails());
+      case screens.HotelLocationRoute:
+        return MaterialPageRoute(builder: (_) => HotelLocation());
 
       default:
         return null;

@@ -10,6 +10,7 @@ import '../../widgets/default_text.dart';
 class SettingScreen extends StatelessWidget {
   SettingScreen({Key? key}) : super(key: key);
   final GlobalCubit globalCubit = sl<GlobalCubit>();
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -25,22 +26,153 @@ class SettingScreen extends StatelessWidget {
               centerTitle: true,
             ),
             body: Padding(
-              padding: EdgeInsets.symmetric(vertical: 5.h, horizontal: 3.w),
-              child: Column(
-                children: [
-                  Row(
-                    children: [
-                      DefaultText(text: 'Darkmode', fontSize: 18.sp),
-                      const Spacer(),
-                      Switch(
-                          activeColor: defaultAppColor2,
-                          value: !globalCubit.isLightTheme,
-                          onChanged: (value) {
-                            globalCubit.changeAppTheme();
-                          })
-                    ],
-                  )
-                ],
+              padding: EdgeInsets.symmetric(horizontal: 10),
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    ListTile(
+                      onTap: () {},
+                      title: Row(
+                        children: [
+                          Expanded(
+                            child: DefaultText(
+                              text: 'Notifications',
+                            ),
+                          ),
+                          Icon(Icons.notifications)
+                        ],
+                      ),
+                    ),
+                    ListTile(
+                      onTap: () {},
+                      title: Row(
+                        children: [
+                          Expanded(
+                            child: DefaultText(
+                              text: 'Theme Mode',
+                            ),
+                          ),
+                          Icon(Icons.dark_mode)
+                        ],
+                      ),
+                    ),
+                    ListTile(
+                      onTap: () {},
+                      title: Row(
+                        children: [
+                          Expanded(
+                            child: DefaultText(
+                              text: 'Fonts',
+                            ),
+                          ),
+                          Icon(Icons.font_download)
+                        ],
+                      ),
+                    ),
+                    ListTile(
+                      onTap: () {},
+                      title: Row(
+                        children: [
+                          Expanded(
+                            child: DefaultText(
+                              text: 'Color',
+                            ),
+                          ),
+                          Icon(Icons.color_lens)
+                        ],
+                      ),
+                    ),
+                    ListTile(
+                      onTap: () {},
+                      title: Row(
+                        children: [
+                          Expanded(
+                            child: DefaultText(
+                              text: 'Language',
+                            ),
+                          ),
+                          Icon(Icons.language)
+                        ],
+                      ),
+                    ),
+                    ListTile(
+                      onTap: () {},
+                      title: Row(
+                        children: [
+                          Expanded(
+                            child: DefaultText(
+                              text: 'Country',
+                            ),
+                          ),
+                          DefaultText(text: 'Egypt',),
+                        ],
+                      ),
+                    ),
+                    ListTile(
+                      onTap: () {},
+                      title: Row(
+                        children: [
+                          Expanded(
+                            child: DefaultText(
+                              text: 'Currency',
+                            ),
+                          ),
+                          DefaultText(text: '\$ AED')
+                        ],
+                      ),
+                    ),
+                    ListTile(
+                      onTap: () {},
+                      title: Row(
+                        children: [
+                          Expanded(
+                            child: DefaultText(
+                              text: 'Terms of Service',
+                            ),
+                          ),
+                          Icon(Icons.arrow_forward_ios_rounded)
+                        ],
+                      ),
+                    ),
+                    ListTile(
+                      onTap: () {},
+                      title: Row(
+                        children: [
+                          Expanded(
+                            child: DefaultText(
+                              text: 'Terms of Service',
+                            ),
+                          ),
+                          Icon(Icons.arrow_forward_ios_rounded)
+                        ],
+                      ),
+                    ),
+                    ListTile(
+                      onTap: () {},
+                      title: Row(
+                        children: [
+                          Expanded(
+                            child: DefaultText(
+                              text: 'Terms of Service',
+                            ),
+                          ),
+                          Icon(Icons.arrow_forward_ios_rounded)
+                        ],
+                      ),
+                    ),
+                    ListTile(
+                      onTap: () {},
+                      title: Row(
+                        children: [
+                          DefaultText(
+                            text: 'Log Out',
+                          ),
+                        ],
+                      ),
+                    ),
+
+                  ],
+                ),
               ),
             ),
           );
