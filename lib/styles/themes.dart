@@ -21,11 +21,13 @@ class Themes {
           )),
       drawerTheme: const DrawerThemeData(backgroundColor: defaultAppColor),
       bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-          selectedItemColor: defaultDarkBlue, elevation: 0));
+          selectedItemColor: defaultDarkBlue, elevation: 0),
+      dialogBackgroundColor: defaultAppColor
+  );
 
   static ThemeData darkTheme = ThemeData(
     drawerTheme: const DrawerThemeData(backgroundColor: defaultDarkBlue),
-    colorScheme: const ColorScheme.light(
+    colorScheme: const ColorScheme.dark(
       primary: defaultAppColor2,
       secondary: defaultAppColor,
     ),
@@ -46,5 +48,6 @@ class Themes {
       activeTickMarkColor: Colors.transparent,
       valueIndicatorColor: defaultAppColor.withOpacity(0.5),
     ),
+    dialogBackgroundColor: defaultAppColor2
   );
 }

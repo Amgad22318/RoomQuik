@@ -14,8 +14,10 @@ class DefaultMaterialButton extends StatelessWidget {
   final String? text;
   final Widget? child;
   final EdgeInsetsGeometry? padding;
+  final EdgeInsetsGeometry? margin;
   final double? fontSize;
   final double? textScaleFactor;
+
 
   const DefaultMaterialButton(
       {Key? key,
@@ -29,6 +31,7 @@ class DefaultMaterialButton extends StatelessWidget {
       this.child,
       this.splashColor,
       this.padding,
+        this.margin,
       this.height,
       this.fontSize,
       this.textScaleFactor})
@@ -36,11 +39,12 @@ class DefaultMaterialButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Container(
       height: height,
       width: width,
+      padding: padding,
+      margin: margin,
       child: MaterialButton(
-        padding: padding,
         elevation: 1,
         splashColor: splashColor,
         color: background ?? defaultAppWhiteColor.withOpacity(0.3),

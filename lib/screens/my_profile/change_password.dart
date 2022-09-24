@@ -1,24 +1,54 @@
+import 'package:algoriza_team_6_realestate_app/constants/constant_methods.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
 
+import '../../business_logic/cubit/profile_cubit/profile_cubit.dart';
+import '../../constants/constants.dart';
+import '../../data/di/di.dart';
+import '../../data/models/responses/auth_model/auth_model.dart';
+import '../../widgets/default_form_field.dart';
+import '../../widgets/default_loading_indicator.dart';
 import '../../widgets/default_material_button.dart';
 import '../../widgets/default_text.dart';
-import '../../widgets/default_text_form_field.dart';
 
-class ChangePassword extends StatelessWidget {
-  const ChangePassword({Key? key}) : super(key: key);
+class ChangePassword extends StatefulWidget {
+
+  Auth myProfile;
+
+  ChangePassword({Key? key, required this.myProfile}) : super(key: key);
+
+  @override
+  State<ChangePassword> createState() => _ChangePasswordState();
+}
+
+class _ChangePasswordState extends State<ChangePassword> {
+
+  late ProfileCubit cubit;
+  var formKey = GlobalKey<FormState>();
+
+  @override
+  void initState() {
+    super.initState();
+    cubit = sl<ProfileCubit>();
+  }
 
   @override
   Widget build(BuildContext context) {
-    var password = TextEditingController();
-    var confirm_password = TextEditingController();
+    var passwordController = TextEditingController();
+    var confirmPasswordController = TextEditingController();
+
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
             onPressed: () {
               Navigator.pop(context);
             },
-            icon: Icon(Icons.arrow_back_ios)),
+            icon: const Icon(Icons.arrow_back_ios)),
+        title: const DefaultText(
+          text: 'Change Password',
+          fontWeight: FontWeight.bold,
+        ),
         elevation: 0,
       ),
       body: Padding(
@@ -28,110 +58,89 @@ class ChangePassword extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               DefaultText(
-                text: 'Change Password',
-                fontSize: 20.sp,
-                fontWeight: FontWeight.bold,
-                color: Colors.black,
-              ),
-              SizedBox(
-                height: 15,
-              ),
-              DefaultText(
                 text: 'Please Enter Your New Password',
                 fontSize: 15.sp,
-                color: Colors.black,
               ),
-              SizedBox(
-                height: 15,
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: 2.h, horizontal: 5.w),
+                child: DefaultFormField(
+                  labelText: 'New Password',
+                  validator: (value) {
+                    if (passwordController.text.isEmpty) {
+                      return "Password can't be empty";
+                    } else if (passwordController.text.length <= 6) {
+                      return 'Your password must be longer than 6 characters';
+                    }
+                    return null;
+                  },
+                  obscureText: true,
+                  maxLines: 1,
+                  prefixIcon: const Icon(Icons.password),
+                  controller: passwordController,
+                  keyboardType: TextInputType.text,
+                ),
               ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 17.0),
-                    child: DefaultText(
-                      text: 'New Password',
-                      fontSize: 20.sp,
-                      color: Colors.black,
-                    ),
-                  ),
-                  DefaultTextFormField(
-                    fontweight: FontWeight.w500,
-                    controllerr: password,
-                    type: TextInputType.text,
-                    label: ' ',
-                    radius: 0,
-                    fonts: 20.sp,
-                    readonly: false,
-                    ispassword: false,
-                    bradius: 25,
-                    enabledbprder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(25),
-                      borderSide: BorderSide(color: Colors.transparent),
-                    ),
-                    focusedborder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(25),
-                      borderSide: BorderSide(color: Colors.transparent),
-                    ),
-                    filled: true,
-                    fillcolor: Colors.blueGrey.withOpacity(0.5),
-                    vertical: 15,
-                    hint: 'Enter New Password',
-                  ),
-                ],
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 5.w,).copyWith(
+                    bottom: 4.h),
+                child: DefaultFormField(
+                  labelText: 'E-mail',
+                  validator: (value) {
+                    if (confirmPasswordController.text.isEmpty) {
+                      return "Password can't be empty";
+                    } else if (confirmPasswordController.text.length <= 6) {
+                      return 'Your password must be longer than 6 characters';
+                    }
+                    return null;
+                  },
+                  obscureText: true,
+                  maxLines: 1,
+                  prefixIcon: const Icon(Icons.password_outlined),
+                  controller: confirmPasswordController,
+                  keyboardType: TextInputType.emailAddress,
+                ),
               ),
-              SizedBox(
-                height: 15,
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 17.0),
-                    child: DefaultText(
-                      text: 'Confirm Password',
-                      fontSize: 20.sp,
-                      color: Colors.black,
-                    ),
-                  ),
-                  DefaultTextFormField(
-                    fontweight: FontWeight.w500,
-                    controllerr: confirm_password,
-                    type: TextInputType.text,
-                    label: ' ',
-                    radius: 0,
-                    fonts: 20.sp,
-                    readonly: false,
-                    ispassword: false,
-                    bradius: 25,
-                    enabledbprder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(25),
-                      borderSide: BorderSide(color: Colors.transparent),
-                    ),
-                    focusedborder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(25),
-                      borderSide: BorderSide(color: Colors.transparent),
-                    ),
-                    filled: true,
-                    fillcolor: Colors.blueGrey.withOpacity(0.5),
-                    vertical: 15,
-                    hint: 'Enter confirm Password',
-                  ),
-                  SizedBox(
-                    height: 25,
-                  ),
-                  DefaultMaterialButton(
-                    height: 62,
-                    radius: 25,
-                    onPressed: () {},
+              BlocConsumer<ProfileCubit, ProfileState>(
+                listener: (context, state) {
+                  if(state is UpdateProfileSuccessState){
+                    showToastMsg(
+                        msg: 'Changing Password Succeeded',
+                        toastState: ToastStates.SUCCESS,
+                    );
+                    Navigator.pop(context);
+                  }else if(state is UpdateProfileFailureState){
+                    showToastMsg(
+                      msg: state.errorMessage!,
+                      toastState: ToastStates.ERROR,
+                    );
+                  }
+                },
+                builder: (context, state) {
+                  if(state is UpdateProfileLoadingState) {
+                    return const DefaultLoadingIndicator();
+                  }
+                  else {
+                    return DefaultMaterialButton(
+                    margin: EdgeInsets.symmetric(horizontal: 5.w,),
+                    radius: 25.sp,
+                    onPressed: () {
+                      if (formKey.currentState!.validate()) {
+                        cubit.updateProfile(
+                            name: widget.myProfile.data.name,
+                            email: widget.myProfile.data.email,
+                            password: passwordController.text,
+                            passwordConfirmation: confirmPasswordController.text
+                        );
+                      }
+                    },
                     child: DefaultText(
                       text: 'Apply',
-                      fontSize: 20.sp,
+                      fontSize: 12.sp,
                       fontWeight: FontWeight.w800,
-
                     ),
-                  ),
-                ],
+                  );
+                  }
+                },
               ),
             ],
           ),

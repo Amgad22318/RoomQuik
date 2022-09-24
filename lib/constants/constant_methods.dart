@@ -1,10 +1,13 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:image_picker/image_picker.dart';
 import 'dart:ui' as ui;
 
+import '../styles/colors.dart';
 import 'constants.dart';
 
 void printResponse(String text) {
@@ -40,7 +43,7 @@ Color chooseToastColor({required ToastStates state}) {
   Color color;
   switch (state) {
     case ToastStates.SUCCESS:
-      color = Colors.cyanAccent;
+      color = defaultAppColor2;
       break;
     case ToastStates.WARNING:
       color = Colors.white;
@@ -123,4 +126,21 @@ Future<Uint8List> getBytesFromAsset(String path, double width) async {
   return (await fi.image.toByteData(format: ui.ImageByteFormat.png))!
       .buffer
       .asUint8List();
+}
+
+Future multipartConvertImage({
+  required XFile image,
+}) async {
+  return MultipartFile.fromFileSync(image.path,
+      filename: image.path.split('/').last);
+}
+
+Future<XFile?> pickImage(ImageSource source) async {
+  XFile? image = await ImagePicker().pickImage(
+      source: source, maxHeight: 1024, maxWidth: 1024, imageQuality: 50);
+  if (image != null) {
+    return image;
+  } else {
+    return null;
+  }
 }

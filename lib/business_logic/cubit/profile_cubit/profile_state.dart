@@ -15,22 +15,13 @@ class GetProfileInfoFailureState extends ProfileState {
   GetProfileInfoFailureState([this.errorMessage]);
 }
 
-class ChangePasswordSuccessState extends ProfileState {}
-
-class ChangePasswordLoadingState extends ProfileState {}
-
-class ChangePasswordFailureState extends ProfileState {
-  final String? errorMessage;
-
-  ChangePasswordFailureState([this.errorMessage]);
-}
 
 class UpdateProfileSuccessState extends ProfileState {}
 
 class UpdateProfileLoadingState extends ProfileState {}
 
 class UpdateProfileFailureState extends ProfileState {
-  final String? errorMessage;
+  final String errorMessage;
 
-  UpdateProfileFailureState([this.errorMessage]);
+  UpdateProfileFailureState(this.errorMessage);
 }
