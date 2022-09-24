@@ -10,6 +10,7 @@ import 'package:algoriza_team_6_realestate_app/screens/setting/setting_screen.da
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
+import '../data/models/responses/auth_model/auth_model.dart';
 import '../screens/hotel_details/hotel_details.dart';
 import '../screens/my_profile/change_password.dart';
 import '../screens/my_profile/edit_profile.dart';
@@ -20,6 +21,7 @@ class AppRouter {
   late Widget startScreen;
 
   Route? onGenerateRoute(RouteSettings settings) {
+
     startScreen = const SplashScreen();
 
     switch (settings.name) {
@@ -27,13 +29,12 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => startScreen);
       case screens.settingScreenRoute:
         return MaterialPageRoute(builder: (_) => SettingScreen());
-
       case screens.onBoardingRoute:
-        return MaterialPageRoute(builder: (_) => OnBoarding());
+        return MaterialPageRoute(builder: (_) => const OnBoarding());
       case screens.loginRoute:
-        return MaterialPageRoute(builder: (_) => Login());
+        return MaterialPageRoute(builder: (_) => const Login());
       case screens.signupRoute:
-        return MaterialPageRoute(builder: (_) => SignUp());
+        return MaterialPageRoute(builder: (_) => const SignUp());
 
       case screens.appLayoutRoute:
         int? route = settings.arguments as int?;
@@ -42,15 +43,14 @@ class AppRouter {
                   route: route,
                 ));
       case screens.filterScreenRoute:
-        return MaterialPageRoute(builder: (_) => FilterScreen());
-      case screens.onBoardingRoute:
-        return MaterialPageRoute(builder: (_) => OnBoarding());
+        return MaterialPageRoute(builder: (_) => const FilterScreen());
       case screens.updateProfileRoute:
-        return MaterialPageRoute(builder: (_) => EditProfile());
+        return MaterialPageRoute(builder: (_) => const EditProfile());
       case screens.changePasswordRoute:
-        return MaterialPageRoute(builder: (_) => ChangePassword());
+        Auth auth = settings.arguments as Auth;
+        return MaterialPageRoute(builder: (_) => ChangePassword(myProfile: auth,));
       case screens.hotelDetailsRoute:
-        return MaterialPageRoute(builder: (_) => HotelDetails());
+        return MaterialPageRoute(builder: (_) => const HotelDetails());
       case screens.hotelLocationRoute:
         LatLng latLng = settings.arguments as LatLng;
         return MaterialPageRoute(builder: (_) => HotelLocation(latLng: latLng));

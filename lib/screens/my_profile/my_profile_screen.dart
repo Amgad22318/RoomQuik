@@ -20,10 +20,9 @@ class MyProfileScreen extends StatelessWidget {
       child: SingleChildScrollView(
         child: Column(
           children: [
-
             InkWell(
               onTap: () {
-                Navigator.pushNamed(context, UpdateProfileRoute);
+                Navigator.pushNamed(context, updateProfileRoute, arguments: cubit.auth);
               },
               child: BlocBuilder<ProfileCubit, ProfileState>(
                 builder: (context, state) {
@@ -31,36 +30,46 @@ class MyProfileScreen extends StatelessWidget {
                     padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 2.h),
                     child: Row(
                       children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            DefaultText(
-                              text: cubit.auth.data.name == ''
-                                  ? 'User Name'
-                                  : cubit.auth.data.name,
-                              fontSize: 15.sp,
-                              fontWeight: FontWeight.bold,
-                            ),
-                            SizedBox(
-                              height: 1.h,
-                            ),
-                            DefaultText(
-                              text: 'View and Edit Profile',
-                              fontSize: 13.sp,
-                              fontWeight: FontWeight.w500,
-                              color: defaultGray,
-                            ),
-                          ],
-                        ),
-                        const Spacer(),
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(35.sp),
-                          child: DefaultCachedNetworkImage(
-                            imageUrl: cubit.auth.data.image,
-                            fit: BoxFit.cover,
+                        Expanded(
+                          flex: 2,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              DefaultText(
+                                text: cubit.auth.data.name == ''
+                                    ? 'User Name'
+                                    : cubit.auth.data.name,
+                                fontSize: 15.sp,
+                                fontWeight: FontWeight.bold,
+                              ),
+                              SizedBox(
+                                height: 1.h,
+                              ),
+                              DefaultText(
+                                text: 'View and Edit Profile',
+                                fontSize: 13.sp,
+                                fontWeight: FontWeight.w500,
+                                color: defaultGray,
+                              ),
+                            ],
                           ),
-                        )
-
+                        ),
+                        Flexible(
+                          child: Container(
+                            alignment: AlignmentDirectional.centerStart,
+                            clipBehavior: Clip.antiAlias,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: defaultAppWhiteColor.withOpacity(0.1),
+                            ),
+                            child: DefaultCachedNetworkImage(
+                              padding: 20.sp,
+                              iconSize: 50.sp,
+                              imageUrl: cubit.auth.data.image,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                   );
@@ -70,7 +79,7 @@ class MyProfileScreen extends StatelessWidget {
 
             InkWell(
               onTap: () {
-                Navigator.pushNamed(context, ChangePasswordRoute);
+                Navigator.pushNamed(context, changePasswordRoute, arguments: cubit.auth);
               },
               child: const DefaultListTile(
                   title: 'Change Password',

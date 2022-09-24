@@ -14,7 +14,7 @@ class DefaultListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      title: DefaultText(
+      leading: DefaultText(
         text: title,
         fontSize: 13.sp,
       ),

@@ -7,6 +7,7 @@ import '../../../constants/constants.dart';
 import '../../../data/source/local/my_shared_preferences.dart';
 import '../../../data/source/local/my_shared_preferences_keys.dart';
 import '../../constants/screens.dart';
+import '../../data/di/di.dart';
 import '../../styles/colors.dart';
 import '../../widgets/default_rich_text.dart';
 import '../../widgets/default_text_span.dart';
@@ -36,8 +37,13 @@ class _SplashScreenState extends State<SplashScreen>
     );
 
     Timer(const Duration(milliseconds: 2500), () async {
-      Navigator.of(context)
+      if(sl<MySharedPref>().getString(key: MySharedKeys.apiToken).isNotEmpty) {
+        Navigator.of(context)
           .pushNamedAndRemoveUntil(appLayoutRoute, (route) => false);
+      }else{
+        Navigator.of(context)
+            .pushNamedAndRemoveUntil(onBoardingRoute, (route) => false);
+      }
     });
   }
 

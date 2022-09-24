@@ -3,9 +3,13 @@ import 'package:algoriza_team_6_realestate_app/data/models/responses/auth_model/
 import 'package:algoriza_team_6_realestate_app/data/repository/Profile_Info_repository/profile_info_repository.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:meta/meta.dart';
 
+import '../../../data/di/di.dart';
 import '../../../data/repository/update_profile_repository/update_profile_repository.dart';
+import '../../../data/source/local/my_shared_preferences.dart';
+import '../../../data/source/local/my_shared_preferences_keys.dart';
 import '../../../data/source/network/api_result_handler.dart';
 
 part 'profile_state.dart';
@@ -38,18 +42,21 @@ class ProfileCubit extends Cubit<ProfileState> {
     }
   }
 
-  void updateProfile(
-    String name,
-    String email,
-    String password,
-    String passwordConfirmation,
-  ) async {
+  void updateProfile({
+    required String name,
+    required String email,
+    String? password,
+    String? passwordConfirmation,
+    XFile? profilePicture,
+  }) async {
     emit(UpdateProfileLoadingState());
     ApiResults apiResults = await UpdateProfileRepository().updateProfileData(
         name,
         email,
         password,
-        passwordConfirmation);
+        passwordConfirmation,
+        profilePicture,
+    );
     if (apiResults is ApiSuccess) {
       handleUpdateProfileResponse(apiResults.data);
     } else if (apiResults is ApiFailure) {
@@ -60,9 +67,10 @@ class ProfileCubit extends Cubit<ProfileState> {
   void handleUpdateProfileResponse(json) {
     updateProfileModel = UpdateProfileModel.fromJson(json);
     if (updateProfileModel.status.success) {
+      sl<MySharedPref>().putString(key: MySharedKeys.apiToken, value: auth.data.apiToken);
       emit(UpdateProfileSuccessState());
     } else {
-      emit(UpdateProfileFailureState());
+      emit(UpdateProfileFailureState(updateProfileModel.status.title.en));
     }
   }
 
