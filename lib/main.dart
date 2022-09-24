@@ -1,4 +1,5 @@
 import 'package:algoriza_team_6_realestate_app/business_logic/cubit/global_cubit/global_cubit.dart';
+import 'package:algoriza_team_6_realestate_app/business_logic/cubit/profile_cubit/profile_cubit.dart';
 import 'package:algoriza_team_6_realestate_app/data/source/local/my_shared_preferences.dart';
 import 'package:algoriza_team_6_realestate_app/router/app_router.dart';
 import 'package:algoriza_team_6_realestate_app/styles/themes.dart';
@@ -35,8 +36,15 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => sl<GlobalCubit>(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => sl<GlobalCubit>(),
+        ),
+        BlocProvider(
+          create: (context) => sl<ProfileCubit>(),
+        ),
+      ],
       child: BlocBuilder<GlobalCubit, GlobalStates>(
         builder: (context, state) {
           return Sizer(

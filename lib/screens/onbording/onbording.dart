@@ -22,15 +22,15 @@ class _OnBoardingState extends State<OnBoarding> {
   List<Widget> pagesList = [
     const OnBoardingPage(
         imagePath: '1.png',
-        boldText: 'plan your traps',
+        boldText: 'plan your trips',
         smallText: 'book one of your unique hotel to escape the ordinary'),
     const OnBoardingPage(
         imagePath: '2.png',
-        boldText: 'plan your traps',
+        boldText: 'plan your trips',
         smallText: 'book one of your unique hotel to escape the ordinary'),
     const OnBoardingPage(
         imagePath: '3.png',
-        boldText: 'plan your traps',
+        boldText: 'plan your trips',
         smallText: 'book one of your unique hotel to escape the ordinary'),
   ];
   int activeIndex = 0;

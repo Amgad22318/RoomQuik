@@ -1,4 +1,5 @@
 import 'package:algoriza_team_6_realestate_app/business_logic/cubit/home_cubit/home_cubit.dart';
+import 'package:algoriza_team_6_realestate_app/business_logic/cubit/profile_cubit/profile_cubit.dart';
 import 'package:algoriza_team_6_realestate_app/screens/home/home_screen.dart';
 import 'package:algoriza_team_6_realestate_app/screens/my_booking/my_booking_screen.dart';
 import 'package:flutter/material.dart';
@@ -38,25 +39,30 @@ class _AppLayoutState extends State<AppLayout> {
         BlocProvider(
           create: (context) => sl<HomeCubit>()..getHotels(),
           lazy: false,
-        )
+        ),
+        BlocProvider(
+          create: (context) => sl<ProfileCubit>()..getProfileInfo(),
+          lazy: false,
+        ),
       ],
       child: Scaffold(
+
         body: _navigationBarScreenList.elementAt(_selectedIndex),
         bottomNavigationBar: BottomNavigationBar(
           type: BottomNavigationBarType.shifting,
-          items: <BottomNavigationBarItem>[
+          items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
               icon: Icon(Icons.home),
               label: 'Home',
               backgroundColor: defaultAppColor,
             ),
             BottomNavigationBarItem(
-              icon: const Icon(Icons.home_work_rounded),
+              icon: Icon(Icons.home_work_rounded),
               label: 'Booking',
               backgroundColor: defaultLightYellowColor,
             ),
             BottomNavigationBarItem(
-              icon: const Icon(Icons.person),
+              icon: Icon(Icons.person),
               label: 'Profile',
               backgroundColor: defaultAppColor2,
             ),

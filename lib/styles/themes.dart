@@ -22,6 +22,8 @@ class Themes {
       drawerTheme: const DrawerThemeData(backgroundColor: defaultAppColor),
       bottomNavigationBarTheme: const BottomNavigationBarThemeData(
           selectedItemColor: defaultDarkBlue, elevation: 0),
+          
+          
       sliderTheme: SliderThemeData(
         inactiveTickMarkColor: Colors.transparent,
         activeTickMarkColor: Colors.transparent,
@@ -29,7 +31,14 @@ class Themes {
       checkboxTheme: CheckboxThemeData(
         checkColor: MaterialStateProperty.all(Colors.white),
         fillColor: MaterialStateProperty.all(defaultAppColor2),
-      ));
+      )
+      dialogBackgroundColor: defaultAppColor
+      );
+      
+
+      
+      
+      
 
   static ThemeData darkTheme = ThemeData(
       drawerTheme: const DrawerThemeData(backgroundColor: defaultDarkBlue),
@@ -56,5 +65,8 @@ class Themes {
       checkboxTheme: CheckboxThemeData(
         checkColor: MaterialStateProperty.all(Colors.white),
         fillColor: MaterialStateProperty.all(defaultAppColor2),
-      ));
+      ),
+    dialogBackgroundColor: defaultAppColor2
+      );
+
 }

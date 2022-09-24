@@ -4,11 +4,12 @@ import 'package:sizer/sizer.dart';
 
 import '../styles/colors.dart';
 import 'default_loading_indicator.dart';
-import 'default_svg.dart';
 
 class DefaultCachedNetworkImage extends StatelessWidget {
   final double? height;
   final double? width;
+  final double? iconSize;
+  final double? padding;
   final String imageUrl;
   final BoxFit? fit;
 
@@ -17,7 +18,7 @@ class DefaultCachedNetworkImage extends StatelessWidget {
       this.height,
       required this.imageUrl,
       this.width,
-      required this.fit})
+      required this.fit, this.iconSize, this.padding})
       : super(key: key);
 
   @override
@@ -36,19 +37,20 @@ class DefaultCachedNetworkImage extends StatelessWidget {
               ));
             },
             errorWidget: (context, url, error) => Padding(
-                padding: EdgeInsets.all(35.sp),
+                padding: EdgeInsets.all(padding ?? 35.sp),
                 child: Icon(
                   Icons.home_work_rounded,
-                  size: 75.sp,
+                  size: iconSize ?? 75.sp,
                   color: defaultAppColor,
                 )),
           )
         : Padding(
-            padding: EdgeInsets.all(35.sp),
+            padding: EdgeInsets.all(padding ?? 35.sp),
             child: Icon(
               Icons.home_work_rounded,
-              size: 75.sp,
+              size: iconSize ?? 75.sp,
               color: defaultAppColor,
-            ));
+            ),
+    );
   }
 }

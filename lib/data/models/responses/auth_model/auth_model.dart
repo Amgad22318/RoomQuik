@@ -51,7 +51,7 @@ class Data {
     num? id,
     String? name,
     String? email,
-    dynamic emailVerifiedAt,
+    String? emailVerifiedAt,
     String? apiToken,
     String? image,
     String? createdAt,
@@ -86,7 +86,7 @@ class Data {
   num? _id;
   String? _name;
   String? _email;
-  dynamic _emailVerifiedAt;
+  String? _emailVerifiedAt;
   String? _apiToken;
   String? _image;
   String? _createdAt;
@@ -97,7 +97,7 @@ class Data {
     num? id,
     String? name,
     String? email,
-    dynamic emailVerifiedAt,
+    String? emailVerifiedAt,
     String? apiToken,
     String? image,
     String? createdAt,
@@ -120,7 +120,7 @@ class Data {
   num get id => _id ?? 0;
   String get name => _name ?? "";
   String get email => _email ?? "";
-  dynamic get emailVerifiedAt => _emailVerifiedAt;
+  String get emailVerifiedAt => _emailVerifiedAt ?? "";
   String get apiToken => _apiToken ?? "";
   String get image => _image ?? "";
   String get createdAt => _createdAt ?? "";
