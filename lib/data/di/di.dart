@@ -1,3 +1,4 @@
+import 'package:algoriza_team_6_realestate_app/business_logic/cubit/filter_cubit/filter_cubit.dart';
 import 'package:algoriza_team_6_realestate_app/business_logic/cubit/global_cubit/global_cubit.dart';
 import 'package:algoriza_team_6_realestate_app/business_logic/cubit/home_cubit/home_cubit.dart';
 import 'package:algoriza_team_6_realestate_app/data/source/local/my_shared_preferences.dart';
@@ -22,5 +23,8 @@ Future<void> init() async {
   );
   sl.registerLazySingleton<HomeCubit>(
     () => HomeCubit(),
+  );
+  sl.registerLazySingleton<FilterCubit>(
+    () => FilterCubit(),
   );
 }

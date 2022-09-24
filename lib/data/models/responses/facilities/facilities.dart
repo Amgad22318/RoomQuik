@@ -60,12 +60,14 @@ class Data {
     String? image,
     String? createdAt,
     String? updatedAt,
+    bool? checked,
   }) {
     _id = id;
     _name = name;
     _image = image;
     _createdAt = createdAt;
     _updatedAt = updatedAt;
+    _checked = checked;
   }
 
   Data.fromJson(dynamic json) {
@@ -74,18 +76,21 @@ class Data {
     _image = json['image'];
     _createdAt = json['created_at'];
     _updatedAt = json['updated_at'];
+    _checked = json['checked'];
   }
   int? _id;
   String? _name;
   String? _image;
   String? _createdAt;
   String? _updatedAt;
+  bool? _checked;
   Data copyWith({
     int? id,
     String? name,
     String? image,
     String? createdAt,
     String? updatedAt,
+    bool? checked,
   }) =>
       Data(
         id: id ?? _id,
@@ -93,12 +98,18 @@ class Data {
         image: image ?? _image,
         createdAt: createdAt ?? _createdAt,
         updatedAt: updatedAt ?? _updatedAt,
+        checked: checked ?? _checked,
       );
   int get id => _id ?? 0;
   String get name => _name ?? '';
   String get image => _image ?? '';
   String get createdAt => _createdAt ?? '';
   String get updatedAt => _updatedAt ?? '';
+  bool get checked => _checked ?? false;
+
+  set setChecked(bool value) {
+    _checked = value;
+  }
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -107,6 +118,7 @@ class Data {
     map['image'] = _image;
     map['created_at'] = _createdAt;
     map['updated_at'] = _updatedAt;
+    map['checked'] = _checked;
     return map;
   }
 }

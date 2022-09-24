@@ -28,101 +28,112 @@ class _HotelsItemState extends State<HotelsItem> {
       clipBehavior: Clip.antiAlias,
       margin: EdgeInsets.symmetric(horizontal: 2.w, vertical: 1.h),
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(16.sp),
-          color: defaultAppWhiteColor.withOpacity(0.1)),
-      child: Column(children: [
-        SizedBox(
-          height: 35.h,
-          child: Stack(
-            alignment: Alignment.bottomCenter,
-            children: [
-              PageView(
-                controller: pageController,
-                children: widget.hotelData.hotelImages.isNotEmpty
-                    ? List.generate(
-                        widget.hotelData.hotelImages.length,
-                        (index) => ClipRRect(
-                              clipBehavior: Clip.antiAlias,
-                              borderRadius: BorderRadius.circular(16.sp),
-                              child: DefaultCachedNetworkImage(
-                                imageUrl: imageBaseURL +
-                                    widget.hotelData.hotelImages[index].image,
-                                fit: BoxFit.cover,
-                              ),
-                            ))
-                    : [
-                        const DefaultCachedNetworkImage(
-                            imageUrl: '', fit: BoxFit.cover)
-                      ],
-              ),
-              Visibility(
-                visible: widget.hotelData.hotelImages.isNotEmpty,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: SmoothPageIndicator(
-                    count: widget.hotelData.hotelImages.length,
-                    effect: const WormEffect(
-                      spacing: 5.0,
-                      radius: 5.0,
-                      dotWidth: 10.0,
-                      dotHeight: 10.0,
-                      strokeWidth: 0,
-                      dotColor: defaultGray,
-                      activeDotColor: defaultAppWhiteColor,
+          borderRadius: BorderRadius.circular(16.sp), color: defaultLightWhite),
+      child: InkWell(
+        borderRadius: BorderRadius.circular(16.sp),
+        onTap: () {
+          Navigator.pushNamed(context, hotelDetailsRoute,
+              arguments: widget.hotelData);
+        },
+        child: Column(children: [
+          SizedBox(
+            height: 35.h,
+            child: Stack(
+              alignment: Alignment.bottomCenter,
+              children: [
+                PageView(
+                  controller: pageController,
+                  children: widget.hotelData.hotelImages.isNotEmpty
+                      ? List.generate(
+                          widget.hotelData.hotelImages.length,
+                          (index) => ClipRRect(
+                                clipBehavior: Clip.antiAlias,
+                                borderRadius: BorderRadius.circular(16.sp),
+                                child: DefaultCachedNetworkImage(
+                                  imageUrl: imageBaseURL +
+                                      widget.hotelData.hotelImages[index].image,
+                                  fit: BoxFit.cover,
+                                ),
+                              ))
+                      : [
+                          const DefaultCachedNetworkImage(
+                              imageUrl: '', fit: BoxFit.cover)
+                        ],
+                ),
+                Visibility(
+                  visible: widget.hotelData.hotelImages.isNotEmpty,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: SmoothPageIndicator(
+                      count: widget.hotelData.hotelImages.length,
+                      effect: const WormEffect(
+                        spacing: 5.0,
+                        radius: 5.0,
+                        dotWidth: 10.0,
+                        dotHeight: 10.0,
+                        strokeWidth: 0,
+                        dotColor: defaultGray,
+                        activeDotColor: defaultAppWhiteColor,
+                      ),
+                      controller: pageController,
                     ),
-                    controller: pageController,
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 2.w, vertical: 1.h),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  DefaultText(
-                    text: widget.hotelData.name,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16.sp,
-                  ),
-                  Row(
-                    children: [
-                      DefaultText(text: widget.hotelData.address),
-                      DefaultIconButton(
-                          onPressed: () {
-                            Navigator.pushNamed(context, hotelLocationRoute,
-                                arguments: LatLng(
-                                    double.parse(widget.hotelData.latitude),
-                                    double.parse(widget.hotelData.longitude)));
-                          },
-                          icon: const Icon(Icons.location_on))
-                    ],
-                  ),
-                ],
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  DefaultText(
-                    text: '${widget.hotelData.price}\$',
-                    maxLines: 2,
-                  ),
-                  const DefaultText(
-                    text: 'per night',
-                    maxLines: 2,
-                    color: defaultGray,
-                  )
-                ],
-              ),
-            ],
-          ),
-        )
-      ]),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 2.w, vertical: 1.h),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    DefaultText(
+                      text: widget.hotelData.name,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16.sp,
+                    ),
+                    Row(
+                      children: [
+                        DefaultText(text: widget.hotelData.address),
+                        DefaultIconButton(
+                            onPressed: () {
+                              Navigator.pushNamed(context, hotelLocationRoute,
+                                  arguments: LatLng(
+                                      double.parse(widget.hotelData.latitude),
+                                      double.parse(
+                                          widget.hotelData.longitude)));
+                            },
+                            icon: const Icon(
+                              Icons.location_on,
+                            ))
+                      ],
+                    ),
+                  ],
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    DefaultText(
+                      text: '${widget.hotelData.price}\$',
+                      maxLines: 2,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    const DefaultText(
+                      text: 'per night',
+                      maxLines: 2,
+                      color: defaultGray,
+                    )
+                  ],
+                ),
+              ],
+            ),
+          )
+        ]),
+      ),
     );
   }
 }
