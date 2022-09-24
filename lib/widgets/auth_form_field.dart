@@ -19,7 +19,7 @@ class AuthFormField extends StatelessWidget {
   final Widget? suffixIcon;
   final String? initialValue;
   final String? hintText;
-  final String? uphintText;
+  final String? upHintText;
   final String? suffixText;
   final TextStyle? suffixTextStyle;
   final Color? backgroundColor;
@@ -46,58 +46,56 @@ class AuthFormField extends StatelessWidget {
 
   const AuthFormField(
       {Key? key,
-        required this.controller,
-        this.validator,
-        this.onTap,
-        this.labelText,
-        required this.keyboardType,
-        this.onFieldSubmitted,
-        this.onEditingComplete,
-        this.onChanged,
-        this.obscureText = false,
-        this.prefixIcon,
-        this.suffixIcon,
-        this.initialValue,
-        this.hintText,
-        this.uphintText,
-        this.backgroundColor,
-        this.height,
-        this.radius = 30.0,
-        this.maxLines,
-        this.enabled = true,
-        this.inputBorder =
-        const OutlineInputBorder(borderSide: BorderSide(width: 1)),
-        this.inputEnabledBorder,
-        this.inputFocusedBorder,
-        this.inputDisabledBorder,
-        this.horizontalPadding = 0,
-        this.verticalPadding = 0,
-        this.textColor,
-        this.labelColor = defaultAppWhiteColor,
-        this.contentPadding,
-        this.containerAlignment,
-        this.suffixText,
-        this.suffixTextStyle,
-        this.suffixIconConstraints,
-        this.readOnly = false,
-        this.cursorColor,
-        this.maxLength,
-        this.errorMaxLines = 2,
-        this.textDirection = TextDirection.ltr,
-        this.textAlign = TextAlign.start})
+      required this.controller,
+      this.validator,
+      this.onTap,
+      this.labelText,
+      required this.keyboardType,
+      this.onFieldSubmitted,
+      this.onEditingComplete,
+      this.onChanged,
+      this.obscureText = false,
+      this.prefixIcon,
+      this.suffixIcon,
+      this.initialValue,
+      this.hintText,
+      this.upHintText,
+      this.backgroundColor,
+      this.height,
+      this.radius = 30.0,
+      this.maxLines,
+      this.enabled = true,
+      this.inputBorder =
+          const OutlineInputBorder(borderSide: BorderSide(width: 1)),
+      this.inputEnabledBorder,
+      this.inputFocusedBorder,
+      this.inputDisabledBorder,
+      this.horizontalPadding = 0,
+      this.verticalPadding = 0,
+      this.textColor,
+      this.labelColor = defaultAppWhiteColor,
+      this.contentPadding,
+      this.containerAlignment,
+      this.suffixText,
+      this.suffixTextStyle,
+      this.suffixIconConstraints,
+      this.readOnly = false,
+      this.cursorColor,
+      this.maxLength,
+      this.errorMaxLines = 2,
+      this.textDirection = TextDirection.ltr,
+      this.textAlign = TextAlign.start})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(
-        vertical: 10
-      ),
+      padding: const EdgeInsets.symmetric(vertical: 10),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           DefaultText(
-            text: '     $uphintText',
+            text: '     $upHintText',
             color: defaultGray,
             fontSize: 12.sp,
           ),
@@ -106,9 +104,10 @@ class AuthFormField extends StatelessWidget {
           ),
           Container(
             alignment: containerAlignment,
-            padding: const EdgeInsets.symmetric(horizontal: 20 , vertical: 10),
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
             decoration: BoxDecoration(
-                color: defaultLightBlack, borderRadius: BorderRadius.circular(30)),
+                color: defaultLightBlack,
+                borderRadius: BorderRadius.circular(30)),
             child: TextFormField(
               maxLength: maxLength,
               readOnly: readOnly,
@@ -140,8 +139,8 @@ class AuthFormField extends StatelessWidget {
                 floatingLabelBehavior: FloatingLabelBehavior.never,
                 suffixIconConstraints: suffixIconConstraints,
                 labelStyle: Theme.of(context).textTheme.caption!.copyWith(
-                  color: labelColor,
-                ),
+                      color: labelColor,
+                    ),
                 labelText: labelText,
                 border: InputBorder.none,
                 enabledBorder: inputEnabledBorder,

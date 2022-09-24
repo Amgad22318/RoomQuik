@@ -369,6 +369,8 @@ class HotelFacilities {
     num? id,
     String? hotelId,
     String? facilityId,
+    String? name,
+    String? image,
     dynamic createdAt,
     dynamic updatedAt,
   }) {
@@ -377,6 +379,8 @@ class HotelFacilities {
     _facilityId = facilityId;
     _createdAt = createdAt;
     _updatedAt = updatedAt;
+    _name = name;
+    _image = image;
   }
 
   HotelFacilities.fromJson(dynamic json) {
@@ -385,16 +389,22 @@ class HotelFacilities {
     _facilityId = json['facility_id'];
     _createdAt = json['created_at'];
     _updatedAt = json['updated_at'];
+    _name = json['name'];
+    _image = json['image'];
   }
   num? _id;
   String? _hotelId;
   String? _facilityId;
+  String? _name;
+  String? _image;
   dynamic _createdAt;
   dynamic _updatedAt;
   HotelFacilities copyWith({
     num? id,
     String? hotelId,
     String? facilityId,
+    String? name,
+    String? image,
     dynamic createdAt,
     dynamic updatedAt,
   }) =>
@@ -404,10 +414,14 @@ class HotelFacilities {
         facilityId: facilityId ?? _facilityId,
         createdAt: createdAt ?? _createdAt,
         updatedAt: updatedAt ?? _updatedAt,
+        name: name ?? _name,
+        image: image ?? _image,
       );
   num get id => _id ?? 0;
   String get hotelId => _hotelId ?? "";
   String get facilityId => _facilityId ?? "";
+  String get name => _name ?? '';
+  String get image => _image ?? '';
   dynamic get createdAt => _createdAt;
   dynamic get updatedAt => _updatedAt;
 
@@ -416,6 +430,8 @@ class HotelFacilities {
     map['id'] = _id;
     map['hotel_id'] = _hotelId;
     map['facility_id'] = _facilityId;
+    map['name'] = _name;
+    map['image'] = _image;
     map['created_at'] = _createdAt;
     map['updated_at'] = _updatedAt;
     return map;

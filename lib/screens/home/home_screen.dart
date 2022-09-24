@@ -2,6 +2,7 @@ import 'package:algoriza_team_6_realestate_app/views/home/hotels_item.dart';
 import 'package:algoriza_team_6_realestate_app/views/home/home_carousal_item.dart';
 import 'package:algoriza_team_6_realestate_app/widgets/default_loading_indicator.dart';
 import 'package:algoriza_team_6_realestate_app/widgets/default_text.dart';
+import 'package:algoriza_team_6_realestate_app/widgets/search_form_field.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -9,10 +10,17 @@ import 'package:sizer/sizer.dart';
 import '../../business_logic/cubit/home_cubit/home_cubit.dart';
 import '../../constants/screens.dart';
 import '../../data/di/di.dart';
-import '../../widgets/default_icon_button.dart';
+import '../../styles/colors.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  final TextEditingController searchController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -20,12 +28,31 @@ class HomeScreen extends StatelessWidget {
         child: CustomScrollView(
       slivers: [
         SliverAppBar(
+          centerTitle: true,
           automaticallyImplyLeading: false,
-          collapsedHeight: 10.h,
           expandedHeight: 30.h,
+          elevation: 0,
+          pinned: true,
+          title: SearchFormField(
+            horizontalPadding: 2.w,
+            controller: searchController,
+            backgroundColor: defaultBlack.withOpacity(0.4),
+            keyboardType: TextInputType.text,
+            hintText: 'Where are you going',
+            onTap: () {
+              Navigator.pushNamed(context, filterScreenRoute,
+                      arguments: searchController.text)
+                  .then((searchString) {
+                setState(() {
+                  searchController.text = searchString as String;
+                });
+              });
+            },
+          ),
           flexibleSpace: FlexibleSpaceBar(
+            centerTitle: true,
             background: Padding(
-              padding: EdgeInsets.symmetric(vertical: 1.0.h),
+              padding: EdgeInsets.only(bottom: 1.0.h, top: 7.5.h),
               child: CarouselSlider(
                 options: CarouselOptions(
                     clipBehavior: Clip.antiAlias,
@@ -33,6 +60,7 @@ class HomeScreen extends StatelessWidget {
                     height: 40.h,
                     initialPage: 0,
                     autoPlay: true,
+                    autoPlayInterval: const Duration(milliseconds: 2000),
                     viewportFraction: 0.9,
                     enableInfiniteScroll: true),
                 items: List.generate(
@@ -45,21 +73,11 @@ class HomeScreen extends StatelessWidget {
         ),
         SliverToBoxAdapter(
           child: Padding(
-            padding: EdgeInsetsDirectional.only(start: 4.w),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                DefaultText(
-                    text: 'Best Hotels',
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16.sp),
-                DefaultIconButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context, filterScreenRoute);
-                    },
-                    icon: const Icon(Icons.filter_list_alt)),
-              ],
-            ),
+            padding: EdgeInsetsDirectional.only(start: 4.w, end: 2.w),
+            child: DefaultText(
+                text: 'Best Hotels',
+                fontWeight: FontWeight.bold,
+                fontSize: 18.sp),
           ),
         ),
         BlocBuilder<HomeCubit, HomeState>(

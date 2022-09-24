@@ -1,5 +1,6 @@
 import 'package:algoriza_team_6_realestate_app/constants/screens.dart'
     as screens;
+import 'package:algoriza_team_6_realestate_app/data/models/responses/hotels_model/hotels_model.dart';
 import 'package:algoriza_team_6_realestate_app/screens/app_layout/app_layout.dart';
 import 'package:algoriza_team_6_realestate_app/screens/auth_pages/login_screen.dart';
 import 'package:algoriza_team_6_realestate_app/screens/auth_pages/sign_up_screen.dart';
@@ -14,8 +15,8 @@ import '../data/models/responses/auth_model/auth_model.dart';
 import '../screens/hotel_details/hotel_details.dart';
 import '../screens/my_profile/change_password.dart';
 import '../screens/my_profile/edit_profile.dart';
-
 import '../screens/splash/splash_screen.dart';
+import 'custom_page_route.dart';
 
 class AppRouter {
   late Widget startScreen;
@@ -43,17 +44,31 @@ class AppRouter {
                   route: route,
                 ));
       case screens.filterScreenRoute:
-        return MaterialPageRoute(builder: (_) => const FilterScreen());
+
+        String searchText = settings.arguments as String;
+        return MaterialPageRoute(
+            builder: (_) => FilterScreen(searchText: searchText));
+      case screens.onBoardingRoute:
+        return MaterialPageRoute(builder: (_) => OnBoarding());
+
       case screens.updateProfileRoute:
         return MaterialPageRoute(builder: (_) => const EditProfile());
       case screens.changePasswordRoute:
         Auth auth = settings.arguments as Auth;
         return MaterialPageRoute(builder: (_) => ChangePassword(myProfile: auth,));
       case screens.hotelDetailsRoute:
-        return MaterialPageRoute(builder: (_) => const HotelDetails());
+
+        HotelData hotelData = settings.arguments as HotelData;
+        return CustomPageRoute(
+            child: HotelDetails(
+          hotelData: hotelData,
+        ));
+
       case screens.hotelLocationRoute:
         LatLng latLng = settings.arguments as LatLng;
-        return MaterialPageRoute(builder: (_) => HotelLocation(latLng: latLng));
+        return MaterialPageRoute(
+          builder: (_) => HotelLocation(latLng: latLng),
+        );
 
       default:
         return null;

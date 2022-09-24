@@ -114,6 +114,8 @@ class _LoginState extends State<Login> {
                           alignment: Alignment.centerRight,
                           child: DefaultTextButton(
                             onPressed: () {},
+
+
                             child: const DefaultText(
                               text: 'Forget your password ?',
                               color: defaultGray,
@@ -176,7 +178,9 @@ class _LoginState extends State<Login> {
                       ],
                     ),
                   ),
+
                 ),
+
               ),
             ),
           );

@@ -10,6 +10,7 @@ class DefaultIconButton extends StatelessWidget {
   final Widget? child;
   final double? height;
   final double? width;
+  final EdgeInsetsGeometry padding;
 
   const DefaultIconButton({
     Key? key,
@@ -22,6 +23,7 @@ class DefaultIconButton extends StatelessWidget {
     required this.icon,
     this.height,
     this.width,
+    this.padding = const EdgeInsets.all(8.0),
   }) : super(key: key);
 
   @override
@@ -33,6 +35,7 @@ class DefaultIconButton extends StatelessWidget {
           color: background,
           borderRadius: BorderRadius.all(Radius.circular(radius))),
       child: IconButton(
+        padding: padding,
         alignment: AlignmentDirectional.center,
         splashColor: splashColor,
         color: background,

@@ -53,6 +53,7 @@ class _SignUpState extends State<SignUp> {
                           text: 'Sign up',
                           fontSize: 25.sp,
                         ),
+
                         Padding(
                           padding: EdgeInsets.symmetric(vertical: 5.h),
                           child: Row(
@@ -227,6 +228,7 @@ class _SignUpState extends State<SignUp> {
                           ),
                         ),
                       ],
+
                     ),
                   ),
                 ),
