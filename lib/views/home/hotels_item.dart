@@ -9,7 +9,9 @@ import 'package:sizer/sizer.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../../constants/constants.dart';
+import '../../data/models/base/hotel/hotel_data.dart';
 import '../../styles/colors.dart';
+import '../../widgets/default_rating_bar_indicator.dart';
 
 class HotelsItem extends StatefulWidget {
   final HotelData hotelData;
@@ -42,17 +44,23 @@ class _HotelsItemState extends State<HotelsItem> {
               alignment: Alignment.bottomCenter,
               children: [
                 PageView(
+                  physics: const BouncingScrollPhysics(),
                   controller: pageController,
                   children: widget.hotelData.hotelImages.isNotEmpty
                       ? List.generate(
                           widget.hotelData.hotelImages.length,
-                          (index) => ClipRRect(
-                                clipBehavior: Clip.antiAlias,
-                                borderRadius: BorderRadius.circular(16.sp),
-                                child: DefaultCachedNetworkImage(
-                                  imageUrl: imageBaseURL +
-                                      widget.hotelData.hotelImages[index].image,
-                                  fit: BoxFit.cover,
+                          (index) => Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 3.w)
+                                    .copyWith(top: 1.5.h),
+                                child: ClipRRect(
+                                  clipBehavior: Clip.antiAlias,
+                                  borderRadius: BorderRadius.circular(16.sp),
+                                  child: DefaultCachedNetworkImage(
+                                    imageUrl: imageBaseURL +
+                                        widget
+                                            .hotelData.hotelImages[index].image,
+                                    fit: BoxFit.cover,
+                                  ),
                                 ),
                               ))
                       : [
@@ -61,9 +69,9 @@ class _HotelsItemState extends State<HotelsItem> {
                         ],
                 ),
                 Visibility(
-                  visible: widget.hotelData.hotelImages.isNotEmpty,
+                  visible: widget.hotelData.hotelImages.length > 1,
                   child: Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: EdgeInsets.only(bottom: 1.h),
                     child: SmoothPageIndicator(
                       count: widget.hotelData.hotelImages.length,
                       effect: const WormEffect(
@@ -84,49 +92,69 @@ class _HotelsItemState extends State<HotelsItem> {
           ),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 2.w, vertical: 1.h),
-            child: Row(
+            child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    DefaultText(
-                      text: widget.hotelData.name,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16.sp,
+                    Expanded(
+                      flex: 5,
+                      child: DefaultText(
+                        text: widget.hotelData.name,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16.sp,
+                      ),
                     ),
-                    Row(
-                      children: [
-                        DefaultText(text: widget.hotelData.address),
-                        DefaultIconButton(
-                            onPressed: () {
-                              Navigator.pushNamed(context, hotelLocationRoute,
-                                  arguments: LatLng(
-                                      double.parse(widget.hotelData.latitude),
-                                      double.parse(
-                                          widget.hotelData.longitude)));
-                            },
-                            icon: const Icon(
-                              Icons.location_on,
-                            ))
-                      ],
+                    Flexible(
+                      flex: 4,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Flexible(
+                            child: DefaultText(
+                              text: '${widget.hotelData.price}\$ ',
+                              maxLines: 2,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 14.sp,
+                            ),
+                          ),
+                          const Flexible(
+                            child: DefaultText(
+                              text: '/per night',
+                              maxLines: 2,
+                              color: defaultGray,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                Row(
                   children: [
-                    DefaultText(
-                      text: '${widget.hotelData.price}\$',
-                      maxLines: 2,
-                      fontWeight: FontWeight.bold,
+                    Expanded(
+                      child: Row(
+                        children: [
+                          DefaultText(text: widget.hotelData.address),
+                          DefaultIconButton(
+                              onPressed: () {
+                                Navigator.pushNamed(context, hotelLocationRoute,
+                                    arguments: LatLng(
+                                        double.parse(widget.hotelData.latitude),
+                                        double.parse(
+                                            widget.hotelData.longitude)));
+                              },
+                              icon: const Icon(
+                                Icons.location_on,
+                              )),
+                        ],
+                      ),
                     ),
-                    const DefaultText(
-                      text: 'per night',
-                      maxLines: 2,
-                      color: defaultGray,
-                    )
+                    DefaultRatingBarIndicator(
+                        rating: double.parse(widget.hotelData.rate),
+                        itemCount: 5,
+                        itemSize: 13.sp)
                   ],
                 ),
               ],

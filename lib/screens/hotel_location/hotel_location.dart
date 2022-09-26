@@ -32,12 +32,14 @@ class _HotelLocationState extends State<HotelLocation> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: DefaultMap(
-          initialCameraPosition: CameraPosition(
-            target: widget.latLng,
-            zoom: 8,
-          ),
-          markers: markers),
+      body: SafeArea(
+        child: DefaultMap(
+            initialCameraPosition: CameraPosition(
+              target: widget.latLng,
+              zoom: 8,
+            ),
+            markers: markers),
+      ),
     );
   }
 

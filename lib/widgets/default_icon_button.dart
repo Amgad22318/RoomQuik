@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sizer/sizer.dart';
 
 class DefaultIconButton extends StatelessWidget {
   final Widget icon;
@@ -10,6 +11,7 @@ class DefaultIconButton extends StatelessWidget {
   final Widget? child;
   final double? height;
   final double? width;
+  final double? iconSize;
   final EdgeInsetsGeometry padding;
 
   const DefaultIconButton({
@@ -24,6 +26,7 @@ class DefaultIconButton extends StatelessWidget {
     this.height,
     this.width,
     this.padding = const EdgeInsets.all(8.0),
+    this.iconSize,
   }) : super(key: key);
 
   @override
@@ -40,6 +43,7 @@ class DefaultIconButton extends StatelessWidget {
         splashColor: splashColor,
         color: background,
         onPressed: onPressed,
+        iconSize: iconSize ?? 24.sp,
         icon: icon,
       ),
     );

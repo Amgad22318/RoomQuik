@@ -39,6 +39,8 @@ class SearchFormField extends StatelessWidget {
   final int? errorMaxLines;
   final TextDirection? textDirection;
   final TextAlign textAlign;
+  final FocusNode? focusNode;
+  final bool autofocus;
 
   const SearchFormField(
       {Key? key,
@@ -77,7 +79,9 @@ class SearchFormField extends StatelessWidget {
       this.maxLength,
       this.errorMaxLines = 2,
       this.textDirection = TextDirection.ltr,
-      this.textAlign = TextAlign.start})
+      this.textAlign = TextAlign.start,
+      this.focusNode,
+      this.autofocus = false})
       : super(key: key);
 
   @override
@@ -89,6 +93,8 @@ class SearchFormField extends StatelessWidget {
       decoration: BoxDecoration(
           color: backgroundColor, borderRadius: BorderRadius.circular(radius)),
       child: TextFormField(
+        autofocus: autofocus,
+        focusNode: focusNode,
         maxLength: maxLength,
         readOnly: readOnly,
         cursorColor: cursorColor,

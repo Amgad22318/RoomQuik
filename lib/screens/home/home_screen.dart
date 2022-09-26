@@ -34,6 +34,7 @@ class _HomeScreenState extends State<HomeScreen> {
           elevation: 0,
           pinned: true,
           title: SearchFormField(
+            readOnly: true,
             horizontalPadding: 2.w,
             controller: searchController,
             backgroundColor: defaultBlack.withOpacity(0.4),

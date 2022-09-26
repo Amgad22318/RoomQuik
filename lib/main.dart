@@ -1,3 +1,4 @@
+import 'package:algoriza_team_6_realestate_app/business_logic/cubit/booking_cubit/booking_cubit.dart';
 import 'package:algoriza_team_6_realestate_app/business_logic/cubit/global_cubit/global_cubit.dart';
 import 'package:algoriza_team_6_realestate_app/business_logic/cubit/profile_cubit/profile_cubit.dart';
 import 'package:algoriza_team_6_realestate_app/data/source/local/my_shared_preferences.dart';
@@ -43,6 +44,9 @@ class _MyAppState extends State<MyApp> {
         ),
         BlocProvider(
           create: (context) => sl<ProfileCubit>(),
+        ),
+        BlocProvider(
+          create: (context) => sl<BookingCubit>(),
         ),
       ],
       child: BlocBuilder<GlobalCubit, GlobalStates>(

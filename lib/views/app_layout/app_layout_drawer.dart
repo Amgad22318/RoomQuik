@@ -44,7 +44,7 @@ class _AppLayoutDrawerState extends State<AppLayoutDrawer> {
                           ),
                           child: DefaultIconButton(
                             onPressed: () {
-                              Navigator.pushNamed(context, settingScreenRoute);
+                              Navigator.pushNamed(context, settingRoute);
                             },
                             icon: const Icon(Icons.settings_outlined,
                                 color: Colors.white),

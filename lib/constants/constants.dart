@@ -7,5 +7,7 @@ CameraPosition appInitialCameraPosition = const CameraPosition(
 
 enum ToastStates { SUCCESS, ERROR, WARNING }
 
+enum BookingStatus { upcomming, cancelled, completed }
+
 String httpSC = 'http:';
 String imageBaseURL = 'http://api.mahmoudtaha.com/images/';
