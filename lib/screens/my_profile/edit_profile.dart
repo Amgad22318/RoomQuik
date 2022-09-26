@@ -1,5 +1,6 @@
 import 'package:algoriza_team_6_realestate_app/styles/colors.dart';
 import 'package:algoriza_team_6_realestate_app/widgets/default_loading_indicator.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
@@ -12,6 +13,7 @@ import '../../data/di/di.dart';
 import '../../views/edit_profile/profile_picture_dialog.dart';
 import '../../widgets/default_cached_network_image.dart';
 import '../../widgets/default_form_field.dart';
+import '../../widgets/default_icon_button.dart';
 import '../../widgets/default_material_button.dart';
 import '../../widgets/default_text.dart';
 
@@ -73,7 +75,6 @@ class _EditProfileState extends State<EditProfile> {
                   children: [
                     Center(
                       child: Stack(
-                        alignment: AlignmentDirectional.bottomEnd,
                         children: [
                           Container(
                             clipBehavior: Clip.antiAlias,
@@ -87,43 +88,53 @@ class _EditProfileState extends State<EditProfile> {
                               fit: BoxFit.cover,
                             ),
                           ),
-                          IconButton(
-                              onPressed: () {
-                                showDialog(
-                                    context: context,
-                                    builder: (context) => ImagePickerDialog(
-                                      cameraOnTap: () {
-                                        Navigator.pop(context);
-                                        pickImage(ImageSource.camera)
-                                            .then((image) {
-                                          if (image != null) {
-                                            cubit.updateProfile(
-                                              name: cubit.auth.data.name,
-                                              email: cubit.auth.data.email,
-                                              profilePicture: image,
-                                            );
-                                          }
-                                        });
-                                      },
-                                      galleryOnTap: () {
-                                        Navigator.pop(context);
-                                        pickImage(ImageSource.gallery)
-                                            .then((image) {
-                                          if (image != null) {
-                                            cubit.updateProfile(
-                                              name: cubit.auth.data.name,
-                                              email: cubit.auth.data.email,
-                                              profilePicture: image,
-                                            );
-                                          }
-                                        });
-                                      },
-                                    ));
-                              },
-                              icon: Icon(
-                                Icons.camera_alt,
-                                size: 30.sp,
-                              ))
+                          Positioned.directional(
+                            textDirection: Directionality.of(context),
+                            bottom: 12.sp,
+                            end: 8.sp,
+                            child: DefaultIconButton(
+                                onPressed: () {
+                                  showDialog(
+                                      context: context,
+                                      builder: (context) => ImagePickerDialog(
+                                        cameraOnTap: () {
+                                          Navigator.pop(context);
+                                          pickImage(ImageSource.camera)
+                                              .then((image) {
+                                            if (image != null) {
+                                              cubit.updateProfile(
+                                                name: cubit.auth.data.name,
+                                                email: cubit.auth.data.email,
+                                                profilePicture: image,
+                                              );
+                                            }
+                                          });
+                                        },
+                                        galleryOnTap: () {
+                                          Navigator.pop(context);
+                                          pickImage(ImageSource.gallery)
+                                              .then((image) {
+                                            if (image != null) {
+                                              cubit.updateProfile(
+                                                name: cubit.auth.data.name,
+                                                email: cubit.auth.data.email,
+                                                profilePicture: image,
+                                              );
+                                            }
+                                          });
+                                        },
+                                      ));
+                                },
+                                icon: const Icon(
+                                  Icons.camera_alt,
+                                ),
+                            radius: 50.sp,
+                              background: defaultAppColor2.withOpacity(0.5),
+                              iconSize: 20.sp,
+                              padding: EdgeInsets.zero,
+                              constraints: BoxConstraints(minHeight: 35.sp, minWidth: 35.sp),
+                            ),
+                          ),
                         ],
                       ),
                     ),

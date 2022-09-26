@@ -72,9 +72,10 @@ class _SplashScreenState extends State<SplashScreen>
             Expanded(
               child: FadeTransition(
                   opacity: _animation,
-                  child: Icon(
-                    Icons.home_work_rounded,
-                    size: 75.sp,
+                  child: Image.asset(
+                    'assets/image/house.png',
+                    height: 60.h,
+                    width: 60.w,
                     color: defaultAppColor,
                   )),
             ),

@@ -9,9 +9,9 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
    <application
-        android:label="algoriza_team_6_realestate_app"
+        android:label="RoomQuik"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/launcher_icon">
 
        <meta-data android:name="com.google.android.geo.API_KEY"
            android:value="AIzaSyBEn3H36HO8oATtE99xQrqoNpMxaDY1mAo"/>

@@ -38,17 +38,17 @@ class DefaultCachedNetworkImage extends StatelessWidget {
             },
             errorWidget: (context, url, error) => Padding(
                 padding: EdgeInsets.all(padding ?? 35.sp),
-                child: Icon(
-                  Icons.home_work_rounded,
-                  size: iconSize ?? 75.sp,
+                child: Image.asset(
+                  'assets/image/house.png',
+                  height: iconSize ?? 75.sp,
                   color: defaultAppColor,
                 )),
           )
         : Padding(
             padding: EdgeInsets.all(padding ?? 35.sp),
-            child: Icon(
-              Icons.home_work_rounded,
-              size: iconSize ?? 75.sp,
+            child: Image.asset(
+              'assets/image/house.png',
+              height: iconSize ?? 75.sp,
               color: defaultAppColor,
             ),
     );
