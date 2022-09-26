@@ -52,7 +52,7 @@ class _EditProfileState extends State<EditProfile> {
         listener: (context, state) {
           if(state is UpdateProfileSuccessState){
             showToastMsg(
-              msg: 'Updating Profile Data Succeeded',
+              msg: state.successMessage,
               toastState: ToastStates.SUCCESS,
             );
             cubit.getProfileInfo();

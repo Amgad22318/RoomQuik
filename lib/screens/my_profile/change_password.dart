@@ -109,7 +109,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                 listener: (context, state) {
                   if (state is UpdateProfileSuccessState) {
                     showToastMsg(
-                      msg: 'Changing Password Succeeded',
+                      msg: state.successMessage,
                       toastState: ToastStates.SUCCESS,
                     );
                     Navigator.pop(context);

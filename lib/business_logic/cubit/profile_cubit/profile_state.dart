@@ -16,7 +16,12 @@ class GetProfileInfoFailureState extends ProfileState {
 }
 
 
-class UpdateProfileSuccessState extends ProfileState {}
+class UpdateProfileSuccessState extends ProfileState {
+  final String successMessage;
+
+  UpdateProfileSuccessState(this.successMessage);
+
+}
 
 class UpdateProfileLoadingState extends ProfileState {}
 

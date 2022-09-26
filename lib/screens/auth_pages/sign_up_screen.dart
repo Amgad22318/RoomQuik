@@ -153,7 +153,7 @@ class _SignUpState extends State<SignUp> {
                           } else if (state is RegisterFailureState) {
                             setState(() {});
                             showToastMsg(
-                              msg: state.errorMessage!,
+                              msg: state.errorMessage,
                               toastState: ToastStates.ERROR,
                             );
                           }

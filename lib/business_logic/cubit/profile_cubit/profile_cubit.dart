@@ -68,7 +68,7 @@ class ProfileCubit extends Cubit<ProfileState> {
     updateProfileModel = UpdateProfileModel.fromJson(json);
     if (updateProfileModel.status.success) {
       sl<MySharedPref>().putString(key: MySharedKeys.apiToken, value: auth.data.apiToken);
-      emit(UpdateProfileSuccessState());
+      emit(UpdateProfileSuccessState(updateProfileModel.status.title.en));
     } else {
       emit(UpdateProfileFailureState(updateProfileModel.status.title.en));
     }
