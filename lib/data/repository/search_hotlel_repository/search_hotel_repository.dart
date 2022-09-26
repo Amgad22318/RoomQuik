@@ -1,6 +1,8 @@
+import 'package:algoriza_team_6_realestate_app/constants/constant_methods.dart';
 import 'package:algoriza_team_6_realestate_app/data/di/di.dart';
 import 'package:algoriza_team_6_realestate_app/data/source/network/api_result_handler.dart';
 
+import '../../models/responses/facilities/facilities.dart';
 import '../../source/network/endpoints.dart';
 import '../../source/network/my_dio.dart';
 
@@ -15,25 +17,27 @@ class SearchRepository {
     double? latitude,
     double? longitude,
     int? distance,
-    List<int>? facilities,
+    Facilities? facilities,
   }) async {
     Map<String, dynamic> query = {
       'count': count,
       'page': page,
-      'name': name,
-      'address': address,
-      'max_price': maxPrice,
-      'min_price': minPrice,
-      'facilities': page,
-      'latitude': latitude,
-      'longitude': longitude,
-      'distance': distance,
+      if (name != null) 'name': name,
+      if (address != null) 'address': address,
+      if (maxPrice != null) 'max_price': maxPrice,
+      if (minPrice != null) 'min_price': minPrice,
+      if (latitude != null) 'latitude': latitude,
+      if (longitude != null) 'longitude': longitude,
+      if (distance != null) 'distance': distance,
     };
     if (facilities != null) {
-      facilities.asMap().forEach((index, element) {
-        query['facilities[$index]'] = element;
+      facilities.data.asMap().forEach((index, element) {
+        if (element.checked) {
+          query['facilities[$index]'] = element.id;
+        }
       });
     }
+    printTest(query.toString());
     return await sl<MyDio>()
         .getData(endPoint: searchEP, queryParameters: query);
   }

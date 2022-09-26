@@ -15,6 +15,7 @@ class DefaultMap extends StatelessWidget {
   final MapType mapType;
   final EdgeInsets padding;
   final Set<Factory<OneSequenceGestureRecognizer>> gestureRecognizers;
+  final Set<Circle> circles;
 
   const DefaultMap({
     Key? key,
@@ -29,6 +30,7 @@ class DefaultMap extends StatelessWidget {
     this.zoomGesturesEnabled = true,
     this.padding = const EdgeInsets.all(0),
     this.gestureRecognizers = const {},
+    this.circles = const {},
   }) : super(key: key);
 
   @override
@@ -46,6 +48,7 @@ class DefaultMap extends StatelessWidget {
       myLocationButtonEnabled: myLocationButtonEnabled,
       mapType: mapType,
       gestureRecognizers: gestureRecognizers,
+      circles: circles,
     );
   }
 }

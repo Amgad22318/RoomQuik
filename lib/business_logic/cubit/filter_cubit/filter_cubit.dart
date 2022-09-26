@@ -1,3 +1,4 @@
+import 'package:algoriza_team_6_realestate_app/constants/constant_methods.dart';
 import 'package:algoriza_team_6_realestate_app/data/repository/search_hotlel_repository/search_hotel_repository.dart';
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
@@ -14,14 +15,32 @@ class FilterCubit extends Cubit<FilterState> {
 
   Hotels filterHotels = Hotels();
 
-  void getFilterHotels() async {
+  void getFilterHotels({
+    String? name,
+    String? address,
+    int? maxPrice,
+    int? minPrice,
+    double? latitude,
+    double? longitude,
+    int? distance,
+  }) async {
     emit(GetFilterHotelsLoadingState());
-    ApiResults apiResults =
-        await SearchRepository().getSearchData(count: 20, page: 1);
+    ApiResults apiResults = await SearchRepository().getSearchData(
+        count: 50,
+        page: 1,
+        name: name,
+        maxPrice: maxPrice,
+        minPrice: minPrice,
+        distance: distance,
+        address: address,
+        longitude: longitude,
+        latitude: latitude,
+        facilities: facilities);
 
     if (apiResults is ApiSuccess) {
       handleFilterHotelsResponse(apiResults.data);
     } else if (apiResults is ApiFailure) {
+      printTest(apiResults.message);
       emit(GetFilterHotelsFailureState(apiResults.message));
     }
   }
@@ -29,7 +48,7 @@ class FilterCubit extends Cubit<FilterState> {
   void handleFilterHotelsResponse(json) {
     filterHotels = Hotels.fromJson(json);
     if (filterHotels.status.success) {
-      emit(GetFilterHotelsSuccessState());
+      emit(GetFilterHotelsSuccessState(filterHotels));
     } else {
       emit(GetFilterHotelsFailureState());
     }

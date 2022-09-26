@@ -22,12 +22,14 @@ class MyProfileScreen extends StatelessWidget {
           children: [
             InkWell(
               onTap: () {
-                Navigator.pushNamed(context, updateProfileRoute, arguments: cubit.auth);
+                Navigator.pushNamed(context, updateProfileRoute,
+                    arguments: cubit.auth);
               },
               child: BlocBuilder<ProfileCubit, ProfileState>(
                 builder: (context, state) {
                   return Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 2.h),
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 5.w, vertical: 2.h),
                     child: Row(
                       children: [
                         Expanded(
@@ -76,19 +78,19 @@ class MyProfileScreen extends StatelessWidget {
                 },
               ),
             ),
-
             InkWell(
               onTap: () {
-                Navigator.pushNamed(context, changePasswordRoute, arguments: cubit.auth);
+                Navigator.pushNamed(context, changePasswordRoute,
+                    arguments: cubit.auth);
               },
               child: const DefaultListTile(
-                  title: 'Change Password',
-                  trailingIcon: Icons.lock,
+                title: 'Change Password',
+                trailingIcon: Icons.lock,
               ),
             ),
             const HorizontalDivider(),
             InkWell(
-              onTap: (){},
+              onTap: () {},
               child: const DefaultListTile(
                 title: 'Invite Friends',
                 trailingIcon: Icons.person_add,
@@ -121,12 +123,11 @@ class MyProfileScreen extends StatelessWidget {
             const HorizontalDivider(),
             InkWell(
               onTap: () {
-                Navigator.pushNamed(context, settingScreenRoute);
+                Navigator.pushNamed(context, settingRoute);
               },
               child: const DefaultListTile(
                 title: 'Settings',
                 trailingIcon: Icons.settings,
-
               ),
             ),
           ],

@@ -5,7 +5,11 @@ abstract class FilterState {}
 
 class FilterInitial extends FilterState {}
 
-class GetFilterHotelsSuccessState extends FilterState {}
+class GetFilterHotelsSuccessState extends FilterState {
+  final Hotels filterResult;
+
+  GetFilterHotelsSuccessState(this.filterResult);
+}
 
 class GetFilterHotelsLoadingState extends FilterState {}
 

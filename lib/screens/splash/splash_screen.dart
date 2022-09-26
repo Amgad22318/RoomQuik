@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:algoriza_team_6_realestate_app/business_logic/cubit/booking_cubit/booking_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
@@ -36,15 +37,21 @@ class _SplashScreenState extends State<SplashScreen>
       curve: Curves.easeIn,
     );
 
-    Timer(const Duration(milliseconds: 2500), () async {
-      if(sl<MySharedPref>().getString(key: MySharedKeys.apiToken).isNotEmpty) {
+    if (sl<MySharedPref>().getString(key: MySharedKeys.apiToken).isNotEmpty) {
+      sl<BookingCubit>()
+        ..getBookingData(bookingStatus: BookingStatus.upcomming)
+        ..getBookingData(bookingStatus: BookingStatus.cancelled)
+        ..getBookingData(bookingStatus: BookingStatus.completed);
+      Timer(const Duration(milliseconds: 2500), () async {
         Navigator.of(context)
-          .pushNamedAndRemoveUntil(appLayoutRoute, (route) => false);
-      }else{
+            .pushNamedAndRemoveUntil(appLayoutRoute, (route) => false);
+      });
+    } else {
+      Timer(const Duration(milliseconds: 2500), () async {
         Navigator.of(context)
             .pushNamedAndRemoveUntil(onBoardingRoute, (route) => false);
-      }
-    });
+      });
+    }
   }
 
   @override

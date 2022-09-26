@@ -10,14 +10,15 @@ class DefaultMaterialButton extends StatelessWidget {
   final Color? background;
   final Color textColor;
   final Color? splashColor;
-  final VoidCallback onPressed; // voidCallback = void Function()
+  final Color? disabledColor;
+  final VoidCallback? onPressed; // voidCallback = void Function()
   final String? text;
   final Widget? child;
   final EdgeInsetsGeometry? padding;
   final EdgeInsetsGeometry? margin;
   final double? fontSize;
   final double? textScaleFactor;
-
+  final double? elevation;
 
   const DefaultMaterialButton(
       {Key? key,
@@ -31,10 +32,12 @@ class DefaultMaterialButton extends StatelessWidget {
       this.child,
       this.splashColor,
       this.padding,
-        this.margin,
+      this.margin,
       this.height,
       this.fontSize,
-      this.textScaleFactor})
+      this.textScaleFactor,
+      this.elevation = 1,
+      this.disabledColor})
       : super(key: key);
 
   @override
@@ -45,7 +48,8 @@ class DefaultMaterialButton extends StatelessWidget {
       padding: padding,
       margin: margin,
       child: MaterialButton(
-        elevation: 1,
+        disabledColor: disabledColor,
+        elevation: elevation,
         splashColor: splashColor,
         color: background ?? defaultAppWhiteColor.withOpacity(0.3),
         shape: RoundedRectangleBorder(

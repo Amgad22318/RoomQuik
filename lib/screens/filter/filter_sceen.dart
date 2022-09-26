@@ -1,4 +1,8 @@
 import 'package:algoriza_team_6_realestate_app/business_logic/cubit/filter_cubit/filter_cubit.dart';
+import 'package:algoriza_team_6_realestate_app/constants/screens.dart';
+import 'package:algoriza_team_6_realestate_app/widgets/default_icon_button.dart';
+import 'package:algoriza_team_6_realestate_app/widgets/default_loading_indicator.dart';
+import 'package:algoriza_team_6_realestate_app/widgets/default_material_button.dart';
 import 'package:algoriza_team_6_realestate_app/widgets/default_text.dart';
 import 'package:algoriza_team_6_realestate_app/widgets/horizontal_divider.dart';
 import 'package:flutter/material.dart';
@@ -27,6 +31,8 @@ class _FilterScreenState extends State<FilterScreen> {
   @override
   void initState() {
     searchController.text = widget.searchText;
+    filterCubit = sl<FilterCubit>();
+
     _priceRange = const RangeValues(200, 1200);
     distance = 20.0;
     super.initState();
@@ -35,7 +41,7 @@ class _FilterScreenState extends State<FilterScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => sl<FilterCubit>()..getFacilities(),
+      create: (context) => filterCubit..getFacilities(),
       child: WillPopScope(
         onWillPop: () async {
           Navigator.pop(context, searchController.text);
@@ -44,19 +50,20 @@ class _FilterScreenState extends State<FilterScreen> {
         },
         child: Scaffold(
           body: SafeArea(
-              child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 5.0.w),
-            child: BlocConsumer<FilterCubit, FilterState>(
-              listener: (context, state) {
-                // TODO: implement listener
-              },
-              builder: (context, state) {
-                filterCubit = sl<FilterCubit>();
-
-                return CustomScrollView(
-                  physics: const BouncingScrollPhysics(),
-                  slivers: [
-                    SliverToBoxAdapter(
+              child: BlocConsumer<FilterCubit, FilterState>(
+            listener: (context, state) {
+              if (state is GetFilterHotelsSuccessState) {
+                Navigator.pushNamed(context, filterResultRoute,
+                    arguments: state.filterResult);
+              }
+            },
+            builder: (context, state) {
+              return CustomScrollView(
+                physics: const BouncingScrollPhysics(),
+                slivers: [
+                  SliverToBoxAdapter(
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 5.0.w),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisSize: MainAxisSize.min,
@@ -64,6 +71,7 @@ class _FilterScreenState extends State<FilterScreen> {
                           Padding(
                             padding: EdgeInsets.symmetric(vertical: 2.h),
                             child: SearchFormField(
+                              autofocus: true,
                               horizontalPadding: 2.w,
                               controller: searchController,
                               backgroundColor: defaultBlack.withOpacity(0.4),
@@ -120,11 +128,26 @@ class _FilterScreenState extends State<FilterScreen> {
                           const HorizontalDivider(color: defaultGray),
                           Padding(
                             padding: EdgeInsets.symmetric(vertical: 2.h),
-                            child: DefaultText(
-                              text: 'Distance from city center',
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16.sp,
-                              color: defaultGray,
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  child: DefaultText(
+                                    text: 'Distance from city center',
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16.sp,
+                                    color: defaultGray,
+                                  ),
+                                ),
+                                DefaultIconButton(
+                                    onPressed: () {
+                                      Navigator.pushNamed(
+                                          context, filterPickLocationRoute,
+                                          arguments: distance.toInt());
+                                    },
+                                    icon: const Icon(
+                                      Icons.edit_location_rounded,
+                                    ))
+                              ],
                             ),
                           ),
                           Align(
@@ -134,8 +157,8 @@ class _FilterScreenState extends State<FilterScreen> {
                                 fontSize: 14.sp),
                           ),
                           Slider(
-                            max: 100,
-                            min: 1,
+                            max: 200,
+                            min: 10,
                             value: distance,
                             onChanged: (value) {
                               setState(() {
@@ -147,28 +170,51 @@ class _FilterScreenState extends State<FilterScreen> {
                         ],
                       ),
                     ),
-                    SliverList(
-                        delegate: SliverChildBuilderDelegate(
-                            childCount: filterCubit.facilities.data.length,
-                            (context, index) => CheckboxListTile(
-                                  title: DefaultText(
-                                      text: filterCubit
-                                          .facilities.data[index].name),
-                                  value: filterCubit
-                                      .facilities.data[index].checked,
-                                  onChanged: (value) {
-                                    setState(() {
-                                      filterCubit.facilities.data[index]
-                                              .setChecked =
-                                          !filterCubit
-                                              .facilities.data[index].checked;
-                                    });
-                                  },
-                                ))),
-                  ],
-                );
-              },
-            ),
+                  ),
+                  SliverList(
+                      delegate: SliverChildBuilderDelegate(
+                          childCount: filterCubit.facilities.data.length,
+                          (context, index) => CheckboxListTile(
+                                checkboxShape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(5.sp)),
+                                title: DefaultText(
+                                    text: filterCubit
+                                        .facilities.data[index].name),
+                                value:
+                                    filterCubit.facilities.data[index].checked,
+                                onChanged: (value) {
+                                  setState(() {
+                                    filterCubit
+                                            .facilities.data[index].setChecked =
+                                        !filterCubit
+                                            .facilities.data[index].checked;
+                                  });
+                                },
+                              ))),
+                  SliverToBoxAdapter(child: Builder(
+                    builder: (context) {
+                      if (state is GetFilterHotelsLoadingState) {
+                        return DefaultLoadingIndicator();
+                      } else {
+                        return DefaultMaterialButton(
+                          onPressed: () {
+                            filterCubit.getFilterHotels(
+                              maxPrice: _priceRange.end.toInt(),
+                              minPrice: _priceRange.start.toInt(),
+                              distance: distance.toInt(),
+                              name: searchController.text,
+                            );
+                          },
+                          text: 'Apply',
+                          margin: EdgeInsets.symmetric(
+                              horizontal: 5.0.w, vertical: 2.h),
+                        );
+                      }
+                    },
+                  ))
+                ],
+              );
+            },
           )),
         ),
       ),

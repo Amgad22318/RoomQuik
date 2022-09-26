@@ -46,8 +46,8 @@ class _AppLayoutState extends State<AppLayout> {
         ),
       ],
       child: Scaffold(
-
-        body: _navigationBarScreenList.elementAt(_selectedIndex),
+        body:
+            SafeArea(child: _navigationBarScreenList.elementAt(_selectedIndex)),
         bottomNavigationBar: BottomNavigationBar(
           type: BottomNavigationBarType.shifting,
           items: const <BottomNavigationBarItem>[

@@ -13,7 +13,6 @@ import '../../widgets/default_material_button.dart';
 import '../../widgets/default_text.dart';
 
 class ChangePassword extends StatefulWidget {
-
   Auth myProfile;
 
   ChangePassword({Key? key, required this.myProfile}) : super(key: key);
@@ -23,7 +22,6 @@ class ChangePassword extends StatefulWidget {
 }
 
 class _ChangePasswordState extends State<ChangePassword> {
-
   late ProfileCubit cubit;
   var formKey = GlobalKey<FormState>();
 
@@ -40,6 +38,7 @@ class _ChangePasswordState extends State<ChangePassword> {
 
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         leading: IconButton(
             onPressed: () {
               Navigator.pop(context);
@@ -51,20 +50,25 @@ class _ChangePasswordState extends State<ChangePassword> {
         ),
         elevation: 0,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(15.0),
-        child: SingleChildScrollView(
+      body: SingleChildScrollView(
+        child: Form(
+          key: formKey,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              DefaultText(
-                text: 'Please Enter Your New Password',
-                fontSize: 15.sp,
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: 2.h),
+                child: Center(
+                  child: DefaultText(
+                    text: 'Please Enter Your New Password',
+                    fontSize: 15.sp,
+                  ),
+                ),
               ),
               Padding(
                 padding: EdgeInsets.symmetric(vertical: 2.h, horizontal: 5.w),
                 child: DefaultFormField(
-                  labelText: 'New Password',
+                  hintText: 'New Password',
                   validator: (value) {
                     if (passwordController.text.isEmpty) {
                       return "Password can't be empty";
@@ -81,10 +85,11 @@ class _ChangePasswordState extends State<ChangePassword> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 5.w,).copyWith(
-                    bottom: 4.h),
+                padding: EdgeInsets.symmetric(
+                  horizontal: 5.w,
+                ).copyWith(bottom: 4.h),
                 child: DefaultFormField(
-                  labelText: 'E-mail',
+                  hintText: 'Confirm New Password',
                   validator: (value) {
                     if (confirmPasswordController.text.isEmpty) {
                       return "Password can't be empty";
@@ -102,43 +107,44 @@ class _ChangePasswordState extends State<ChangePassword> {
               ),
               BlocConsumer<ProfileCubit, ProfileState>(
                 listener: (context, state) {
-                  if(state is UpdateProfileSuccessState){
+                  if (state is UpdateProfileSuccessState) {
                     showToastMsg(
-                        msg: 'Changing Password Succeeded',
-                        toastState: ToastStates.SUCCESS,
+                      msg: 'Changing Password Succeeded',
+                      toastState: ToastStates.SUCCESS,
                     );
                     Navigator.pop(context);
-                  }else if(state is UpdateProfileFailureState){
+                  } else if (state is UpdateProfileFailureState) {
                     showToastMsg(
-                      msg: state.errorMessage!,
+                      msg: state.errorMessage,
                       toastState: ToastStates.ERROR,
                     );
                   }
                 },
                 builder: (context, state) {
-                  if(state is UpdateProfileLoadingState) {
+                  if (state is UpdateProfileLoadingState) {
                     return const DefaultLoadingIndicator();
-                  }
-                  else {
+                  } else {
                     return DefaultMaterialButton(
-                    margin: EdgeInsets.symmetric(horizontal: 5.w,),
-                    radius: 25.sp,
-                    onPressed: () {
-                      if (formKey.currentState!.validate()) {
-                        cubit.updateProfile(
-                            name: widget.myProfile.data.name,
-                            email: widget.myProfile.data.email,
-                            password: passwordController.text,
-                            passwordConfirmation: confirmPasswordController.text
-                        );
-                      }
-                    },
-                    child: DefaultText(
-                      text: 'Apply',
-                      fontSize: 12.sp,
-                      fontWeight: FontWeight.w800,
-                    ),
-                  );
+                      margin: EdgeInsets.symmetric(
+                        horizontal: 5.w,
+                      ),
+                      radius: 25.sp,
+                      onPressed: () {
+                        if (formKey.currentState!.validate()) {
+                          cubit.updateProfile(
+                              name: widget.myProfile.data.name,
+                              email: widget.myProfile.data.email,
+                              password: passwordController.text,
+                              passwordConfirmation:
+                                  confirmPasswordController.text);
+                        }
+                      },
+                      child: DefaultText(
+                        text: 'Apply',
+                        fontSize: 12.sp,
+                        fontWeight: FontWeight.w800,
+                      ),
+                    );
                   }
                 },
               ),
