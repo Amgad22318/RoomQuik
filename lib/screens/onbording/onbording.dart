@@ -1,3 +1,4 @@
+import 'package:algoriza_team_6_realestate_app/constants/constant_methods.dart';
 import 'package:algoriza_team_6_realestate_app/constants/screens.dart';
 import 'package:algoriza_team_6_realestate_app/widgets/default_material_button.dart';
 import 'package:algoriza_team_6_realestate_app/widgets/onbording_page.dart';
@@ -21,15 +22,15 @@ class _OnBoardingState extends State<OnBoarding> {
   final carouselController = CarouselController();
   List<Widget> pagesList = [
     const OnBoardingPage(
-        imagePath: '1.png',
+        imagePath: 'assets/image/onboarding_1.png',
         boldText: 'plan your trips',
         smallText: 'book one of your unique hotel to escape the ordinary'),
     const OnBoardingPage(
-        imagePath: '2.png',
+        imagePath: 'assets/image/onboarding_2.png',
         boldText: 'plan your trips',
         smallText: 'book one of your unique hotel to escape the ordinary'),
     const OnBoardingPage(
-        imagePath: '3.png',
+        imagePath: 'assets/image/onboarding_3.png',
         boldText: 'plan your trips',
         smallText: 'book one of your unique hotel to escape the ordinary'),
   ];
@@ -61,14 +62,15 @@ class _OnBoardingState extends State<OnBoarding> {
             ),
             AnimatedSmoothIndicator(
               count: pagesList.length,
-              effect: const WormEffect(
+              effect: WormEffect(
                 spacing: 5.0,
                 radius: 5.0,
                 dotWidth: 10.0,
                 dotHeight: 10.0,
                 strokeWidth: 0,
                 dotColor: defaultGray,
-                activeDotColor: defaultAppColor,
+                activeDotColor:
+                    darkOrLightColor(defaultAppColor4, defaultAppColor),
               ),
               activeIndex: activeIndex,
             ),
@@ -78,10 +80,8 @@ class _OnBoardingState extends State<OnBoarding> {
                 onPressed: () {
                   Navigator.pushNamed(context, loginRoute);
                 },
-                height: 55,
-                background: defaultLightTealColor,
+                background: darkOrLightColor(defaultAppColor4, defaultAppColor),
                 text: 'Login',
-                fontSize: 18,
               ),
             ),
             Padding(
@@ -90,9 +90,7 @@ class _OnBoardingState extends State<OnBoarding> {
                 onPressed: () {
                   Navigator.pushNamed(context, signupRoute);
                 },
-                height: 55,
                 text: 'Create account',
-                fontSize: 18,
               ),
             )
           ],

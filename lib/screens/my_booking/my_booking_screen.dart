@@ -1,3 +1,4 @@
+import 'package:algoriza_team_6_realestate_app/constants/constant_methods.dart';
 import 'package:algoriza_team_6_realestate_app/styles/colors.dart';
 import 'package:algoriza_team_6_realestate_app/views/my_booking/completed_booking_item.dart';
 import 'package:algoriza_team_6_realestate_app/views/my_booking/upcoming_booking_item.dart';
@@ -43,7 +44,8 @@ class _MyBookingScreenState extends State<MyBookingScreen> {
             padding: EdgeInsets.symmetric(vertical: 3.h),
             child: Material(
               borderRadius: BorderRadius.circular(20.sp),
-              color: defaultLightWhite,
+              color: darkOrLightColor(
+                  defaultAppWhiteColor.withOpacity(0.2), defaultLightWhite),
               child: ToggleButtons(
                 borderRadius: BorderRadius.circular(20.sp),
                 constraints: BoxConstraints(
@@ -70,20 +72,23 @@ class _MyBookingScreenState extends State<MyBookingScreen> {
                   DefaultText(
                     text: 'UpComing',
                     fontWeight: FontWeight.bold,
-                    color:
-                        isSelected[0] ? defaultAppColor2 : defaultAppWhiteColor,
+                    color: isSelected[0]
+                        ? darkOrLightColor(defaultAppColor4, defaultAppColor2)
+                        : defaultAppWhiteColor,
                   ),
                   DefaultText(
                     text: 'Completed',
                     fontWeight: FontWeight.bold,
-                    color:
-                        isSelected[1] ? defaultAppColor2 : defaultAppWhiteColor,
+                    color: isSelected[1]
+                        ? darkOrLightColor(defaultAppColor4, defaultAppColor2)
+                        : defaultAppWhiteColor,
                   ),
                   DefaultText(
                     text: 'Cancelled',
                     fontWeight: FontWeight.bold,
-                    color:
-                        isSelected[2] ? defaultAppColor2 : defaultAppWhiteColor,
+                    color: isSelected[2]
+                        ? darkOrLightColor(defaultAppColor4, defaultAppColor2)
+                        : defaultAppWhiteColor,
                   ),
                 ],
               ),

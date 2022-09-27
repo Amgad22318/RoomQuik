@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
+import '../constants/constant_methods.dart';
 import '../styles/colors.dart';
 import 'default_text.dart';
 
@@ -106,7 +107,7 @@ class AuthFormField extends StatelessWidget {
             alignment: containerAlignment,
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
             decoration: BoxDecoration(
-                color: defaultLightBlack,
+                color: darkOrLightColor(defaultAppColor4, defaultAppColor),
                 borderRadius: BorderRadius.circular(30)),
             child: TextFormField(
               maxLength: maxLength,
@@ -147,8 +148,8 @@ class AuthFormField extends StatelessWidget {
                 disabledBorder: inputDisabledBorder,
                 focusedBorder: inputFocusedBorder,
                 hintText: hintText,
-                hintStyle: const TextStyle(
-                  color: defaultGray,
+                hintStyle: TextStyle(
+                  color: defaultAppWhiteColor.withOpacity(0.6),
                 ),
                 hintTextDirection: TextDirection.ltr,
                 prefixIcon: prefixIcon,

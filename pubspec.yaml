@@ -37,8 +37,10 @@ dependencies:
   flutter_svg: ^1.1.4
   cached_network_image: ^3.2.2
   google_maps_flutter: ^2.2.0
+  flutter_google_places: ^0.3.0
   fluttertoast: ^8.0.9
   geolocator: ^9.0.1
+  geocoding: ^2.0.5
   intl: ^0.17.0
   bloc: ^8.0.1
   flutter_bloc: ^8.0.0

@@ -1,11 +1,9 @@
 import 'dart:typed_data';
 
 import 'package:algoriza_team_6_realestate_app/constants/constant_methods.dart';
-import 'package:algoriza_team_6_realestate_app/data/models/responses/hotels_model/hotels_model.dart';
 import 'package:algoriza_team_6_realestate_app/widgets/default_map.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:sizer/sizer.dart';
 
 class HotelLocation extends StatefulWidget {
   final LatLng latLng;

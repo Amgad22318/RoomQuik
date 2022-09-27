@@ -108,7 +108,7 @@ class _LoginState extends State<Login> {
                         upHintText: 'password',
                       ),
                       Align(
-                        alignment: Alignment.centerRight,
+                        alignment: Alignment.center,
                         child: DefaultTextButton(
                           onPressed: () {},
                           child: const DefaultText(
@@ -141,7 +141,8 @@ class _LoginState extends State<Login> {
                                       password: passwordController.text);
                                 }
                               },
-                              background: defaultLightTealColor,
+                              background: darkOrLightColor(
+                                  defaultAppColor4, defaultAppColor),
                               text: 'Login',
                               fontSize: 15.sp,
                             );
@@ -162,7 +163,8 @@ class _LoginState extends State<Login> {
                                 TextSpan(
                                     text: 'Register',
                                     style: TextStyle(
-                                        color: defaultTwitterColor,
+                                        color: darkOrLightColor(
+                                            defaultAppColor4, defaultAppColor),
                                         fontWeight: FontWeight.w500,
                                         fontSize: 15.sp)),
                               ],

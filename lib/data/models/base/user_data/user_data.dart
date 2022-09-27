@@ -75,8 +75,8 @@ class UserData {
         provider: provider ?? _provider,
       );
   num get id => _id ?? 0;
-  String get name => _name ?? "";
-  String get email => _email ?? "";
+  String get name => _name ?? "User Name";
+  String get email => _email ?? "User Email";
   String get emailVerifiedAt => _emailVerifiedAt ?? "";
   String get apiToken => _apiToken ?? "";
   String get image => _image ?? "";

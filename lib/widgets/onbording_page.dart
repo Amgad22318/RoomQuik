@@ -24,7 +24,7 @@ class OnBoardingPage extends StatelessWidget {
           Flexible(
             flex: 15,
             child: Image(
-              image: AssetImage('assets/$imagePath'),
+              image: AssetImage(imagePath),
             ),
           ),
           const Spacer(),

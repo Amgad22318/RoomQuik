@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
 import '../../business_logic/cubit/home_cubit/home_cubit.dart';
+import '../../constants/constant_methods.dart';
 import '../../constants/screens.dart';
 import '../../data/di/di.dart';
 import '../../styles/colors.dart';
@@ -37,7 +38,9 @@ class _HomeScreenState extends State<HomeScreen> {
             readOnly: true,
             horizontalPadding: 2.w,
             controller: searchController,
-            backgroundColor: defaultBlack.withOpacity(0.4),
+            backgroundColor: darkOrLightColor(
+                defaultAppColor4.withOpacity(0.75),
+                defaultBlack.withOpacity(0.4)),
             keyboardType: TextInputType.text,
             hintText: 'Where are you going',
             onTap: () {

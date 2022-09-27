@@ -34,6 +34,8 @@ class ChangeBookingStatusSuccessState extends BookingStates {
   ChangeBookingStatusSuccessState(this.bookingId);
 }
 
+class ChangeBookingStatusItemRemovedState extends BookingStates {}
+
 class ChangeBookingStatusLoadingState extends BookingStates {
   final int bookingId;
   ChangeBookingStatusLoadingState(this.bookingId);

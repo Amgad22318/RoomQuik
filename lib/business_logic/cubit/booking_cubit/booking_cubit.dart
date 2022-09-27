@@ -1,5 +1,5 @@
+import 'package:algoriza_team_6_realestate_app/constants/constant_methods.dart';
 import 'package:algoriza_team_6_realestate_app/data/models/responses/hotels_model/get_booking_model.dart';
-import 'package:algoriza_team_6_realestate_app/data/models/responses/hotels_model/hotels_model.dart';
 import 'package:algoriza_team_6_realestate_app/data/models/responses/hotels_model/update_create_booking_model.dart';
 import 'package:algoriza_team_6_realestate_app/data/repository/booking_repository/booking_repository.dart';
 import 'package:algoriza_team_6_realestate_app/data/repository/create_booking_repository/create_booking_repository.dart';
@@ -93,23 +93,37 @@ class BookingCubit extends Cubit<BookingStates> {
   void updateBookingStatus({
     required int bookingId,
     required BookingStatus newBookingStatus,
+    required BookingStatus oldBookingStatus,
   }) async {
     emit(ChangeBookingStatusLoadingState(bookingId));
-    ApiResults apiResults = await UpdateBookingRepository()
-        .updateBookingData(bookingId, newBookingStatus);
+    ApiResults apiResults = await UpdateBookingRepository().updateBookingData(
+      bookingId,
+      newBookingStatus,
+    );
 
     if (apiResults is ApiSuccess) {
       handleChangeBookingStatusResponse(
-          apiResults.data, newBookingStatus, bookingId);
+          apiResults.data, newBookingStatus, bookingId, oldBookingStatus);
     } else if (apiResults is ApiFailure) {
       emit(ChangeBookingStatusFailureState(apiResults.message));
     }
   }
 
-  void handleChangeBookingStatusResponse(
-      json, BookingStatus bookingStatus, int bookingId) {
+  void handleChangeBookingStatusResponse(json, BookingStatus newBookingStatus,
+      int bookingId, BookingStatus oldBookingStatus) {
     updateBookingStatusModel = UpdateCreateBookingModel.fromJson(json);
     if (updateBookingStatusModel.status.success) {
+      if (oldBookingStatus == BookingStatus.cancelled) {
+        cancelledBooking.data.data
+            .removeWhere((element) => element.id == bookingId);
+      } else if (oldBookingStatus == BookingStatus.completed) {
+        completedBooking.data.data
+            .removeWhere((element) => element.id == bookingId);
+      } else {
+        upComingBooking.data.data
+            .removeWhere((element) => element.id == bookingId);
+      }
+      emit(ChangeBookingStatusItemRemovedState());
       getBookingData(bookingStatus: BookingStatus.upcomming);
       getBookingData(bookingStatus: BookingStatus.completed);
       getBookingData(bookingStatus: BookingStatus.cancelled);

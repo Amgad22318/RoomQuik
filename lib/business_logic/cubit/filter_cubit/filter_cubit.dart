@@ -1,6 +1,7 @@
 import 'package:algoriza_team_6_realestate_app/constants/constant_methods.dart';
 import 'package:algoriza_team_6_realestate_app/data/repository/search_hotlel_repository/search_hotel_repository.dart';
 import 'package:bloc/bloc.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:meta/meta.dart';
 
 import '../../../data/models/responses/facilities/facilities.dart';
@@ -20,8 +21,7 @@ class FilterCubit extends Cubit<FilterState> {
     String? address,
     int? maxPrice,
     int? minPrice,
-    double? latitude,
-    double? longitude,
+    LatLng? latLng,
     int? distance,
   }) async {
     emit(GetFilterHotelsLoadingState());
@@ -33,8 +33,7 @@ class FilterCubit extends Cubit<FilterState> {
         minPrice: minPrice,
         distance: distance,
         address: address,
-        longitude: longitude,
-        latitude: latitude,
+        latLng: latLng,
         facilities: facilities);
 
     if (apiResults is ApiSuccess) {

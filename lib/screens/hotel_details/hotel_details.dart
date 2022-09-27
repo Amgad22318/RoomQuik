@@ -134,11 +134,12 @@ class _HotelDetailsState extends State<HotelDetails> {
                                         fontSize: 14.sp,
                                       ),
                                     ),
-                                    const Flexible(
+                                    Flexible(
                                       child: DefaultText(
                                         text: '/per night',
                                         maxLines: 2,
-                                        color: defaultGray,
+                                        color: defaultAppWhiteColor
+                                            .withOpacity(0.7),
                                       ),
                                     ),
                                   ],

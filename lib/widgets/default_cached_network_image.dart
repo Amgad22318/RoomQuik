@@ -1,3 +1,4 @@
+import 'package:algoriza_team_6_realestate_app/constants/constant_methods.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
@@ -18,7 +19,9 @@ class DefaultCachedNetworkImage extends StatelessWidget {
       this.height,
       required this.imageUrl,
       this.width,
-      required this.fit, this.iconSize, this.padding})
+      required this.fit,
+      this.iconSize,
+      this.padding})
       : super(key: key);
 
   @override
@@ -30,18 +33,20 @@ class DefaultCachedNetworkImage extends StatelessWidget {
             height: height,
             imageUrl: imageUrl,
             progressIndicatorBuilder: (context, url, downloadProgress) {
-              return Center(
-                  child: DefaultLoadingIndicator(
-                color: defaultAppWhiteColor,
-                value: downloadProgress.downloaded.toDouble(),
-              ));
+              return Padding(
+                padding: EdgeInsets.all(padding ?? 35.sp),
+                child: Center(
+                    child: DefaultLoadingIndicator(
+                  value: downloadProgress.downloaded.toDouble(),
+                )),
+              );
             },
             errorWidget: (context, url, error) => Padding(
                 padding: EdgeInsets.all(padding ?? 35.sp),
                 child: Image.asset(
                   'assets/image/house.png',
                   height: iconSize ?? 75.sp,
-                  color: defaultAppColor,
+                  color: darkOrLightColor(defaultAppColor4, defaultAppColor),
                 )),
           )
         : Padding(
@@ -49,8 +54,8 @@ class DefaultCachedNetworkImage extends StatelessWidget {
             child: Image.asset(
               'assets/image/house.png',
               height: iconSize ?? 75.sp,
-              color: defaultAppColor,
+              color: darkOrLightColor(defaultAppColor4, defaultAppColor),
             ),
-    );
+          );
   }
 }

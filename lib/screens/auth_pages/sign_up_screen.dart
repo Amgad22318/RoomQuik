@@ -181,7 +181,8 @@ class _SignUpState extends State<SignUp> {
                                     );
                                   }
                                 },
-                                background: defaultLightTealColor,
+                                background: darkOrLightColor(
+                                    defaultAppColor4, defaultAppColor),
                                 text: 'Sign up',
                                 fontSize: 15.sp,
                               ),
@@ -216,7 +217,8 @@ class _SignUpState extends State<SignUp> {
                                 TextSpan(
                                     text: 'Login',
                                     style: TextStyle(
-                                        color: defaultTwitterColor,
+                                        color: darkOrLightColor(
+                                            defaultAppColor4, defaultAppColor),
                                         fontWeight: FontWeight.w500,
                                         fontSize: 15.sp)),
                               ],

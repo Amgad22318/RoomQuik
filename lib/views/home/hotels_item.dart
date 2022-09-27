@@ -8,6 +8,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:sizer/sizer.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
+import '../../constants/constant_methods.dart';
 import '../../constants/constants.dart';
 import '../../data/models/base/hotel/hotel_data.dart';
 import '../../styles/colors.dart';
@@ -23,6 +24,11 @@ class HotelsItem extends StatefulWidget {
 
 class _HotelsItemState extends State<HotelsItem> {
   final PageController pageController = PageController();
+  @override
+  void dispose() {
+    pageController;
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +36,9 @@ class _HotelsItemState extends State<HotelsItem> {
       clipBehavior: Clip.antiAlias,
       margin: EdgeInsets.symmetric(horizontal: 2.w, vertical: 1.h),
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(16.sp), color: defaultLightWhite),
+          borderRadius: BorderRadius.circular(16.sp),
+          color: darkOrLightColor(
+              defaultAppWhiteColor.withOpacity(0.2), defaultLightWhite)),
       child: InkWell(
         borderRadius: BorderRadius.circular(16.sp),
         onTap: () {
@@ -119,11 +127,11 @@ class _HotelsItemState extends State<HotelsItem> {
                               fontSize: 14.sp,
                             ),
                           ),
-                          const Flexible(
+                          Flexible(
                             child: DefaultText(
                               text: '/per night',
                               maxLines: 2,
-                              color: defaultGray,
+                              color: defaultAppWhiteColor.withOpacity(0.7),
                             ),
                           ),
                         ],
