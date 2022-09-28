@@ -39,7 +39,7 @@ class _FilterScreenState extends State<FilterScreen> {
     });
     searchController.text = widget.searchText;
     filterCubit = sl<FilterCubit>();
-    _priceRange = const RangeValues(2000, 8000);
+    _priceRange = const RangeValues(100, 500);
     distance = 100.0;
     super.initState();
   }
@@ -125,13 +125,13 @@ class _FilterScreenState extends State<FilterScreen> {
                           ),
                         ),
                         RangeSlider(
-                          divisions: 1000,
+                          divisions: 900,
                           semanticFormatterCallback: (double newValue) {
                             return '${newValue.round()} dollars';
                           },
                           values: _priceRange,
-                          max: 10000,
-                          min: 50,
+                          max: 1000,
+                          min: 10,
                           onChanged: (value) {
                             setState(() {
                               _priceRange = value;

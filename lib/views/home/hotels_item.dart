@@ -143,7 +143,9 @@ class _HotelsItemState extends State<HotelsItem> {
                     Expanded(
                       child: Row(
                         children: [
-                          DefaultText(text: widget.hotelData.address),
+                          Expanded(
+                              child:
+                                  DefaultText(text: widget.hotelData.address)),
                           DefaultIconButton(
                               onPressed: () {
                                 Navigator.pushNamed(context, hotelLocationRoute,
