@@ -40,7 +40,7 @@ class _UpComingBookingItemState extends State<UpComingBookingItem> {
 
   @override
   void dispose() {
-    pageController;
+    pageController.dispose();
     super.dispose();
   }
 

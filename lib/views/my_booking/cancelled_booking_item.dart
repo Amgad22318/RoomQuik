@@ -40,7 +40,7 @@ class _CancelledBookingItemState extends State<CancelledBookingItem> {
 
   @override
   void dispose() {
-    pageController;
+    pageController.dispose();
     super.dispose();
   }
 

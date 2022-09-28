@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
-import '../styles/colors.dart';
 import 'default_text.dart';
 
 class DefaultListTile extends StatelessWidget {

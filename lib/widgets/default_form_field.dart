@@ -39,6 +39,7 @@ class DefaultFormField extends StatelessWidget {
   final int? errorMaxLines;
   final TextDirection? textDirection;
   final TextAlign textAlign;
+  final TextInputAction? textInputAction;
 
   const DefaultFormField(
       {Key? key,
@@ -78,7 +79,8 @@ class DefaultFormField extends StatelessWidget {
       this.maxLength,
       this.errorMaxLines = 2,
       this.textDirection = TextDirection.ltr,
-      this.textAlign = TextAlign.start})
+      this.textAlign = TextAlign.start,
+      this.textInputAction})
       : super(key: key);
 
   @override
@@ -90,6 +92,7 @@ class DefaultFormField extends StatelessWidget {
       decoration: BoxDecoration(
           color: backgroundColor, borderRadius: BorderRadius.circular(radius)),
       child: TextFormField(
+        textInputAction: textInputAction,
         maxLength: maxLength,
         readOnly: readOnly,
         cursorColor: cursorColor,

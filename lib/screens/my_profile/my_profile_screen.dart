@@ -11,9 +11,14 @@ import '../../data/di/di.dart';
 import '../../styles/colors.dart';
 import '../../widgets/default_text.dart';
 
-class MyProfileScreen extends StatelessWidget {
+class MyProfileScreen extends StatefulWidget {
   const MyProfileScreen({Key? key}) : super(key: key);
 
+  @override
+  State<MyProfileScreen> createState() => _MyProfileScreenState();
+}
+
+class _MyProfileScreenState extends State<MyProfileScreen> {
   @override
   Widget build(BuildContext context) {
     ProfileCubit cubit = ProfileCubit.get(context);
@@ -133,8 +138,11 @@ class MyProfileScreen extends StatelessWidget {
             const HorizontalDivider(),
             InkWell(
               onTap: () {
-                sl<MySharedPref>().clearShared();
-                Navigator.pushNamed(context, onBoardingRoute);
+                setState(() {
+                  sl<MySharedPref>().clearShared();
+                  Navigator.pushNamedAndRemoveUntil(
+                      context, onBoardingRoute, (route) => false);
+                });
               },
               child: const DefaultListTile(
                 title: 'Log Out',

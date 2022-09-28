@@ -1,4 +1,3 @@
-import 'package:algoriza_team_6_realestate_app/constants/constant_methods.dart';
 import 'package:algoriza_team_6_realestate_app/data/models/responses/hotels_model/get_booking_model.dart';
 import 'package:algoriza_team_6_realestate_app/data/models/responses/hotels_model/update_create_booking_model.dart';
 import 'package:algoriza_team_6_realestate_app/data/repository/booking_repository/booking_repository.dart';

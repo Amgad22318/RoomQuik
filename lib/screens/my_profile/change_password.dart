@@ -13,9 +13,9 @@ import '../../widgets/default_material_button.dart';
 import '../../widgets/default_text.dart';
 
 class ChangePassword extends StatefulWidget {
-  Auth myProfile;
+  final Auth myProfile;
 
-  ChangePassword({Key? key, required this.myProfile}) : super(key: key);
+  const ChangePassword({Key? key, required this.myProfile}) : super(key: key);
 
   @override
   State<ChangePassword> createState() => _ChangePasswordState();
@@ -24,7 +24,8 @@ class ChangePassword extends StatefulWidget {
 class _ChangePasswordState extends State<ChangePassword> {
   late ProfileCubit cubit;
   var formKey = GlobalKey<FormState>();
-
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController confirmPasswordController = TextEditingController();
   @override
   void initState() {
     super.initState();
@@ -32,10 +33,15 @@ class _ChangePasswordState extends State<ChangePassword> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    var passwordController = TextEditingController();
-    var confirmPasswordController = TextEditingController();
+  void dispose() {
+    passwordController.dispose();
+    confirmPasswordController.dispose();
 
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -68,6 +74,7 @@ class _ChangePasswordState extends State<ChangePassword> {
               Padding(
                 padding: EdgeInsets.symmetric(vertical: 2.h, horizontal: 5.w),
                 child: DefaultFormField(
+                  textInputAction: TextInputAction.next,
                   hintText: 'New Password',
                   validator: (value) {
                     if (passwordController.text.isEmpty) {
@@ -110,13 +117,13 @@ class _ChangePasswordState extends State<ChangePassword> {
                   if (state is UpdateProfileSuccessState) {
                     showToastMsg(
                       msg: state.successMessage,
-                      toastState: ToastStates.SUCCESS,
+                      toastState: ToastStates.success,
                     );
                     Navigator.pop(context);
                   } else if (state is UpdateProfileFailureState) {
                     showToastMsg(
                       msg: state.errorMessage,
-                      toastState: ToastStates.ERROR,
+                      toastState: ToastStates.error,
                     );
                   }
                 },

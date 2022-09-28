@@ -34,7 +34,7 @@ class DefaultCachedNetworkImage extends StatelessWidget {
             imageUrl: imageUrl,
             progressIndicatorBuilder: (context, url, downloadProgress) {
               return Padding(
-                padding: EdgeInsets.all(padding ?? 35.sp),
+                padding: EdgeInsets.all(padding ?? 50.sp),
                 child: Center(
                     child: DefaultLoadingIndicator(
                   value: downloadProgress.downloaded.toDouble(),

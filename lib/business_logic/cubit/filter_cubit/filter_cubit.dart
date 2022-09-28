@@ -1,6 +1,7 @@
 import 'package:algoriza_team_6_realestate_app/constants/constant_methods.dart';
 import 'package:algoriza_team_6_realestate_app/data/repository/search_hotlel_repository/search_hotel_repository.dart';
 import 'package:bloc/bloc.dart';
+import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:meta/meta.dart';
 
@@ -15,6 +16,13 @@ class FilterCubit extends Cubit<FilterState> {
   FilterCubit() : super(FilterInitial());
 
   Hotels filterHotels = Hotels();
+  final TextEditingController searchLocationController =
+      TextEditingController();
+  LatLng? locationPicked;
+  void pickNewLocation(LatLng? newLocation) {
+    locationPicked = newLocation;
+    emit(PickNewLocationState());
+  }
 
   void getFilterHotels({
     String? name,

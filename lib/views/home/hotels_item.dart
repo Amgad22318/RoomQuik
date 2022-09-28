@@ -1,5 +1,4 @@
 import 'package:algoriza_team_6_realestate_app/constants/screens.dart';
-import 'package:algoriza_team_6_realestate_app/data/models/responses/hotels_model/hotels_model.dart';
 import 'package:algoriza_team_6_realestate_app/widgets/default_cached_network_image.dart';
 import 'package:algoriza_team_6_realestate_app/widgets/default_icon_button.dart';
 import 'package:algoriza_team_6_realestate_app/widgets/default_text.dart';
@@ -26,7 +25,7 @@ class _HotelsItemState extends State<HotelsItem> {
   final PageController pageController = PageController();
   @override
   void dispose() {
-    pageController;
+    pageController.dispose();
     super.dispose();
   }
 

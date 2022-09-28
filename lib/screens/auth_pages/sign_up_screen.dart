@@ -12,6 +12,7 @@ import '../../constants/screens.dart';
 import '../../data/di/di.dart';
 import '../../widgets/default_loading_indicator.dart';
 import '../../widgets/default_material_button.dart';
+import '../../widgets/default_text_button.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({Key? key}) : super(key: key);
@@ -21,20 +22,35 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
-  final firstNameController = TextEditingController();
-  final lastNameController = TextEditingController();
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
-  final passwordConfirmationController = TextEditingController();
+  final TextEditingController firstNameController = TextEditingController();
+  final TextEditingController lastNameController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController passwordConfirmationController =
+      TextEditingController();
   final _formKey = GlobalKey<FormState>();
-  late AuthCubit cubit;
+  late AuthCubit authCubit;
+  @override
+  void initState() {
+    authCubit = sl<AuthCubit>();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    firstNameController.dispose();
+    lastNameController.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+    passwordConfirmationController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => sl<AuthCubit>(),
+      create: (context) => authCubit,
       child: Builder(builder: (context) {
-        cubit = sl<AuthCubit>();
         return Scaffold(
           body: SafeArea(
             child: Form(
@@ -50,6 +66,7 @@ class _SignUpState extends State<SignUp> {
                       DefaultText(
                         text: 'Sign up',
                         fontSize: 25.sp,
+                        fontWeight: FontWeight.bold,
                       ),
 
                       Padding(
@@ -87,6 +104,8 @@ class _SignUpState extends State<SignUp> {
                         ),
                       ),
                       AuthFormField(
+                        autofocus: true,
+                        textInputAction: TextInputAction.next,
                         controller: firstNameController,
                         validator: (value) => emailController.text.isEmpty
                             ? "First Name can't be empty"
@@ -97,6 +116,7 @@ class _SignUpState extends State<SignUp> {
                       ),
                       //
                       AuthFormField(
+                        textInputAction: TextInputAction.next,
                         controller: lastNameController,
                         validator: (value) => emailController.text.isEmpty
                             ? "Last Name can't be empty"
@@ -106,6 +126,7 @@ class _SignUpState extends State<SignUp> {
                         upHintText: 'Last name',
                       ),
                       AuthFormField(
+                        textInputAction: TextInputAction.next,
                         controller: emailController,
                         validator: (value) => emailController.text.isEmpty
                             ? "E-mail can't be empty"
@@ -115,11 +136,12 @@ class _SignUpState extends State<SignUp> {
                         upHintText: 'Your email',
                       ),
                       AuthFormField(
+                        textInputAction: TextInputAction.next,
                         controller: passwordController,
                         validator: (value) {
                           if (passwordController.text.isEmpty) {
                             return "Password can't be empty";
-                          } else if (passwordController.text.length <= 6) {
+                          } else if (passwordController.text.length < 6) {
                             return 'Your password must be longer than 6 characters';
                           }
                           return null;
@@ -135,7 +157,7 @@ class _SignUpState extends State<SignUp> {
                         validator: (value) {
                           if (passwordController.text.isEmpty) {
                             return "Password can't be empty";
-                          } else if (passwordController.text.length <= 6) {
+                          } else if (passwordController.text.length < 6) {
                             return 'Your password must be longer than 6 characters';
                           }
                           return null;
@@ -149,12 +171,13 @@ class _SignUpState extends State<SignUp> {
                       BlocConsumer<AuthCubit, AuthState>(
                         listener: (context, state) {
                           if (state is RegisterSuccessState) {
-                            Navigator.pushNamed(context, appLayoutRoute);
+                            Navigator.pushNamedAndRemoveUntil(
+                                context, appLayoutRoute, (route) => false);
                           } else if (state is RegisterFailureState) {
                             setState(() {});
                             showToastMsg(
                               msg: state.errorMessage,
-                              toastState: ToastStates.ERROR,
+                              toastState: ToastStates.error,
                             );
                           }
                         },
@@ -171,7 +194,7 @@ class _SignUpState extends State<SignUp> {
                                 padding: EdgeInsets.symmetric(vertical: 3.h),
                                 onPressed: () {
                                   if (_formKey.currentState!.validate()) {
-                                    cubit.register(
+                                    authCubit.register(
                                       name:
                                           '${firstNameController.text} ${lastNameController.text}',
                                       email: emailController.text,
@@ -203,28 +226,26 @@ class _SignUpState extends State<SignUp> {
                           ),
                         ),
                       ),
-                      Center(
-                        child: InkWell(
-                          onTap: () {
-                            Navigator.pop(context);
-                          },
-                          child: RichText(
-                            text: TextSpan(
-                              text: "Already have an account ? ",
-                              style: TextStyle(
-                                  color: defaultGray, fontSize: 12.sp),
-                              children: <TextSpan>[
-                                TextSpan(
-                                    text: 'Login',
-                                    style: TextStyle(
-                                        color: darkOrLightColor(
-                                            defaultAppColor4, defaultAppColor),
-                                        fontWeight: FontWeight.w500,
-                                        fontSize: 15.sp)),
-                              ],
-                            ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          DefaultText(
+                            text: "Already have an account ? ",
+                            color: defaultGray,
+                            fontSize: 12.sp,
                           ),
-                        ),
+                          DefaultTextButton(
+                              onPressed: () {
+                                Navigator.pushReplacementNamed(
+                                    context, loginRoute);
+                              },
+                              child: DefaultText(
+                                  text: 'Login',
+                                  color: darkOrLightColor(
+                                      defaultAppColor4, defaultAppColor),
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 15.sp))
+                        ],
                       ),
                     ],
                   ),

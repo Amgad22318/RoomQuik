@@ -18,7 +18,6 @@ class OnBoarding extends StatefulWidget {
 }
 
 class _OnBoardingState extends State<OnBoarding> {
-  final controller = PageController();
   final carouselController = CarouselController();
   List<Widget> pagesList = [
     const OnBoardingPage(
@@ -34,7 +33,14 @@ class _OnBoardingState extends State<OnBoarding> {
         boldText: 'plan your trips',
         smallText: 'book one of your unique hotel to escape the ordinary'),
   ];
-  int activeIndex = 0;
+  late int activeIndex;
+
+  @override
+  void initState() {
+    activeIndex = 0;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

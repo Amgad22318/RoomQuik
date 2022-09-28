@@ -5,7 +5,7 @@ CameraPosition appInitialCameraPosition = const CameraPosition(
   zoom: 5,
 );
 
-enum ToastStates { SUCCESS, ERROR, WARNING }
+enum ToastStates { success, error, warning }
 
 enum BookingStatus { upcomming, cancelled, completed }
 

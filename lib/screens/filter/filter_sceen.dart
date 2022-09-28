@@ -6,12 +6,12 @@ import 'package:algoriza_team_6_realestate_app/widgets/default_material_button.d
 import 'package:algoriza_team_6_realestate_app/widgets/default_text.dart';
 import 'package:algoriza_team_6_realestate_app/widgets/horizontal_divider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../constants/constant_methods.dart';
 import '../../data/di/di.dart';
-import '../../data/models/arguments/picked_location_args.dart';
 import '../../styles/colors.dart';
 import '../../widgets/search_form_field.dart';
 
@@ -29,15 +29,26 @@ class _FilterScreenState extends State<FilterScreen> {
   final TextEditingController searchController = TextEditingController();
   late double distance;
   late FilterCubit filterCubit;
-  PickedLocationArgs pickedLocationArgs = PickedLocationArgs();
+  late FocusNode myFocusNode;
 
   @override
   void initState() {
+    myFocusNode = FocusNode();
+    SchedulerBinding.instance.addPostFrameCallback((Duration _) {
+      FocusScope.of(context).requestFocus(myFocusNode);
+    });
     searchController.text = widget.searchText;
     filterCubit = sl<FilterCubit>();
-    _priceRange = const RangeValues(200, 1200);
-    distance = 20.0;
+    _priceRange = const RangeValues(2000, 8000);
+    distance = 100.0;
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    myFocusNode.dispose();
+    searchController.dispose();
+    super.dispose();
   }
 
   @override
@@ -71,7 +82,7 @@ class _FilterScreenState extends State<FilterScreen> {
                         Padding(
                           padding: EdgeInsets.symmetric(vertical: 2.h),
                           child: SearchFormField(
-                            autofocus: true,
+                            focusNode: myFocusNode,
                             horizontalPadding: 2.w,
                             controller: searchController,
                             backgroundColor: darkOrLightColor(
@@ -143,12 +154,8 @@ class _FilterScreenState extends State<FilterScreen> {
                               DefaultIconButton(
                                   onPressed: () {
                                     Navigator.pushNamed(
-                                            context, filterPickLocationRoute,
-                                            arguments: distance.toInt())
-                                        .then((value) {
-                                      pickedLocationArgs =
-                                          value as PickedLocationArgs;
-                                    });
+                                        context, filterPickLocationRoute,
+                                        arguments: distance.toInt());
                                   },
                                   icon: const Icon(
                                     Icons.edit_location_rounded,
@@ -208,8 +215,9 @@ class _FilterScreenState extends State<FilterScreen> {
                               minPrice: _priceRange.start.toInt(),
                               distance: distance.toInt(),
                               name: searchController.text,
-                              address: pickedLocationArgs.pickedLocationAddress,
-                              latLng: pickedLocationArgs.pickedLocationLatLng);
+                              address:
+                                  filterCubit.searchLocationController.text,
+                              latLng: filterCubit.locationPicked);
                         },
                         text: 'Apply',
                         margin: EdgeInsets.symmetric(

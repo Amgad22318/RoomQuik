@@ -12,19 +12,18 @@ class SettingScreen extends StatelessWidget {
   final GlobalCubit globalCubit = sl<GlobalCubit>();
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: BlocBuilder<GlobalCubit, GlobalStates>(
-        builder: (context, state) {
-          return Scaffold(
-            appBar: AppBar(
-              elevation: 0,
-              title: const DefaultText(
-                text: 'Setting',
-                fontWeight: FontWeight.bold,
-              ),
-              centerTitle: true,
+    return BlocBuilder<GlobalCubit, GlobalStates>(
+      builder: (context, state) {
+        return Scaffold(
+          appBar: AppBar(
+            title: const DefaultText(
+              text: 'Setting',
+              fontWeight: FontWeight.bold,
             ),
-            body: Padding(
+            centerTitle: true,
+          ),
+          body: SafeArea(
+            child: Padding(
               padding: EdgeInsets.symmetric(vertical: 5.h, horizontal: 3.w),
               child: Column(
                 children: [
@@ -43,9 +42,9 @@ class SettingScreen extends StatelessWidget {
                 ],
               ),
             ),
-          );
-        },
-      ),
+          ),
+        );
+      },
     );
   }
 }

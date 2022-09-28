@@ -1,13 +1,12 @@
-import 'package:algoriza_team_6_realestate_app/business_logic/cubit/filter_cubit/filter_cubit.dart';
 import 'package:algoriza_team_6_realestate_app/business_logic/cubit/home_cubit/home_cubit.dart';
 import 'package:algoriza_team_6_realestate_app/business_logic/cubit/profile_cubit/profile_cubit.dart';
+import 'package:algoriza_team_6_realestate_app/constants/constant_methods.dart';
 import 'package:algoriza_team_6_realestate_app/screens/home/home_screen.dart';
 import 'package:algoriza_team_6_realestate_app/screens/my_booking/my_booking_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../data/di/di.dart';
-import '../../styles/colors.dart';
 import '../my_profile/my_profile_screen.dart';
 
 class AppLayout extends StatefulWidget {
@@ -29,6 +28,7 @@ class _AppLayoutState extends State<AppLayout> {
   @override
   void initState() {
     _selectedIndex = widget.route ?? 0;
+    locationPermission();
     super.initState();
   }
 

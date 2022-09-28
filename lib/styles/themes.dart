@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'colors.dart';
 
 class Themes {
+  //..............light Theme
   static ThemeData lightTheme = ThemeData(
       colorScheme: ColorScheme.light(
         primary: defaultAppColor4,
@@ -13,8 +14,11 @@ class Themes {
       buttonTheme: const ButtonThemeData(
         buttonColor: defaultAppColor3,
       ),
+      textSelectionTheme:
+          const TextSelectionThemeData(cursorColor: defaultAppWhiteColor),
       scaffoldBackgroundColor: defaultAppColor,
       appBarTheme: const AppBarTheme(
+          elevation: 0,
           backgroundColor: defaultAppColor,
           systemOverlayStyle: SystemUiOverlayStyle(
             statusBarColor: Colors.transparent,
@@ -44,17 +48,22 @@ class Themes {
           borderColor: Colors.transparent,
           fillColor: Colors.transparent));
 
+  //..............dark Theme
+
   static ThemeData darkTheme = ThemeData(
     colorScheme: const ColorScheme.dark(
       primary: defaultAppColor2,
       secondary: defaultAppColor,
     ),
+    textSelectionTheme:
+        const TextSelectionThemeData(cursorColor: defaultAppWhiteColor),
     iconTheme: const IconThemeData(color: defaultAppWhiteColor),
     buttonTheme: const ButtonThemeData(
       buttonColor: defaultAppColor3,
     ),
     scaffoldBackgroundColor: defaultAppColor3,
     appBarTheme: const AppBarTheme(
+        elevation: 0,
         backgroundColor: defaultAppColor3,
         systemOverlayStyle: SystemUiOverlayStyle(
           statusBarColor: Colors.transparent,

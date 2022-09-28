@@ -44,13 +44,13 @@ void showToastMsg({required String msg, required ToastStates toastState}) {
 Color chooseToastColor({required ToastStates state}) {
   Color color;
   switch (state) {
-    case ToastStates.SUCCESS:
+    case ToastStates.success:
       color = defaultAppColor2;
       break;
-    case ToastStates.WARNING:
+    case ToastStates.warning:
       color = Colors.white;
       break;
-    case ToastStates.ERROR:
+    case ToastStates.error:
       color = Colors.red;
       break;
   }

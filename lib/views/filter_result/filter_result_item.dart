@@ -10,7 +10,6 @@ import '../../styles/colors.dart';
 
 import '../../constants/constants.dart';
 import '../../data/models/base/hotel/hotel_data.dart';
-import '../../styles/colors.dart';
 import '../../widgets/default_rating_bar_indicator.dart';
 import '../../widgets/default_rich_text.dart';
 import '../../widgets/default_text_span.dart';
@@ -34,7 +33,7 @@ class _FilterResultItemState extends State<FilterResultItem> {
   final PageController pageController = PageController();
   @override
   void dispose() {
-    pageController;
+    pageController.dispose();
     super.dispose();
   }
 

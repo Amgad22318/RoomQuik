@@ -44,6 +44,8 @@ class AuthFormField extends StatelessWidget {
   final int? errorMaxLines;
   final TextDirection? textDirection;
   final TextAlign textAlign;
+  final TextInputAction? textInputAction;
+  final bool autofocus;
 
   const AuthFormField(
       {Key? key,
@@ -85,7 +87,9 @@ class AuthFormField extends StatelessWidget {
       this.maxLength,
       this.errorMaxLines = 2,
       this.textDirection = TextDirection.ltr,
-      this.textAlign = TextAlign.start})
+      this.textAlign = TextAlign.start,
+      this.textInputAction,
+      this.autofocus = false})
       : super(key: key);
 
   @override
@@ -110,6 +114,8 @@ class AuthFormField extends StatelessWidget {
                 color: darkOrLightColor(defaultAppColor4, defaultAppColor),
                 borderRadius: BorderRadius.circular(30)),
             child: TextFormField(
+              autofocus: autofocus,
+              textInputAction: textInputAction,
               maxLength: maxLength,
               readOnly: readOnly,
               cursorColor: cursorColor,

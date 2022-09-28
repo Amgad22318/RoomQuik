@@ -95,10 +95,7 @@ class _MyBookingScreenState extends State<MyBookingScreen> {
             ),
           ),
         ),
-        BlocConsumer<BookingCubit, BookingStates>(
-          listener: (context, state) {
-            // TODO: implement listener
-          },
+        BlocBuilder<BookingCubit, BookingStates>(
           builder: (context, state) {
             if (isSelected[0] == true) {
               if (bookingCubit.upComingBooking.data.data.isNotEmpty) {
