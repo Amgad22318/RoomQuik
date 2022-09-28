@@ -171,8 +171,10 @@ class _CompletedBookingItemState extends State<CompletedBookingItem> {
                             Expanded(
                               child: Row(
                                 children: [
-                                  DefaultText(
-                                      text: widget.bookingData.hotel.address),
+                                  Expanded(
+                                    child: DefaultText(
+                                        text: widget.bookingData.hotel.address),
+                                  ),
                                   DefaultIconButton(
                                       onPressed: () {
                                         Navigator.pushNamed(

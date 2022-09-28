@@ -171,8 +171,10 @@ class _UpComingBookingItemState extends State<UpComingBookingItem> {
                             Expanded(
                               child: Row(
                                 children: [
-                                  DefaultText(
-                                      text: widget.bookingData.hotel.address),
+                                  Expanded(
+                                    child: DefaultText(
+                                        text: widget.bookingData.hotel.address),
+                                  ),
                                   DefaultIconButton(
                                       onPressed: () {
                                         Navigator.pushNamed(

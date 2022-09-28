@@ -14,3 +14,5 @@ class GetHotelsFailureState extends HomeState {
 
   GetHotelsFailureState([this.errorMessage]);
 }
+
+class ShowLoadingState extends HomeState {}

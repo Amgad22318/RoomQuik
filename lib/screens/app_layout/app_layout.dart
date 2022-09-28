@@ -37,7 +37,7 @@ class _AppLayoutState extends State<AppLayout> {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => sl<HomeCubit>()..getHotels(),
+          create: (context) => sl<HomeCubit>()..getHotels(1),
           lazy: false,
         ),
         BlocProvider(

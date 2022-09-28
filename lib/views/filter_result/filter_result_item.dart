@@ -146,7 +146,9 @@ class _FilterResultItemState extends State<FilterResultItem> {
                       textDirection: TextDirection.ltr,
                       child: Row(
                         children: [
-                          DefaultText(text: widget.hotelData.address),
+                          Expanded(
+                              child:
+                                  DefaultText(text: widget.hotelData.address)),
                           DefaultIconButton(
                               onPressed: () {
                                 Navigator.pushNamed(context, hotelLocationRoute,
