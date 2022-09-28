@@ -11,6 +11,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:sizer/sizer.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
+import '../../constants/constant_methods.dart';
 import '../../constants/constants.dart';
 import '../../data/di/di.dart';
 import '../../data/models/responses/hotels_model/get_booking_model.dart';
@@ -38,12 +39,20 @@ class _CancelledBookingItemState extends State<CancelledBookingItem> {
   }
 
   @override
+  void dispose() {
+    pageController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Container(
       clipBehavior: Clip.antiAlias,
       margin: EdgeInsets.symmetric(horizontal: 2.w, vertical: 1.h),
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(16.sp), color: defaultLightWhite),
+          borderRadius: BorderRadius.circular(16.sp),
+          color: darkOrLightColor(
+              defaultAppWhiteColor.withOpacity(0.2), defaultLightWhite)),
       child: BlocBuilder<BookingCubit, BookingStates>(
         builder: (context, state) {
           if (state is ChangeBookingStatusLoadingState &&
@@ -144,11 +153,12 @@ class _CancelledBookingItemState extends State<CancelledBookingItem> {
                                       fontSize: 14.sp,
                                     ),
                                   ),
-                                  const Flexible(
+                                  Flexible(
                                     child: DefaultText(
                                       text: '/per night',
                                       maxLines: 2,
-                                      color: defaultGray,
+                                      color:
+                                          defaultAppWhiteColor.withOpacity(0.7),
                                     ),
                                   ),
                                 ],
@@ -199,10 +209,13 @@ class _CancelledBookingItemState extends State<CancelledBookingItem> {
                           onPressed: () {
                             bookingCubit.updateBookingStatus(
                                 bookingId: widget.bookingData.id,
-                                newBookingStatus: BookingStatus.upcomming);
+                                newBookingStatus: BookingStatus.upcomming,
+                                oldBookingStatus: BookingStatus.cancelled);
                           },
                           text: 'UpComing',
-                          background: defaultAppColor2.withOpacity(0.7),
+                          background: darkOrLightColor(
+                              defaultAppColor4.withOpacity(0.7),
+                              defaultAppColor2.withOpacity(0.7)),
                         ),
                       ),
                       const Spacer(),
@@ -212,7 +225,8 @@ class _CancelledBookingItemState extends State<CancelledBookingItem> {
                           onPressed: () {
                             bookingCubit.updateBookingStatus(
                                 bookingId: widget.bookingData.id,
-                                newBookingStatus: BookingStatus.completed);
+                                newBookingStatus: BookingStatus.completed,
+                                oldBookingStatus: BookingStatus.cancelled);
                           },
                           text: 'Complete',
                         ),

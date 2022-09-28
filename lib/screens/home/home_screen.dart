@@ -1,5 +1,5 @@
-import 'package:algoriza_team_6_realestate_app/views/home/hotels_item.dart';
 import 'package:algoriza_team_6_realestate_app/views/home/home_carousal_item.dart';
+import 'package:algoriza_team_6_realestate_app/views/home/hotels_item.dart';
 import 'package:algoriza_team_6_realestate_app/widgets/default_loading_indicator.dart';
 import 'package:algoriza_team_6_realestate_app/widgets/default_text.dart';
 import 'package:algoriza_team_6_realestate_app/widgets/search_form_field.dart';
@@ -7,7 +7,9 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
+
 import '../../business_logic/cubit/home_cubit/home_cubit.dart';
+import '../../constants/constant_methods.dart';
 import '../../constants/screens.dart';
 import '../../data/di/di.dart';
 import '../../styles/colors.dart';
@@ -21,6 +23,12 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final TextEditingController searchController = TextEditingController();
+
+  @override
+  void dispose() {
+    searchController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +45,9 @@ class _HomeScreenState extends State<HomeScreen> {
             readOnly: true,
             horizontalPadding: 2.w,
             controller: searchController,
-            backgroundColor: defaultBlack.withOpacity(0.4),
+            backgroundColor: darkOrLightColor(
+                defaultAppColor4.withOpacity(0.75),
+                defaultBlack.withOpacity(0.4)),
             keyboardType: TextInputType.text,
             hintText: 'Where are you going',
             onTap: () {

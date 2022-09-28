@@ -28,3 +28,5 @@ class GetFacilitiesFailureState extends FilterState {
 
   GetFacilitiesFailureState([this.errorMessage]);
 }
+
+class PickNewLocationState extends FilterState {}

@@ -40,6 +40,12 @@ class _HotelDetailsState extends State<HotelDetails> {
   }
 
   @override
+  void dispose() {
+    pageController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: SafeArea(
@@ -134,11 +140,12 @@ class _HotelDetailsState extends State<HotelDetails> {
                                         fontSize: 14.sp,
                                       ),
                                     ),
-                                    const Flexible(
+                                    Flexible(
                                       child: DefaultText(
                                         text: '/per night',
                                         maxLines: 2,
-                                        color: defaultGray,
+                                        color: defaultAppWhiteColor
+                                            .withOpacity(0.7),
                                       ),
                                     ),
                                   ],
@@ -221,9 +228,9 @@ class _HotelDetailsState extends State<HotelDetails> {
           child: BlocConsumer<BookingCubit, BookingStates>(
             listener: (context, state) {
               if (state is BookingFailureState) {
-                showToastMsg(msg: state.msg, toastState: ToastStates.ERROR);
+                showToastMsg(msg: state.msg, toastState: ToastStates.error);
               } else if (state is BookingSuccessState) {
-                showToastMsg(msg: state.msg, toastState: ToastStates.SUCCESS);
+                showToastMsg(msg: state.msg, toastState: ToastStates.success);
               }
             },
             builder: (context, state) {

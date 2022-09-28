@@ -1,6 +1,5 @@
 import 'package:algoriza_team_6_realestate_app/styles/colors.dart';
 import 'package:algoriza_team_6_realestate_app/widgets/default_loading_indicator.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
@@ -18,29 +17,38 @@ import '../../widgets/default_material_button.dart';
 import '../../widgets/default_text.dart';
 
 class EditProfile extends StatefulWidget {
-  const EditProfile({Key? key,}) : super(key: key);
+  const EditProfile({
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<EditProfile> createState() => _EditProfileState();
 }
 
 class _EditProfileState extends State<EditProfile> {
-
   late ProfileCubit cubit;
   var formKey = GlobalKey<FormState>();
-
+  late TextEditingController nameController;
+  late TextEditingController emailController;
   @override
   void initState() {
+    cubit = sl<ProfileCubit>();
+
+    nameController = TextEditingController(text: cubit.auth.data.name);
+    emailController = TextEditingController(text: cubit.auth.data.email);
+
     super.initState();
-     cubit = sl<ProfileCubit>();
+  }
+
+  @override
+  void dispose() {
+    nameController.dispose();
+    emailController.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-
-    final nameController = TextEditingController(text: cubit.auth.data.name);
-    final emailController = TextEditingController(text: cubit.auth.data.email);
-
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -48,21 +56,20 @@ class _EditProfileState extends State<EditProfile> {
               Navigator.pop(context);
             },
             icon: const Icon(Icons.arrow_back_ios)),
-        elevation: 0,
       ),
       body: BlocConsumer<ProfileCubit, ProfileState>(
         listener: (context, state) {
-          if(state is UpdateProfileSuccessState){
+          if (state is UpdateProfileSuccessState) {
             showToastMsg(
               msg: state.successMessage,
-              toastState: ToastStates.SUCCESS,
+              toastState: ToastStates.success,
             );
             cubit.getProfileInfo();
             Navigator.pop(context);
-          }else if(state is UpdateProfileFailureState){
+          } else if (state is UpdateProfileFailureState) {
             showToastMsg(
               msg: state.errorMessage,
-              toastState: ToastStates.ERROR,
+              toastState: ToastStates.error,
             );
           }
         },
@@ -84,6 +91,7 @@ class _EditProfileState extends State<EditProfile> {
                             ),
                             child: DefaultCachedNetworkImage(
                               height: 25.h,
+                              width: 25.h,
                               imageUrl: cubit.auth.data.image,
                               fit: BoxFit.cover,
                             ),
@@ -93,57 +101,59 @@ class _EditProfileState extends State<EditProfile> {
                             bottom: 12.sp,
                             end: 8.sp,
                             child: DefaultIconButton(
-                                onPressed: () {
-                                  showDialog(
-                                      context: context,
-                                      builder: (context) => ImagePickerDialog(
-                                        cameraOnTap: () {
-                                          Navigator.pop(context);
-                                          pickImage(ImageSource.camera)
-                                              .then((image) {
-                                            if (image != null) {
-                                              cubit.updateProfile(
-                                                name: cubit.auth.data.name,
-                                                email: cubit.auth.data.email,
-                                                profilePicture: image,
-                                              );
-                                            }
-                                          });
-                                        },
-                                        galleryOnTap: () {
-                                          Navigator.pop(context);
-                                          pickImage(ImageSource.gallery)
-                                              .then((image) {
-                                            if (image != null) {
-                                              cubit.updateProfile(
-                                                name: cubit.auth.data.name,
-                                                email: cubit.auth.data.email,
-                                                profilePicture: image,
-                                              );
-                                            }
-                                          });
-                                        },
-                                      ));
-                                },
-                                icon: const Icon(
-                                  Icons.camera_alt,
-                                ),
-                            radius: 50.sp,
-                              background: defaultAppColor2.withOpacity(0.5),
+                              onPressed: () {
+                                showDialog(
+                                    context: context,
+                                    builder: (context) => ImagePickerDialog(
+                                          cameraOnTap: () {
+                                            Navigator.pop(context);
+                                            pickImage(ImageSource.camera)
+                                                .then((image) {
+                                              if (image != null) {
+                                                cubit.updateProfile(
+                                                  name: cubit.auth.data.name,
+                                                  email: cubit.auth.data.email,
+                                                  profilePicture: image,
+                                                );
+                                              }
+                                            });
+                                          },
+                                          galleryOnTap: () {
+                                            Navigator.pop(context);
+                                            pickImage(ImageSource.gallery)
+                                                .then((image) {
+                                              if (image != null) {
+                                                cubit.updateProfile(
+                                                  name: cubit.auth.data.name,
+                                                  email: cubit.auth.data.email,
+                                                  profilePicture: image,
+                                                );
+                                              }
+                                            });
+                                          },
+                                        ));
+                              },
+                              icon: const Icon(
+                                Icons.camera_alt,
+                              ),
+                              radius: 50.sp,
+                              background: defaultAppColor2.withOpacity(0.75),
                               iconSize: 20.sp,
                               padding: EdgeInsets.zero,
-                              constraints: BoxConstraints(minHeight: 35.sp, minWidth: 35.sp),
+                              constraints: BoxConstraints(
+                                  minHeight: 35.sp, minWidth: 35.sp),
                             ),
                           ),
                         ],
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.symmetric(vertical: 2.h, horizontal: 5.w),
+                      padding:
+                          EdgeInsets.symmetric(vertical: 2.h, horizontal: 5.w),
                       child: DefaultFormField(
                         labelText: 'Name',
-                        validator: (value){
-                          if(nameController.text.isEmpty){
+                        validator: (value) {
+                          if (nameController.text.isEmpty) {
                             return "Name can't be empty.";
                           }
                           return null;
@@ -154,11 +164,13 @@ class _EditProfileState extends State<EditProfile> {
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 5.w,).copyWith(bottom: 4.h),
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 5.w,
+                      ).copyWith(bottom: 4.h),
                       child: DefaultFormField(
                         labelText: 'E-mail',
-                        validator: (value){
-                          if(emailController.text.isEmpty){
+                        validator: (value) {
+                          if (emailController.text.isEmpty) {
                             return "E-mail can't be empty.";
                           }
                           return null;
@@ -168,25 +180,27 @@ class _EditProfileState extends State<EditProfile> {
                         keyboardType: TextInputType.emailAddress,
                       ),
                     ),
-                    state is UpdateProfileLoadingState ?
-                    const DefaultLoadingIndicator()
+                    state is UpdateProfileLoadingState
+                        ? const DefaultLoadingIndicator()
                         : DefaultMaterialButton(
-                      margin: EdgeInsets.symmetric(horizontal: 5.w,),
-                      radius: 25.sp,
-                      onPressed: () {
-                        if(formKey.currentState!.validate()){
-                          cubit.updateProfile(
-                              name: nameController.text,
-                              email: emailController.text,
-                          );
-                        }
-                      },
-                      child: DefaultText(
-                        text: 'Apply',
-                        fontSize: 12.sp,
-                        fontWeight: FontWeight.w800,
-                      ),
-                    ),
+                            margin: EdgeInsets.symmetric(
+                              horizontal: 5.w,
+                            ),
+                            radius: 25.sp,
+                            onPressed: () {
+                              if (formKey.currentState!.validate()) {
+                                cubit.updateProfile(
+                                  name: nameController.text,
+                                  email: emailController.text,
+                                );
+                              }
+                            },
+                            child: DefaultText(
+                              text: 'Apply',
+                              fontSize: 12.sp,
+                              fontWeight: FontWeight.w800,
+                            ),
+                          ),
                   ],
                 ),
               ),

@@ -36,7 +36,7 @@ Future<void> init() async {
   sl.registerLazySingleton<ProfileCubit>(
     () => ProfileCubit(),
   );
-  sl.registerLazySingleton<AuthCubit>(
+  sl.registerFactory<AuthCubit>(
     () => AuthCubit(),
   );
   sl.registerLazySingleton<BookingCubit>(

@@ -32,13 +32,16 @@ class AppRouter {
       case '/':
         return MaterialPageRoute(builder: (_) => startScreen);
       case screens.settingRoute:
-        return MaterialPageRoute(builder: (_) => SettingScreen());
+        return CustomPageRoute(
+            direction: AxisDirection.left, child: SettingScreen());
       case screens.onBoardingRoute:
         return MaterialPageRoute(builder: (_) => const OnBoarding());
       case screens.loginRoute:
-        return MaterialPageRoute(builder: (_) => const Login());
+        return CustomPageRoute(
+            direction: AxisDirection.down, child: const Login());
       case screens.signupRoute:
-        return MaterialPageRoute(builder: (_) => const SignUp());
+        return CustomPageRoute(
+            direction: AxisDirection.down, child: const SignUp());
 
       case screens.appLayoutRoute:
         int? route = settings.arguments as int?;
@@ -48,16 +51,19 @@ class AppRouter {
                 ));
       case screens.filterScreenRoute:
         String searchText = settings.arguments as String;
-        return MaterialPageRoute(
-            builder: (_) => FilterScreen(searchText: searchText));
+        return CustomPageRoute(
+            direction: AxisDirection.down,
+            child: FilterScreen(searchText: searchText));
       case screens.updateProfileRoute:
-        return MaterialPageRoute(builder: (_) => const EditProfile());
+        return CustomPageRoute(
+            direction: AxisDirection.left, child: const EditProfile());
       case screens.changePasswordRoute:
         Auth auth = settings.arguments as Auth;
-        return MaterialPageRoute(
-            builder: (_) => ChangePassword(
-                  myProfile: auth,
-                ));
+        return CustomPageRoute(
+            direction: AxisDirection.left,
+            child: ChangePassword(
+              myProfile: auth,
+            ));
       case screens.hotelDetailsRoute:
         HotelData hotelData = settings.arguments as HotelData;
         return CustomPageRoute(
@@ -78,9 +84,9 @@ class AppRouter {
         );
       case screens.filterResultLocationRoute:
         Hotels filterHotels = settings.arguments as Hotels;
-        return MaterialPageRoute(
-          builder: (_) =>
-              FilterResultLocationScreen(filterHotels: filterHotels),
+        return CustomPageRoute(
+          direction: AxisDirection.up,
+          child: FilterResultLocationScreen(filterHotels: filterHotels),
         );
       case screens.filterPickLocationRoute:
         int distance = settings.arguments as int;

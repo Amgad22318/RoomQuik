@@ -2,7 +2,6 @@ import 'package:algoriza_team_6_realestate_app/constants/constant_methods.dart';
 import 'package:algoriza_team_6_realestate_app/constants/constants.dart';
 import 'package:algoriza_team_6_realestate_app/constants/screens.dart';
 import 'package:algoriza_team_6_realestate_app/data/di/di.dart';
-import 'package:algoriza_team_6_realestate_app/data/source/network/endpoints.dart';
 import 'package:algoriza_team_6_realestate_app/styles/colors.dart';
 import 'package:algoriza_team_6_realestate_app/widgets/auth_form_field.dart';
 import 'package:algoriza_team_6_realestate_app/widgets/default_loading_indicator.dart';
@@ -23,22 +22,34 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
-  late AuthCubit cubit;
+  late AuthCubit authCubit;
+  @override
+  void initState() {
+    authCubit = sl<AuthCubit>();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => sl<AuthCubit>(),
+      create: (context) => authCubit,
       child: Builder(builder: (context) {
-        cubit = sl<AuthCubit>();
         return Scaffold(
           body: SafeArea(
-            child: Padding(
-              padding: EdgeInsets.all(15.sp),
-              child: SingleChildScrollView(
+            child: SingleChildScrollView(
+              physics: const BouncingScrollPhysics(),
+              child: Padding(
+                padding: EdgeInsets.all(15.sp),
                 child: Form(
                   key: _formKey,
                   child: Column(
@@ -47,32 +58,35 @@ class _LoginState extends State<Login> {
                       DefaultText(
                         text: 'Login',
                         fontSize: 25.sp,
+                        fontWeight: FontWeight.bold,
                       ),
                       Padding(
                         padding: EdgeInsets.symmetric(vertical: 5.h),
                         child: Row(
                           children: [
+                            const Spacer(),
                             Expanded(
+                              flex: 8,
                               child: DefaultMaterialButton(
                                 onPressed: () {},
-                                padding: EdgeInsets.all(13.sp),
-                                text: 'facebook',
+                                text: 'Facebook',
                                 fontSize: 15.sp,
                                 background: defaultFacebookColor,
                               ),
                             ),
-                            SizedBox(
-                              width: 5.w,
+                            const Spacer(
+                              flex: 2,
                             ),
                             Expanded(
+                              flex: 8,
                               child: DefaultMaterialButton(
                                 onPressed: () {},
-                                padding: EdgeInsets.all(13.sp),
-                                text: 'twitter',
+                                text: 'Twitter',
                                 fontSize: 15.sp,
                                 background: defaultTwitterColor,
                               ),
                             ),
+                            const Spacer(),
                           ],
                         ),
                       ),
@@ -83,6 +97,8 @@ class _LoginState extends State<Login> {
                         ),
                       ),
                       AuthFormField(
+                        autofocus: true,
+                        textInputAction: TextInputAction.next,
                         validator: (value) => emailController.text.isEmpty
                             ? "E-mail can't be empty"
                             : null,
@@ -108,7 +124,7 @@ class _LoginState extends State<Login> {
                         upHintText: 'password',
                       ),
                       Align(
-                        alignment: Alignment.centerRight,
+                        alignment: Alignment.center,
                         child: DefaultTextButton(
                           onPressed: () {},
                           child: const DefaultText(
@@ -120,11 +136,12 @@ class _LoginState extends State<Login> {
                       BlocConsumer<AuthCubit, AuthState>(
                         listener: (context, state) {
                           if (state is LoginSuccessState) {
-                            Navigator.pushNamed(context, appLayoutRoute);
+                            Navigator.pushNamedAndRemoveUntil(
+                                context, appLayoutRoute, (route) => false);
                           } else if (state is LoginFailureState) {
                             showToastMsg(
                               msg: state.errorMessage,
-                              toastState: ToastStates.ERROR,
+                              toastState: ToastStates.error,
                             );
                           }
                         },
@@ -136,40 +153,40 @@ class _LoginState extends State<Login> {
                               padding: EdgeInsets.symmetric(vertical: 1.h),
                               onPressed: () {
                                 if (_formKey.currentState!.validate()) {
-                                  cubit.login(
+                                  authCubit.login(
                                       email: emailController.text,
                                       password: passwordController.text);
                                 }
                               },
-                              background: defaultLightTealColor,
+                              background: darkOrLightColor(
+                                  defaultAppColor4, defaultAppColor),
                               text: 'Login',
                               fontSize: 15.sp,
                             );
                           }
                         },
                       ),
-                      Center(
-                        child: InkWell(
-                          onTap: () {
-                            Navigator.pushNamed(context, registerEP);
-                          },
-                          child: RichText(
-                            text: TextSpan(
-                              text: "Don't have an account ? ",
-                              style: TextStyle(
-                                  color: defaultGray, fontSize: 12.sp),
-                              children: <TextSpan>[
-                                TextSpan(
-                                    text: 'Register',
-                                    style: TextStyle(
-                                        color: defaultTwitterColor,
-                                        fontWeight: FontWeight.w500,
-                                        fontSize: 15.sp)),
-                              ],
-                            ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          DefaultText(
+                            text: "Don't have an account ? ",
+                            color: defaultGray,
+                            fontSize: 12.sp,
                           ),
-                        ),
-                      ),
+                          DefaultTextButton(
+                              onPressed: () {
+                                Navigator.pushReplacementNamed(
+                                    context, signupRoute);
+                              },
+                              child: DefaultText(
+                                  text: 'Register',
+                                  color: darkOrLightColor(
+                                      defaultAppColor4, defaultAppColor),
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 15.sp))
+                        ],
+                      )
                     ],
                   ),
                 ),

@@ -1,4 +1,5 @@
 import 'package:algoriza_team_6_realestate_app/business_logic/cubit/profile_cubit/profile_cubit.dart';
+import 'package:algoriza_team_6_realestate_app/data/source/local/my_shared_preferences.dart';
 import 'package:algoriza_team_6_realestate_app/widgets/default_cached_network_image.dart';
 import 'package:algoriza_team_6_realestate_app/widgets/default_list_tile.dart';
 import 'package:algoriza_team_6_realestate_app/widgets/horizontal_divider.dart';
@@ -6,12 +7,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
 import '../../constants/screens.dart';
+import '../../data/di/di.dart';
 import '../../styles/colors.dart';
 import '../../widgets/default_text.dart';
 
-class MyProfileScreen extends StatelessWidget {
+class MyProfileScreen extends StatefulWidget {
   const MyProfileScreen({Key? key}) : super(key: key);
 
+  @override
+  State<MyProfileScreen> createState() => _MyProfileScreenState();
+}
+
+class _MyProfileScreenState extends State<MyProfileScreen> {
   @override
   Widget build(BuildContext context) {
     ProfileCubit cubit = ProfileCubit.get(context);
@@ -38,9 +45,7 @@ class MyProfileScreen extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               DefaultText(
-                                text: cubit.auth.data.name == ''
-                                    ? 'User Name'
-                                    : cubit.auth.data.name,
+                                text: cubit.auth.data.name,
                                 fontSize: 15.sp,
                                 fontWeight: FontWeight.bold,
                               ),
@@ -128,6 +133,20 @@ class MyProfileScreen extends StatelessWidget {
               child: const DefaultListTile(
                 title: 'Settings',
                 trailingIcon: Icons.settings,
+              ),
+            ),
+            const HorizontalDivider(),
+            InkWell(
+              onTap: () {
+                setState(() {
+                  sl<MySharedPref>().clearShared();
+                  Navigator.pushNamedAndRemoveUntil(
+                      context, onBoardingRoute, (route) => false);
+                });
+              },
+              child: const DefaultListTile(
+                title: 'Log Out',
+                trailingIcon: Icons.logout,
               ),
             ),
           ],

@@ -27,6 +27,7 @@ class SearchFormField extends StatelessWidget {
   final double? height;
   final int? maxLines;
   final double horizontalPadding;
+  final double verticalPadding;
   final InputBorder? inputBorder;
   final InputBorder? inputEnabledBorder;
   final InputBorder? inputFocusedBorder;
@@ -81,7 +82,8 @@ class SearchFormField extends StatelessWidget {
       this.textDirection = TextDirection.ltr,
       this.textAlign = TextAlign.start,
       this.focusNode,
-      this.autofocus = false})
+      this.autofocus = false,
+      this.verticalPadding = 0})
       : super(key: key);
 
   @override
@@ -89,7 +91,8 @@ class SearchFormField extends StatelessWidget {
     return Container(
       alignment: containerAlignment,
       height: height,
-      padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
+      padding: EdgeInsets.symmetric(
+          horizontal: horizontalPadding, vertical: verticalPadding),
       decoration: BoxDecoration(
           color: backgroundColor, borderRadius: BorderRadius.circular(radius)),
       child: TextFormField(

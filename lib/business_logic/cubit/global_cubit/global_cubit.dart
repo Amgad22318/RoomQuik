@@ -1,5 +1,3 @@
-import 'package:algoriza_team_6_realestate_app/constants/constant_methods.dart';
-import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
 

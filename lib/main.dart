@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
 
+import 'business_logic/cubit/filter_cubit/filter_cubit.dart';
 import 'business_logic/cubit/observer.dart';
 import 'data/di/di.dart';
 
@@ -47,6 +48,10 @@ class _MyAppState extends State<MyApp> {
         ),
         BlocProvider(
           create: (context) => sl<BookingCubit>(),
+        ),
+        BlocProvider(
+          create: (context) => sl<FilterCubit>()..getFacilities(),
+          lazy: false,
         ),
       ],
       child: BlocBuilder<GlobalCubit, GlobalStates>(

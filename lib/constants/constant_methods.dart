@@ -1,3 +1,4 @@
+import 'package:algoriza_team_6_realestate_app/business_logic/cubit/global_cubit/global_cubit.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +8,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:ui' as ui;
 
+import '../data/di/di.dart';
 import '../styles/colors.dart';
 import 'constants.dart';
 
@@ -42,13 +44,13 @@ void showToastMsg({required String msg, required ToastStates toastState}) {
 Color chooseToastColor({required ToastStates state}) {
   Color color;
   switch (state) {
-    case ToastStates.SUCCESS:
+    case ToastStates.success:
       color = defaultAppColor2;
       break;
-    case ToastStates.WARNING:
+    case ToastStates.warning:
       color = Colors.white;
       break;
-    case ToastStates.ERROR:
+    case ToastStates.error:
       color = Colors.red;
       break;
   }
@@ -143,4 +145,8 @@ Future<XFile?> pickImage(ImageSource source) async {
   } else {
     return null;
   }
+}
+
+Color darkOrLightColor(Color lightColor, Color darkColor) {
+  return sl<GlobalCubit>().isLightTheme ? lightColor : darkColor;
 }

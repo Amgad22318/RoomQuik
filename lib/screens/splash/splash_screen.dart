@@ -29,7 +29,7 @@ class _SplashScreenState extends State<SplashScreen>
   void initState() {
     super.initState();
     _controller = AnimationController(
-      duration: const Duration(milliseconds: 2000),
+      duration: const Duration(milliseconds: 3000),
       vsync: this,
     )..forward();
     _animation = CurvedAnimation(
@@ -42,12 +42,12 @@ class _SplashScreenState extends State<SplashScreen>
         ..getBookingData(bookingStatus: BookingStatus.upcomming)
         ..getBookingData(bookingStatus: BookingStatus.cancelled)
         ..getBookingData(bookingStatus: BookingStatus.completed);
-      Timer(const Duration(milliseconds: 2500), () async {
+      Timer(const Duration(milliseconds: 4000), () async {
         Navigator.of(context)
             .pushNamedAndRemoveUntil(appLayoutRoute, (route) => false);
       });
     } else {
-      Timer(const Duration(milliseconds: 2500), () async {
+      Timer(const Duration(milliseconds: 4000), () async {
         Navigator.of(context)
             .pushNamedAndRemoveUntil(onBoardingRoute, (route) => false);
       });
@@ -63,7 +63,7 @@ class _SplashScreenState extends State<SplashScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: defaultDarkBlue,
+      backgroundColor: defaultAppColor3,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
