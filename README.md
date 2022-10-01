@@ -22,9 +22,11 @@ RoomQuik .. Flutter Booking App using: Flutter BLoC as state management, Dio for
 ### flutter_bloc 
 ### intl 
 ### google_maps_flutter 
+### google_maps_places
 ### fluttertoast
 ### flutter_svg
 ### cached_network_image
 ### sizer
 ### geolocator
 ### flutter_launcher_icons
+### Geocoding
